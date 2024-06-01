@@ -24,6 +24,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
 import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.databinding.ActivityLoginBinding
+import com.rentby.rentbymobile.ui.register.RegisterActivity
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -112,7 +113,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateUI(currentUser: FirebaseUser?) {
         if (currentUser != null) {
-            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
             finish()
         }
     }
