@@ -5,4 +5,6 @@
     <string name="telephone">Nomor Hp</string>
     <string name="address">Alamat</string>
     <string name="save">Simpan</string>
+    <string name="location">Lokasi</string>
+    <string name="profile">Profil</string>
 </resources>
