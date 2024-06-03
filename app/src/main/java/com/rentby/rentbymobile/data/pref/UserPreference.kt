@@ -1,6 +1,7 @@
 package com.rentby.rentbymobile.data.pref
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -51,6 +52,7 @@ class UserPreference private constructor(private val dataStore: DataStore<androi
         dataStore.edit { preferences ->
             preferences.clear()
         }
+        Log.d("TestingRegister", "User Pref Cleared")
     }
     companion object {
         @Volatile

@@ -2,6 +2,7 @@ package com.rentby.rentbymobile.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -48,7 +49,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.getSession().observe(this) { user ->
-            if (!user.isRegistered) {
+            Log.d("TestingRegister", user.name + user.email + user.isRegistered)
+
+            if (auth.currentUser != null && !user.isRegistered) {
                 startActivity(Intent(this, RegisterActivity::class.java))
                 finish()
             }
@@ -57,14 +60,13 @@ class MainActivity : AppCompatActivity() {
         binding.signOutButton.setOnClickListener {
             signOut()
         }
-
-
     }
 
     private fun signOut() {
         lifecycleScope.launch {
             val credentialManager = CredentialManager.create(this@MainActivity)
             auth.signOut()
+            viewModel.logout()
             credentialManager.clearCredentialState(ClearCredentialStateRequest())
             startActivity(Intent(this@MainActivity, LoginActivity::class.java))
             finish()
