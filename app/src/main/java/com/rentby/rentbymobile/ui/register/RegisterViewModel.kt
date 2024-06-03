@@ -47,4 +47,10 @@ class RegisterViewModel(private val userRepository: UserRepository) : ViewModel(
             }
         }
     }
+
+    fun logout() {
+        viewModelScope.launch {
+            userRepository.logout()
+        }
+    }
 }

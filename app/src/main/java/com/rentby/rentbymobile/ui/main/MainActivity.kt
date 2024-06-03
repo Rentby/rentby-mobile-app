@@ -49,8 +49,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.getSession().observe(this) { user ->
-            Log.d("TestingRegister", user.name + user.email + user.isRegistered)
-
             if (auth.currentUser != null && !user.isRegistered) {
                 startActivity(Intent(this, RegisterActivity::class.java))
                 finish()
