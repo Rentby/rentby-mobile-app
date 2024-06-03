@@ -5,8 +5,11 @@ import com.rentby.rentbymobile.data.pref.UserModel
 import com.rentby.rentbymobile.data.pref.UserPreference
 import com.rentby.rentbymobile.data.request.RegisterRequest
 import com.rentby.rentbymobile.data.response.RegisterResponse
+import com.rentby.rentbymobile.data.response.UserDetailResponse
 import com.rentby.rentbymobile.data.retrofit.ApiService
 import kotlinx.coroutines.flow.Flow
+import retrofit2.HttpException
+import java.io.IOException
 
 
 class UserRepository private constructor(
@@ -29,6 +32,18 @@ class UserRepository private constructor(
 
     suspend fun logout() {
         userPreference.logout()
+    }
+
+    suspend fun getUserDetail(email: String): UserDetailResponse? {
+        return try {
+            apiService.getUserDetail(email)
+        } catch (e: HttpException) {
+            // Handle specific HTTP exceptions if needed
+            null
+        } catch (e: IOException) {
+            // Handle network I/O exceptions if needed
+            null
+        }
     }
 
     companion object {

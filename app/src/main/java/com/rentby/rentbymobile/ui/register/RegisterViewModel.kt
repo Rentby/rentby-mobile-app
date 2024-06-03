@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.gson.Gson
+import com.rentby.rentbymobile.data.pref.UserModel
 import com.rentby.rentbymobile.data.repository.UserRepository
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -19,6 +20,8 @@ class RegisterViewModel(private val userRepository: UserRepository) : ViewModel(
                 val email = Firebase.auth.currentUser?.email.toString()
                 val response = userRepository.register(name, email, address, phoneNumber)
                 Log.d("Register", response.toString())
+
+                userRepository.saveSession(UserModel(email, name, address, phoneNumber, true))
             } catch (e: HttpException) {
                 Log.e("Register", "HTTP error occurred", e)
                 val errorMessage = e.response()?.errorBody()?.string() ?: "An error occurred"

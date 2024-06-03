@@ -1,9 +1,10 @@
-package com.rentby.rentbymobile.ui
+package com.rentby.rentbymobile.ui.login
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -24,11 +25,16 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
 import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.databinding.ActivityLoginBinding
+import com.rentby.rentbymobile.ui.ViewModelFactory
+import com.rentby.rentbymobile.ui.main.MainActivity
 import com.rentby.rentbymobile.ui.register.RegisterActivity
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
+    private val viewModel by viewModels<LoginViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,8 +119,15 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateUI(currentUser: FirebaseUser?) {
         if (currentUser != null) {
-            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
-            finish()
+            viewModel.isRegistered(Firebase.auth.currentUser?.email.toString()) { isRegistered ->
+                if (isRegistered) {
+                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                    finish()
+                } else {
+                    startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+                    finish()
+                }
+            }
         }
     }
 

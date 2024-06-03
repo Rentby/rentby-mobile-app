@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.rentby.rentbymobile.data.repository.UserRepository
 import com.rentby.rentbymobile.di.UserInjection
+import com.rentby.rentbymobile.ui.login.LoginViewModel
+import com.rentby.rentbymobile.ui.main.MainViewModel
 import com.rentby.rentbymobile.ui.register.RegisterViewModel
 
 class ViewModelFactory(
@@ -16,6 +18,12 @@ class ViewModelFactory(
         return when {
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
                 RegisterViewModel(userRepository) as T
+            }
+            modelClass.isAssignableFrom(MainViewModel::class.java) -> {
+                MainViewModel(userRepository) as T
+            }
+            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
+                LoginViewModel(userRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
