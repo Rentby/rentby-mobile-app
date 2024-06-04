@@ -13,6 +13,16 @@
         android:theme="@style/Theme.RentBy"
         tools:targetApi="31">
         <activity
+            android:name=".ui.BookedListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.BookingDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.BookmarkActivity"
+            android:exported="false"
+            android:theme="@style/Theme.RentBy" />
+        <activity
             android:name=".ui.ProfileActivity"
             android:exported="false" />
         <activity
