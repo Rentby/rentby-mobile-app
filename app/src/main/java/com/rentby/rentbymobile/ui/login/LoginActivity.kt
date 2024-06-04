@@ -3,6 +3,7 @@ package com.rentby.rentbymobile.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -48,10 +49,20 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
 
+        window.navigationBarColor = getResources().getColor(R.color.rentby_primary)
+
         auth = Firebase.auth
 
         binding.signInButton.setOnClickListener {
             signIn()
+        }
+
+        viewModel.loading.observe(this) { loading ->
+            if (loading) {
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.GONE
+            }
         }
     }
 

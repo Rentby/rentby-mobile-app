@@ -7,4 +7,7 @@
     <string name="save">Simpan</string>
     <string name="location">Lokasi</string>
     <string name="profile">Profil</string>
+    <string name="login_title">Do hobbies no worries</string>
+    <string name="login_subtitle">Find your hobbies, rent the equipment, pay less, get fun, more happy!</string>
+    <string name="continue_with_google">Continue with Google</string>
 </resources>

@@ -5,4 +5,6 @@
     <color name="nav_item_color">#FFFFFF</color>
     <color name="selected_button_color">#0000FF</color>
     <color name="unselected_button_color">#FFFFFF</color>
+    <color name="rentby_primary">#0A1931</color>
+    <color name="rentby_secondary">#FFC947</color>
 </resources>
