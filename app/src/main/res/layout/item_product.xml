@@ -21,7 +21,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            card_view:cardCornerRadius="8dp">
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="0dp">
 
             <ImageView
                 android:id="@+id/item_image"
