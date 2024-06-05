@@ -96,12 +96,13 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/seller_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toTopOf="@id/price_layout">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -119,33 +120,37 @@
                 android:text="* Tas Mempunyai 1 Kompertemen Utama Dengan Penutup Tas dan Tali Serut\n* Dibagian Depan Tas Ada 1 Kompartemen Dengan Zipper\n* Ada 1 Kompartemen Kecil Dibagian Penutup Tas\n* Mempunyai Slot Didalam Kompartemen Utama, Bisa Digunakan Untuk Menaruh Water Bladder dan Muat Untuk Laptop 15.6 Inch\n* Dibagian Kiri dan Kanan Tas Ada Kantong Untuk Botol Minum\n* Mempunyai Tali Dada Yang Dapat Diatur Tingginya"
                 android:textSize="15dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="8dp">
-
-                <TextView
-                    android:id="@+id/textView_price"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Harga Sewa\nRp70.000 /hari"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/button_book"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Book"
-                    android:layout_marginStart="16dp" />
-
-            </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/price_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/textView_price"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Harga Sewa\nRp70.000 /hari"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Book"
+            android:layout_marginStart="16dp" />
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
