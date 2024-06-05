@@ -40,29 +40,34 @@
         android:id="@+id/booking_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Waiting"
-        android:textColor="#FFFFFF"
-        android:background="@color/white"
+        android:background="@drawable/circle_background"
+        android:backgroundTint="#FFC947"
         android:padding="8dp"
+        android:text="Waiting"
         android:textAlignment="center"
-        android:textStyle="bold"
+        android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/order_details"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <!-- Order Details -->
+
+    <!-- Sender Info -->
     <LinearLayout
         android:id="@+id/order_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:background="#FFFFFF"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="#FFFFFF"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <!-- Order Date and Time -->
         <TextView
@@ -76,8 +81,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/order_number"
                 android:layout_width="wrap_content"
@@ -85,6 +91,7 @@
                 android:text="No. Pesanan"
                 android:textColor="#000000"
                 android:textStyle="bold" />
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -97,8 +104,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/jumlahpengiriman"
                 android:layout_width="wrap_content"
@@ -106,21 +114,23 @@
                 android:text="Jumlah Pengiriman"
                 android:textColor="#000000"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/number_of_delivery"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:text="2" />
+                android:text="2 Barang" />
         </LinearLayout>
 
         <!-- Payment Method -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/payment_method"
                 android:layout_width="wrap_content"
@@ -128,6 +138,7 @@
                 android:text="Metode Pembayaran"
                 android:textColor="#000000"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/payment"
                 android:layout_width="0dp"
@@ -138,7 +149,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Sender Info -->
     <LinearLayout
         android:id="@+id/sender_info"
         android:layout_width="match_parent"
@@ -159,21 +169,29 @@
             android:textColor="#000000"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/sender_store_name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Alex"
-            android:textColor="#000000"
-            android:layout_marginTop="4dp" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/sender_store_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="081294675968"
-            android:textColor="#000000"
-            android:layout_marginTop="4dp" />
+            <TextView
+                android:id="@+id/sender_store_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Alex"
+                android:textColor="#000000"
+                android:layout_marginTop="4dp" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right|end"
+                android:background="@color/white"
+                app:srcCompat="@drawable/ic_message" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/sender_store_address"
@@ -252,14 +270,8 @@
                 android:id="@+id/label_bukti_penerimaan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bukti Penerimaan"
+                android:text="Produk"
                 android:textColor="#000000" />
-            <Button
-                android:id="@+id/bukti_penerimaan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:text="Upload" />
         </LinearLayout>
     </LinearLayout>
 
@@ -289,7 +301,8 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_star"
-                android:contentDescription="Star 1" />
+                android:contentDescription="Star 1"
+                android:paddingHorizontal="15dp"/>
 
             <ImageButton
                 android:id="@+id/star2"
@@ -297,7 +310,8 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_star"
-                android:contentDescription="Star 2" />
+                android:contentDescription="Star 2"
+                android:paddingHorizontal="15dp"/>
 
             <ImageButton
                 android:id="@+id/star3"
@@ -305,7 +319,8 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_star"
-                android:contentDescription="Star 3" />
+                android:contentDescription="Star 3"
+                android:paddingHorizontal="15dp"/>
 
             <ImageButton
                 android:id="@+id/star4"
@@ -313,7 +328,8 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_star"
-                android:contentDescription="Star 4" />
+                android:contentDescription="Star 4"
+                android:paddingHorizontal="15dp"/>
 
             <ImageButton
                 android:id="@+id/star5"
@@ -321,7 +337,8 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_star"
-                android:contentDescription="Star 5" />
+                android:contentDescription="Star 5"
+                android:paddingHorizontal="15dp"/>
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -359,7 +376,7 @@
         android:padding="16dp"
         android:background="#FFFFFF"
         android:layout_marginTop="8dp"
-        android:layout_gravity="bottom"
+        android:layout_gravity="end|bottom"
         app:layout_constraintTop_toBottomOf="@id/review_section"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
