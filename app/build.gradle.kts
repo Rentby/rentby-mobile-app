@@ -67,4 +67,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
     implementation("androidx.activity:activity-ktx:1.7.2")
     implementation("androidx.recyclerview:recyclerview:1.3.0")
+
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 }

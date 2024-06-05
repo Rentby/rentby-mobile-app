@@ -52,4 +52,11 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="hiking">Hiking</string>
+    <string name="cosplay">Cosplay</string>
+    <string name="title">judul</string>
+    <string name="description">deskripsi</string>
+    <string name="price">harga</string>
+    <string name="Day">Hari</string>
+    <string name="per_day">/Hari</string>
 </resources>

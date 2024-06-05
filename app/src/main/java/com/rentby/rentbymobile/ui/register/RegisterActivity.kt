@@ -38,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         auth = Firebase.auth
-        
+
         val factory = ViewModelFactory.getInstance(this)
         viewModel =ViewModelProvider(this, factory).get(RegisterViewModel::class.java)
 
@@ -51,9 +51,13 @@ class RegisterActivity : AppCompatActivity() {
             val address = binding.tfAddress.editText?.text.toString()
             val phoneNumber = binding.tfTelephone.editText?.text.toString()
             if (name.isNotEmpty() && address.isNotEmpty() && phoneNumber.isNotEmpty()) {
-                viewModel.register(this, name, address, phoneNumber) {
-                    // This block will be executed on successful registration
-                    navigateToMainActivity()
+                if (isValidIndonesianPhoneNumber(phoneNumber)) {
+                    viewModel.register(this, name, address, phoneNumber) {
+                        // This block will be executed on successful registration
+                        navigateToMainActivity()
+                    }
+                } else {
+                    Toast.makeText(this, "Nomor telepon tidak valid!", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 Toast.makeText(this, "Harap Lengkapi Informasi Anda!", Toast.LENGTH_SHORT).show()
@@ -77,6 +81,11 @@ class RegisterActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish() // Close the current activity
+    }
+
+    private fun isValidIndonesianPhoneNumber(phoneNumber: String): Boolean {
+        val regex = Regex("^08[0-9]{8,10}\$")
+        return phoneNumber.matches(regex)
     }
 
     private fun signOut() {

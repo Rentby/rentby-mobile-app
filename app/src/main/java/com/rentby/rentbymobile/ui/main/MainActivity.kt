@@ -3,6 +3,7 @@ package com.rentby.rentbymobile.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -11,13 +12,21 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.CredentialManager
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.rentby.rentbymobile.R
+import com.rentby.rentbymobile.data.ProductList
 import com.rentby.rentbymobile.databinding.ActivityMainBinding
 import com.rentby.rentbymobile.ui.login.LoginActivity
 import com.rentby.rentbymobile.ui.ViewModelFactory
+import com.rentby.rentbymobile.ui.adapter.ProductAdapter
 import com.rentby.rentbymobile.ui.register.RegisterActivity
+import com.rentby.rentbymobile.utils.GridSpacingItemDecoration
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -55,9 +64,40 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.signOutButton.setOnClickListener {
-            signOut()
+        firebaseUser.photoUrl?.let { photoUrl ->
+            Glide.with(this)
+                .load(photoUrl)
+                .circleCrop()
+                .placeholder(R.drawable.ic_profile) // Optional: placeholder image
+                .error(R.drawable.ic_profile) // Optional: error image
+                .into(binding.userPhoto) // Ensure the ID is correct
         }
+
+        val bottomNavigationItemView = binding.bottomNavigation
+        bottomNavigationItemView.setOnItemSelectedListener  { item ->
+            when(item.itemId) {
+                R.id.home -> {
+                    // Respond to navigation item 1 click
+                    true
+                }
+                R.id.bookmark -> {
+                    // Respond to navigation item 2 click
+                    true
+                }
+                R.id.booked -> {
+                    Log.d("TestNavi", "Clicked")
+                    signOut()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        val productAdapter = ProductAdapter(ProductList.getProducts())
+        binding.recyclerView.adapter = productAdapter
+        binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
+        binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 16, false))
+
     }
 
     private fun signOut() {
