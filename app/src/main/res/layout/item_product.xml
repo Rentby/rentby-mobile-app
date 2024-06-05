@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/per_day"
-                android:textColor="@android:color/tertiary_text_light"
+                android:textColor="@color/text_secondary"
                 android:textSize="12sp"
                 card_view:layout_constraintBottom_toBottomOf="@+id/tvProductPrice"
                 card_view:layout_constraintStart_toEndOf="@+id/tvProductPrice" />

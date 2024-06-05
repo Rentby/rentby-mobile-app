@@ -47,6 +47,41 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        setupAuth()
+        setupNavigation()
+        setupRecyclerView()
+    }
+
+    private fun setupRecyclerView() {
+        val productAdapter = ProductAdapter(ProductList.getProducts())
+        binding.recyclerView.adapter = productAdapter
+        binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
+        binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 16, false))
+    }
+
+    private fun setupNavigation() {
+        val bottomNavigationItemView = binding.bottomNavigation
+        bottomNavigationItemView.setOnItemSelectedListener  { item ->
+            when(item.itemId) {
+                R.id.home -> {
+                    // Respond to navigation item 1 click
+                    true
+                }
+                R.id.bookmark -> {
+                    // Respond to navigation item 2 click
+                    true
+                }
+                R.id.booked -> {
+                    Log.d("TestNavi", "Clicked")
+                    signOut()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun setupAuth(){
         auth = Firebase.auth
         val firebaseUser = auth.currentUser
 
@@ -72,32 +107,6 @@ class MainActivity : AppCompatActivity() {
                 .error(R.drawable.ic_profile) // Optional: error image
                 .into(binding.userPhoto) // Ensure the ID is correct
         }
-
-        val bottomNavigationItemView = binding.bottomNavigation
-        bottomNavigationItemView.setOnItemSelectedListener  { item ->
-            when(item.itemId) {
-                R.id.home -> {
-                    // Respond to navigation item 1 click
-                    true
-                }
-                R.id.bookmark -> {
-                    // Respond to navigation item 2 click
-                    true
-                }
-                R.id.booked -> {
-                    Log.d("TestNavi", "Clicked")
-                    signOut()
-                    true
-                }
-                else -> false
-            }
-        }
-
-        val productAdapter = ProductAdapter(ProductList.getProducts())
-        binding.recyclerView.adapter = productAdapter
-        binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
-        binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 16, false))
-
     }
 
     private fun signOut() {
