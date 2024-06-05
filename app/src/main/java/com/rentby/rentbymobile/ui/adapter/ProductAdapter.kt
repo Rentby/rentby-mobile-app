@@ -1,13 +1,19 @@
 package com.rentby.rentbymobile.ui.adapter
 
+import android.content.Intent
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.data.model.Product
 import com.rentby.rentbymobile.databinding.ItemProductBinding
+import com.rentby.rentbymobile.ui.DetailProductActivity
 
-class ProductAdapter(private val listProduct: ArrayList<Product>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+class ProductAdapter(
+    private val context: Context,
+    private val listProduct: ArrayList<Product>
+) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     inner class ProductViewHolder(private val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
@@ -21,6 +27,11 @@ class ProductAdapter(private val listProduct: ArrayList<Product>) : RecyclerView
             product.image?.let {
                 binding.itemImage.setImageResource(it)
             } ?: binding.itemImage.setImageResource(R.drawable.default_image)
+
+            binding.root.setOnClickListener {
+                val intent = Intent(context, DetailProductActivity::class.java)
+                context.startActivity(intent)
+            }
         }
     }
 

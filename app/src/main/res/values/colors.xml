@@ -7,7 +7,12 @@
     <color name="unselected_button_color">#FFFFFF</color>
     <color name="rentby_primary">#0A1931</color>
     <color name="rentby_secondary">#FFC947</color>
+    <color name="rentby_tertiary">#FFDC86</color>
     <color name="text_secondary">#9ca3af</color>
+    <color name="gray_100">#f1f5f9</color>
+    <color name="gray_200">#e5e7eb</color>
+    <color name="gray_300">#d1d5db</color>
+    <color name="gray_400">#94a3b8</color>
     <color name="green">#00FF00</color>
     <color name="blue">#0000FF</color>
     <color name="red">#FF0000</color>
