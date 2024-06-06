@@ -61,4 +61,8 @@
     <string name="per_day">/Hari</string>
     <string name="Description">Deskripsi</string>
     <string name="lipsum_2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec pulvinar enim. Duis cursus lorem vel consequat viverra. Vestibulum non augue nibh. Aenean ac blandit orci. Aliquam interdum eros et mollis maximus. Fusce suscipit vehicula ipsum, dapibus tincidunt libero egestas nec. Curabitur in augue vel ipsum eleifend cursus vehicula vel tellus. Donec dictum, risus eget sollicitudin facilisis, nunc mi auctor augue, eu convallis eros nisi vitae risus. Quisque convallis ipsum porttitor tellus porta, sed aliquam ante placerat. Nullam vitae odio placerat orci viverra tempor. Proin fermentum dictum neque eget finibus. In dictum vulputate turpis in fermentum. Etiam mauris augue, porta sed quam in, pretium volutpat nibh. Nullam maximus turpis mauris, eu vulputate justo dapibus vitae. Morbi dolor magna, sodales quis placerat fermentum, eleifend et quam. Praesent gravida lorem efficitur justo fermentum, sed ultrices tellus eleifend. Aliquam sit amet eleifend ligula, et placerat felis. Proin felis lorem, aliquam et leo in, tincidunt auctor erat. Nunc mollis, justo et faucibus aliquam, magna justo interdum lacus, sed sodales dolor tellus ac justo.</string>
+    <string name="chat">pesan</string>
+    <string name="favorite">favorite</string>
+    <string name="back">kembali</string>
+    <string name="share">bagikan</string>
 </resources>

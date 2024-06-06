@@ -26,7 +26,7 @@
             android:name=".ui.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.DetailProductActivity"
+            android:name=".ui.product.detail.DetailProductActivity"
             android:exported="false" />
         <activity
             android:name=".ui.ActivityDetailProduct"

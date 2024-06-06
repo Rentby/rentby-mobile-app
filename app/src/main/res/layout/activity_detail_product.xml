@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.DetailProductActivity">
+    tools:context=".ui.product.detail.DetailProductActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,38 +16,68 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingActionButtonBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:clickable="true"
+                android:contentDescription="@string/back"
+                app:backgroundTint="@color/rentby_tertiary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingActionButtonShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:clickable="true"
+                android:contentDescription="@string/share"
+                app:backgroundTint="@color/rentby_tertiary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/baseline_ios_share_24" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="0dp"
+                android:layout_height="400dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/product" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="0dp"
-                    android:layout_height="400dp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/product" />
+                android:id="@+id/constraintLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-12dp"
+                android:background="@drawable/white_rounded_top"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView">
 
                 <TextView
                     android:id="@+id/textView_product_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
                     android:fontFamily="sans-serif-medium"
                     android:maxLines="2"
-                    android:text="Tas Gunung The North Face Elextra"
+                    android:text="Tas Ransel Gunung Carrier 50L Backsupport Water Resistant"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toStartOf="@+id/btnBookmark"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView_location"
@@ -115,41 +145,36 @@
                     style="?attr/materialIconButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="12dp"
                     android:layout_weight="0"
+                    android:contentDescription="@string/favorite"
                     app:icon="@drawable/favorite_border"
                     app:iconSize="32dp"
                     app:iconTint="@color/gray_400"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView_location"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView_product_name" />
-
-                <View
-                    android:id="@+id/spaceGap"
-                    android:layout_width="0dp"
-                    android:layout_height="8dp"
-                    android:layout_marginTop="18dp"
-                    android:background="@color/gray_100"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvRating" />
 
                 <LinearLayout
                     android:id="@+id/seller_layout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/date_selection_box"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="16dp"
+                    android:padding="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/spaceGap">
+                    app:layout_constraintTop_toBottomOf="@+id/tvRating">
 
                     <ImageView
                         android:id="@+id/imageView_profile"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/ic_profile" />
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_user_profile" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -179,38 +204,31 @@
 
                     <Button
                         android:id="@+id/btnChat"
-                        style="?attr/materialIconButtonFilledTonalStyle"
+                        style="?attr/materialIconButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
+                        android:contentDescription="@string/chat"
                         app:icon="@drawable/messenger" />
 
                 </LinearLayout>
 
-                <View
-                    android:id="@+id/spaceGap1"
-                    android:layout_width="0dp"
-                    android:layout_height="8dp"
-                    android:background="@color/gray_100"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/seller_layout" />
-
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/spaceGap1">
+                    app:layout_constraintTop_toBottomOf="@+id/seller_layout">
 
                     <TextView
                         android:id="@+id/textView2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/Description"
                         android:textColor="@color/black"
@@ -223,6 +241,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:paddingBottom="24dp"
                         android:text="@string/lipsum_2"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -231,7 +250,8 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <androidx.cardview.widget.CardView
@@ -265,11 +285,12 @@
 
             <Button
                 android:id="@+id/button_book"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:backgroundTint="@color/rentby_primary"
-                android:text="Book"
+                android:text="Pilih Tanggal"
+                android:textColor="@color/rentby_primary"
                 app:layout_constraintBottom_toBottomOf="@+id/tvPrice"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView_price" />
@@ -302,27 +323,5 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButtonBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:clickable="true"
-        app:backgroundTint="@color/rentby_tertiary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButtonShare"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:clickable="true"
-        app:backgroundTint="@color/rentby_tertiary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_ios_share_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

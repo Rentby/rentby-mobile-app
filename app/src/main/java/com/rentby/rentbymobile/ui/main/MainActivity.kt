@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         val productAdapter = ProductAdapter(this, ProductList.getProducts())
         binding.recyclerView.adapter = productAdapter
         binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
-        binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 16, false))
+        binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
     }
 
     private fun setupNavigation() {

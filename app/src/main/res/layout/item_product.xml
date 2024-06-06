@@ -11,7 +11,7 @@
     android:layout_marginEnd="0dp"
     android:layout_marginBottom="0dp"
     card_view:cardCornerRadius="8dp"
-    card_view:cardElevation="0dp">
+    card_view:cardElevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,31 +37,70 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tvBooked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="sans-serif"
+                android:text="(99)"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                card_view:layout_constraintBottom_toBottomOf="@+id/tvRatingCount"
+                card_view:layout_constraintStart_toEndOf="@+id/tvRatingCount"
+                card_view:layout_constraintTop_toTopOf="@+id/tvRatingCount" />
+
+            <TextView
+                android:id="@+id/tvRatingCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:fontFamily="sans-serif"
+                android:text="5.0"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                card_view:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                card_view:layout_constraintStart_toEndOf="@+id/imageView4"
+                card_view:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+            <TextView
                 android:id="@+id/tvProductTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:lines="2"
                 android:maxLines="2"
                 android:text="@string/title"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
-                tools:text="Tas Ransel Gunung Carrier 35L Backsupport Water Resistant" />
+                tools:text="Tas Ransel Gunung Carrier 35L Backsupport Water Resistant Portable Bagus Sekali Hemat" />
 
             <TextView
                 android:id="@+id/tvProductPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/price"
                 android:textColor="@color/rentby_primary"
                 android:textSize="16sp"
-                card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintStart_toStartOf="@+id/tvProductTitle"
                 card_view:layout_constraintTop_toBottomOf="@+id/tvProductTitle"
                 tools:text="Rp36.000" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="16dp"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/tvProductPrice"
+                card_view:srcCompat="@drawable/ic_star" />
 
             <TextView
                 android:id="@+id/tvUnit"
@@ -78,49 +117,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 android:background="@drawable/rating_box"
-                card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintEnd_toEndOf="parent">
-
-                <TextView
-                    android:id="@+id/tvRatingCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp"
-                    android:text="5.0"
-                    android:textColor="@color/black"
-                    android:textSize="10sp"
-                    card_view:layout_constraintBottom_toBottomOf="parent"
-                    card_view:layout_constraintStart_toEndOf="@+id/imageView4"
-                    card_view:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tvBooked"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginEnd="2dp"
-                    android:fontFamily="sans-serif-light"
-                    android:text="(99)"
-                    android:textSize="10sp"
-                    card_view:layout_constraintBottom_toBottomOf="@+id/tvRatingCount"
-                    card_view:layout_constraintEnd_toEndOf="parent"
-                    card_view:layout_constraintHorizontal_bias="0.0"
-                    card_view:layout_constraintStart_toEndOf="@+id/tvRatingCount" />
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="8dp"
-                    android:layout_height="8dp"
-                    android:layout_marginStart="2dp"
-                    card_view:layout_constraintBottom_toBottomOf="parent"
-                    card_view:layout_constraintStart_toStartOf="parent"
-                    card_view:layout_constraintTop_toTopOf="parent"
-                    card_view:srcCompat="@drawable/ic_star" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                card_view:layout_constraintBottom_toBottomOf="@+id/tvProductPrice"
+                card_view:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

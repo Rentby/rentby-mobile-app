@@ -1,4 +1,4 @@
-package com.rentby.rentbymobile.ui
+package com.rentby.rentbymobile.ui.product.detail
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -24,6 +24,17 @@ class DetailProductActivity : AppCompatActivity() {
 
         binding.floatingActionButtonBack.setOnClickListener {
             finish()
+        }
+
+        setupBookingAction()
+    }
+
+    private fun setupBookingAction() {
+        binding.apply {
+            buttonBook.setOnClickListener {
+                val modal = BookingCalendarFragment()
+                supportFragmentManager.let { modal.show(it, BookingCalendarFragment.TAG) }
+            }
         }
     }
 }

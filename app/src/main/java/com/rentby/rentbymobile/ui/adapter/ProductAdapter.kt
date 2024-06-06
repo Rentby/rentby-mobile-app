@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.data.model.Product
 import com.rentby.rentbymobile.databinding.ItemProductBinding
-import com.rentby.rentbymobile.ui.DetailProductActivity
+import com.rentby.rentbymobile.ui.product.detail.DetailProductActivity
 
 class ProductAdapter(
     private val context: Context,
@@ -19,11 +19,12 @@ class ProductAdapter(
         fun bind(product: Product) {
             val price = "Rp" + product.price
             val rating = String.format("%.1f", product.rating)
+            val booked = "• Disewa 1" + product.booked.toString()
 
             binding.tvProductTitle.text = product.name
             binding.tvProductPrice.text = price
             binding.tvRatingCount.text = rating
-            binding.tvBooked.text = product.booked.toString()
+            binding.tvBooked.text = booked
             product.image?.let {
                 binding.itemImage.setImageResource(it)
             } ?: binding.itemImage.setImageResource(R.drawable.default_image)
