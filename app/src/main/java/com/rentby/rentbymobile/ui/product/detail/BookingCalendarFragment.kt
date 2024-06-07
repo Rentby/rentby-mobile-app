@@ -1,6 +1,7 @@
 package com.rentby.rentbymobile.ui.product.detail
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.rentby.rentbymobile.databinding.BookingCalendarFragmentBinding
 import androidx.core.util.Pair
+import com.rentby.rentbymobile.ui.order.OrderActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -28,6 +30,11 @@ class BookingCalendarFragment : BottomSheetDialogFragment() {
 
         binding.pickDateLayout.setOnClickListener {
             showDateRangePicker(parentFragmentManager)
+        }
+
+        binding.orderButton.setOnClickListener {
+            val intent = Intent(context, OrderActivity::class.java)
+            context?.startActivity(intent)
         }
 
         return binding.root

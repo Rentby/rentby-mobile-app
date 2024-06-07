@@ -65,4 +65,5 @@
     <string name="favorite">favorite</string>
     <string name="back">kembali</string>
     <string name="share">bagikan</string>
+    <string name="payment_method">Metode Pembayaran</string>
 </resources>
