@@ -18,4 +18,11 @@
     <color name="red">#FF0000</color>
     <color name="light_gray">#D3D3D3</color>
     <color name="yellow">#FFC947</color>
+
+    <color name="status_waiting_payment">#FFFF00</color>
+    <color name="status_ready_pickup">#00FF00</color>
+    <color name="status_in_renting_date">#0000FF</color>
+    <color name="status_needs_return">#FF0000</color>
+    <color name="status_finished">#00FFFF</color>
+    <color name="status_unknown">#CCCCCC</color>
 </resources>

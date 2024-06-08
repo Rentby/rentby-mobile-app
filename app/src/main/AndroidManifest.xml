@@ -19,7 +19,7 @@
             android:name=".ui.BookedListActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.BookingDetailActivity"
+            android:name=".ui.order.OrderDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.BookmarkActivity"

@@ -51,9 +51,10 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout3"
+                android:id="@+id/layout_product_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:background="@color/white"
                 android:padding="0dp">
 
@@ -66,22 +67,22 @@
                     app:cardCornerRadius="8dp"
                     app:cardElevation="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/tvSellerName"
-                    app:layout_constraintTop_toBottomOf="@+id/tvSellerName">
+                    app:layout_constraintStart_toStartOf="@+id/tv_seller_name"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_seller_name">
 
                     <ImageView
-                        android:id="@+id/imageView5"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:id="@+id/image_product"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/product" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:id="@+id/tvSellerName"
+                    android:id="@+id/tv_seller_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Makassar Cosplay Store"
@@ -91,38 +92,38 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/tv_product_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="24dp"
                     android:text="Tas Ransel Gunung Carrier 50L Backsupport Water Resistant"
                     android:textColor="@color/text_secondary"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/cardView2"
                     app:layout_constraintTop_toTopOf="@+id/cardView2" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/tv_order_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
                     android:text="2 x 40.000"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@+id/textView13"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_rent_daterange"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_rent_daterange" />
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/tv_rent_daterange"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="08 Jun - 09 Jun"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@+id/textView5"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_product_name"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_product_name" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -135,23 +136,22 @@
                     android:id="@+id/textView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="sans-serif"
                     android:text="Total Harga"
                     android:textColor="@color/text_secondary"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/title_rent_summary"
+                    app:layout_constraintTop_toBottomOf="@+id/title_rent_summary" />
 
                 <TextView
-                    android:id="@+id/textView15"
+                    android:id="@+id/tv_price_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="24dp"
                     android:fontFamily="sans-serif"
                     android:text="Rp80.000"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView14" />
 
@@ -162,19 +162,19 @@
                     android:layout_marginTop="8dp"
                     android:text="Biaya Layanan"
                     android:textColor="@color/text_secondary"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@+id/textView14"
                     app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/tv_service_fee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Rp1.000"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView15"
-                    app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_price_total"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_price_total" />
 
                 <View
                     android:id="@+id/view2"
@@ -193,27 +193,26 @@
                     android:layout_marginTop="16dp"
                     android:text="Total Belanja"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@id/view"
                     app:layout_constraintTop_toBottomOf="@id/view" />
 
                 <TextView
-                    android:id="@+id/textView19"
+                    android:id="@+id/tv_order_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Rp88.000"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/view"
                     app:layout_constraintTop_toTopOf="@+id/textView18" />
 
                 <TextView
-                    android:id="@+id/textView20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:id="@+id/title_rent_summary"
+                    android:layout_width="133dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Ringkasan Belanja"
@@ -228,24 +227,22 @@
                     android:layout_height="1dp"
                     android:layout_marginTop="16dp"
                     android:background="@color/gray_100"
-                    app:layout_constraintEnd_toEndOf="@+id/textView17"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_service_fee"
                     app:layout_constraintStart_toStartOf="@+id/textView16"
                     app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/button_confirm_order"
                     android:layout_width="0dp"
                     android:layout_height="64dp"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:backgroundTint="@color/rentby_primary"
                     android:text="Konfirmasi Order"
                     android:textColor="@color/rentby_secondary"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/payment_method"
+                    app:layout_constraintStart_toStartOf="@+id/payment_method"
                     app:layout_constraintTop_toBottomOf="@id/view3" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -258,7 +255,7 @@
                     android:textColorHint="@color/black"
                     app:boxStrokeColor="@color/rentby_secondary"
                     app:hintTextAppearance="@style/TextAppearance.AppCompat.Medium"
-                    app:layout_constraintEnd_toEndOf="@+id/textView19"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_order_total"
                     app:layout_constraintStart_toStartOf="@+id/textView18"
                     app:layout_constraintTop_toBottomOf="@id/view2">
 
@@ -266,6 +263,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="none"
+                        android:textSize="14sp"
                         app:simpleItems="@array/payment_methods" />
 
                 </com.google.android.material.textfield.TextInputLayout>
