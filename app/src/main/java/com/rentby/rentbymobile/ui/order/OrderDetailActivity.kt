@@ -37,6 +37,12 @@ class OrderDetailActivity : AppCompatActivity() {
         setupView()
     }
 
+    private fun setupAction(){
+        binding.arrowLeft.setOnClickListener {
+            finish()
+        }
+    }
+
     private fun setupView(){
         viewModel.orderDetail.observe(this) { order ->
             order?.let {
@@ -44,62 +50,55 @@ class OrderDetailActivity : AppCompatActivity() {
                 val rentEndDate = formatDate(order.rentEnd)
                 val rentDate = "$rentStartDate - $rentEndDate"
 
-                // Calculate the number of rental days
-                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                val startDate = dateFormat.parse(order.rentStart)
-                val endDate = dateFormat.parse(order.rentEnd)
-                val rentalDays = if (startDate != null && endDate != null) {
-                    TimeUnit.DAYS.convert(endDate.time - startDate.time, TimeUnit.MILLISECONDS).toInt()
-                } else {
-                    1 // Default to 1 day if date parsing fails
-                }
-
                 val rentPricePerDay = order.rentPrice.toInt()
-                val totalRentPrice = rentalDays * rentPricePerDay // total harga rental
                 val formattedRentPricePerDay = NumberFormat.getNumberInstance(Locale("id", "ID")).format(rentPricePerDay)
-                val formattedTotalRentPrice = "Rp" + NumberFormat.getNumberInstance(Locale("id", "ID")).format(totalRentPrice) // total harga rental
-                val orderPrice = "$rentalDays x $formattedRentPricePerDay"
+                val orderPrice = "${order.rentDuration} x $formattedRentPricePerDay"
 
-                val formattedRentFee = "Rp" + NumberFormat.getNumberInstance(Locale("id", "ID")).format(order.serviceFee.toInt())
+                val formattedTotalRentPrice = "Rp" + NumberFormat.getNumberInstance(Locale("id", "ID")).format(order.rentTotal) // total harga rental
+                val formattedDeposit = "Rp" + NumberFormat.getNumberInstance(Locale("id", "ID")).format(order.deposit)
+                val formattedServiceFee = "Rp" + NumberFormat.getNumberInstance(Locale("id", "ID")).format(order.serviceFee.toInt())
 
-                val totalAmount = totalRentPrice + order.serviceFee.toInt()
+
+                val totalAmount = order.rentTotal + order.serviceFee + order.deposit
                 val orderTotal = "Rp" + NumberFormat.getNumberInstance(Locale("id", "ID")).format(totalAmount)
-                val (status, color) = when (order.status) {
+
+                val lateCharge = "${order.lateDuration} x $formattedRentPricePerDay"
+                val formattedTotalCharge = "Rp" + NumberFormat.getNumberInstance(Locale("id", "ID")).format(order.lateCharge)
+
+                val status = when (order.status) {
                     1 -> {
                         binding.layoutPickUpTime.visibility = View.GONE
                         binding.layoutReturnTime.visibility = View.GONE
                         binding.layoutPickUpLocation.visibility = View.GONE
                         binding.layoutReview.visibility = View.GONE
-                        "Waiting for Payment" to R.color.status_waiting_payment
+                        "Waiting for Payment"
                     }
                     2 -> {
                         binding.layoutPickUpTime.visibility = View.GONE
                         binding.layoutReturnTime.visibility = View.GONE
                         binding.layoutReview.visibility = View.GONE
                         binding.buttonPayNow.visibility = View.GONE
-                        "Order Ready for Pickup" to R.color.status_ready_pickup
+                        "Order Ready for Pickup"
                     }
                     3 -> {
                         binding.layoutReturnTime.visibility = View.GONE
                         binding.layoutReview.visibility = View.GONE
                         binding.buttonPayNow.visibility = View.GONE
-                        "Order is in Renting Date" to R.color.status_in_renting_date
+                        "Order is in Renting Date"
                     }
                     4 -> {
                         binding.layoutReturnTime.visibility = View.GONE
                         binding.layoutReview.visibility = View.GONE
                         binding.buttonPayNow.visibility = View.GONE
-                        "Order Needs to be Returned" to R.color.status_needs_return
+                        "Order Needs to be Returned"
                     }
                     5 -> {
                         binding.buttonPayNow.visibility = View.GONE
                         if(order.isRated){ binding.layoutReview.visibility = View.GONE }
-                        "Order Finished" to R.color.status_finished
+                        "Order Finished"
                     }
-                    else -> "Unknown Status" to R.color.status_unknown
+                    else -> "Unknown Status"
                 }
-
-                setStatusBarColor(ContextCompat.getColor(this, color))
 
                 // Update UI with order details
                 binding.tvOrderId.text = order.id
@@ -117,19 +116,19 @@ class OrderDetailActivity : AppCompatActivity() {
                 binding.tvPickUpLocation.text = order.pickupLocation
 
                 binding.tvPriceTotal.text = formattedTotalRentPrice
-                binding.tvServiceFee.text = formattedRentFee
+                binding.tvServiceFee.text = formattedServiceFee
+                binding.tvDeposit.text = formattedDeposit
                 binding.tvOrderTotal.text = orderTotal
+
+                binding.tvCharge.text = lateCharge
+                binding.tvTotalCharge.text = formattedTotalCharge
+
                 order.image?.let {
                     binding.imageProduct.setImageResource(it)
                 }
             }
         }
     }
-
-    private fun setStatusBarColor(color: Int) {
-        binding.statusCard.setCardBackgroundColor(color)
-    }
-
     private fun formatDate(dateString: String): String {
         val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())

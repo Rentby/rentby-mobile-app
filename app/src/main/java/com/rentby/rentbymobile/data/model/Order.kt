@@ -10,13 +10,19 @@ data class Order (
     val payment: String,
     val sellerId: String,
     val sellerName: String,
+    val pickupLocation: String,
     val productName: String,
     val rentStart: String,
     val rentEnd: String,
-    val rentPrice: String,
-    val pickupLocation: String,
-    val serviceFee: String,
+    val rentDuration: Int,
+    val rentPrice: Float,
+    val rentTotal: Float,
+    val deposit: Float,
+    val serviceFee: Float,
     val isRated: Boolean,
+
+    val lateDuration: Int,
+    val lateCharge: Float,
 
     @DrawableRes
     val image: Int?

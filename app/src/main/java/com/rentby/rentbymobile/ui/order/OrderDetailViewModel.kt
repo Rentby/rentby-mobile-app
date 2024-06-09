@@ -1,10 +1,10 @@
 package com.rentby.rentbymobile.ui.order
 
-import OrderList.getMockOrders
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.rentby.rentbymobile.data.model.Order
+import com.rentby.rentbymobile.data.mock.OrderList.getMockOrders
 
 class OrderDetailViewModel : ViewModel() {
     private val _orderDetail = MutableLiveData<Order?>()

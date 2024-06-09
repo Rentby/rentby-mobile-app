@@ -23,7 +23,7 @@ class OrderActivity : AppCompatActivity() {
         }
 
         binding.buttonConfirmOrder.setOnClickListener {
-            val orderId = "ORD6" // Replace with the actual order ID you want to pass
+            val orderId = "ORD4" // Replace with the actual order ID you want to pass
             val intent = Intent(this, OrderDetailActivity::class.java).apply {
                 putExtra(OrderDetailActivity.ORDER_ID, orderId)
             }
