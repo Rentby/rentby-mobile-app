@@ -1,5 +1,8 @@
 package com.rentby.rentbymobile.ui.product.detail
 
+import android.content.Context
+import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +11,8 @@ import kotlinx.coroutines.launch
 import com.rentby.rentbymobile.data.model.Product
 import com.rentby.rentbymobile.data.repository.ProductRepository
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.rentby.rentbymobile.helper.calculateDay
+import com.rentby.rentbymobile.ui.order.OrderActivity
 import java.util.Calendar
 
 class BookingCalendarViewModel : ViewModel() {
@@ -65,7 +70,7 @@ class BookingCalendarViewModel : ViewModel() {
         val end = _rentEnd.value ?: return
         val price = _rentPrice.value?.toIntOrNull() ?: return
 
-        val duration = ((end - start) / (1000 * 60 * 60 * 24)).toInt() + 1
+        val duration = calculateDay(start, end)
         _duration.value = duration
         _rentTotal.value = duration * price
     }
@@ -80,5 +85,15 @@ class BookingCalendarViewModel : ViewModel() {
             add(Calendar.DAY_OF_YEAR, 1)
         }
         return calendar.timeInMillis
+    }
+
+    fun makeBooking(context: Context, productId: String) {
+        Log.d("OrderActivity", "Order Button Clicked - Product ID: $productId., Rent Start: ${rentStart.value.toString()}, Rent End: ${rentEnd.value.toString()}")
+        val intent = Intent(context, OrderActivity::class.java).apply {
+            putExtra(OrderActivity.PRODUCT_ID, productId)
+            putExtra(OrderActivity.RENT_START, _rentStart.value)
+            putExtra(OrderActivity.RENT_END, _rentEnd.value)
+        }
+        context.startActivity(intent)
     }
 }
