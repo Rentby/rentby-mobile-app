@@ -3,7 +3,6 @@ package com.rentby.rentbymobile.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -13,14 +12,12 @@ import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.CredentialManager
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.rentby.rentbymobile.R
-import com.rentby.rentbymobile.data.ProductList
+import com.rentby.rentbymobile.data.mock.ProductList
 import com.rentby.rentbymobile.databinding.ActivityMainBinding
 import com.rentby.rentbymobile.ui.login.LoginActivity
 import com.rentby.rentbymobile.ui.ViewModelFactory

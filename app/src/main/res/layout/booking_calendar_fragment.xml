@@ -28,9 +28,9 @@
         android:backgroundTint="@color/rentby_primary"
         android:text="Button"
         android:textColor="@color/rentby_secondary"
-        app:layout_constraintBottom_toBottomOf="@+id/textView9"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_rent_total_day"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintStart_toEndOf="@+id/tv_rent_total"
         app:layout_constraintTop_toTopOf="@+id/textView8" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -72,7 +72,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/tv_rent_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -89,9 +89,9 @@
             android:layout_marginEnd="8dp"
             android:text="|"
             android:textColor="@color/rentby_secondary"
-            app:layout_constraintBottom_toBottomOf="@+id/textView6"
-            app:layout_constraintEnd_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toTopOf="@+id/textView6" />
+            app:layout_constraintBottom_toBottomOf="@+id/tv_rent_duration"
+            app:layout_constraintEnd_toStartOf="@+id/tv_rent_duration"
+            app:layout_constraintTop_toTopOf="@+id/tv_rent_duration" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -106,7 +106,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pickDateLayout" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/tv_rent_total_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1 x "
@@ -115,17 +115,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/tv_rent_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:text="40.000"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toTopOf="@+id/textView9" />
+        app:layout_constraintStart_toEndOf="@+id/tv_rent_total_day"
+        app:layout_constraintTop_toTopOf="@+id/tv_rent_total_day" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/tv_rent_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
@@ -133,7 +133,7 @@
         android:text=" = Rp80.000"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toTopOf="@+id/textView10" />
+        app:layout_constraintStart_toEndOf="@+id/tv_rent_price"
+        app:layout_constraintTop_toTopOf="@+id/tv_rent_price" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

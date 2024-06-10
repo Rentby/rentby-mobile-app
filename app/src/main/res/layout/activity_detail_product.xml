@@ -45,14 +45,14 @@
                 app:srcCompat="@drawable/baseline_ios_share_24" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imageProduct"
                 android:layout_width="0dp"
                 android:layout_height="400dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/product" />
+                app:srcCompat="@drawable/default_image" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout4"
@@ -62,7 +62,7 @@
                 android:background="@drawable/white_rounded_top"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView">
+                app:layout_constraintTop_toBottomOf="@+id/imageProduct">
 
                 <TextView
                     android:id="@+id/textView_product_name"
@@ -71,8 +71,8 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
                     android:fontFamily="sans-serif-medium"
-                    android:maxLines="2"
-                    android:text="Tas Ransel Gunung Carrier 50L Backsupport Water Resistant"
+                    android:maxLines="3"
+                    android:text="Product Name"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toStartOf="@+id/btnBookmark"
@@ -85,7 +85,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Tembalang, Semarang"
+                    android:text="Product Location"
                     android:textColor="@color/text_secondary"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@+id/textView_product_name"
@@ -307,7 +307,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView_price"
                 app:layout_constraintTop_toBottomOf="@+id/textView_price"
-                tools:text="Rp70.000" />
+                tools:text="Price" />
 
             <TextView
                 android:id="@+id/tvPriceUnit"
