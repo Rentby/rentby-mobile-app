@@ -5,9 +5,9 @@
         android:icon="@drawable/ic_home"
         android:title="Home" />
     <item
-        android:id="@+id/bookmark"
-        android:icon="@drawable/ic_bookmark_outline_24"
-        android:title="Bookmark" />
+        android:id="@+id/favorite"
+        android:icon="@drawable/ic_favorite"
+        android:title="Favorite" />
     <item
         android:id="@+id/booked"
         android:icon="@drawable/ic_booked"

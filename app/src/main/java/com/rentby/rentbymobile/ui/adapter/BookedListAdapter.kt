@@ -1,15 +1,30 @@
 package com.rentby.rentbymobile.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.data.model.Order
 import com.rentby.rentbymobile.databinding.ItemBookedBinding
+import com.rentby.rentbymobile.ui.order.OrderDetailActivity
 
-class BookedListAdapter(private val orders: List<Order>) : RecyclerView.Adapter<BookedListAdapter.OrderViewHolder>() {
+class BookedListAdapter(
+    private val context: Context,
+    private val listBooked: List<Order>
+) : RecyclerView.Adapter<BookedListAdapter.BookedViewHolder>() {
 
-    inner class OrderViewHolder(private val binding: ItemBookedBinding) : RecyclerView.ViewHolder(binding.root) {
+    interface OnItemClickListener {
+        fun onItemClick(orderId: String)
+    }
+
+    private var listener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
+
+    inner class BookedViewHolder(private val binding: ItemBookedBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(order: Order) {
             binding.apply {
                 orderImage.setImageResource(order.image ?: R.drawable.product)
@@ -24,18 +39,22 @@ class BookedListAdapter(private val orders: List<Order>) : RecyclerView.Adapter<
                     else -> "Unknown"
                 }
             }
+            binding.root.setOnClickListener {
+                listener?.onItemClick(order.id)
+            }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemBookedBinding.inflate(inflater, parent, false)
-        return OrderViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookedViewHolder {
+        val binding = ItemBookedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return BookedViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
-        holder.bind(orders[position])
+    override fun onBindViewHolder(holder: BookedViewHolder, position: Int) {
+        holder.bind(listBooked[position])
     }
 
-    override fun getItemCount(): Int = orders.size
+    override fun getItemCount(): Int {
+        return listBooked.size
+    }
 }
