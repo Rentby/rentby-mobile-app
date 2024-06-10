@@ -35,6 +35,7 @@ class OrderDetailActivity : AppCompatActivity() {
         viewModel.getOrderDetail(orderId)
 
         setupView()
+        setupAction()
     }
 
     private fun setupAction(){
@@ -62,7 +63,7 @@ class OrderDetailActivity : AppCompatActivity() {
                 val totalAmount = order.rentTotal + order.serviceFee + order.deposit
                 val orderTotal = "Rp" + NumberFormat.getNumberInstance(Locale("id", "ID")).format(totalAmount)
 
-                val lateCharge = "${order.lateDuration} x $formattedRentPricePerDay"
+                val lateCharge = "${order.lateDuration} x $formattedRentPricePerDay = "
                 val formattedTotalCharge = "Rp" + NumberFormat.getNumberInstance(Locale("id", "ID")).format(order.lateCharge)
 
                 val status = when (order.status) {

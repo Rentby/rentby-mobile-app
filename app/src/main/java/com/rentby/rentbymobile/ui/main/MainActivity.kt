@@ -17,7 +17,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.rentby.rentbymobile.R
-import com.rentby.rentbymobile.data.ProductList
+import com.rentby.rentbymobile.data.mock.ProductList
 import com.rentby.rentbymobile.databinding.ActivityMainBinding
 import com.rentby.rentbymobile.ui.login.LoginActivity
 import com.rentby.rentbymobile.ui.ViewModelFactory

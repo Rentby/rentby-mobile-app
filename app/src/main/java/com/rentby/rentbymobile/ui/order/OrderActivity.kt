@@ -31,4 +31,13 @@ class OrderActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    companion object {
+        const val SELLER_NAME = "Pendaki Makassar"
+        const val PRODUCT_NAME = "Tas Ransel Gunung Carrier 50L Backsupport Water Resistant"
+        const val PRODUCT_IMAGE = "https://down-id.img.susercontent.com/file/sg-11134201-7qvdi-ljd92z2nswelf2"
+        const val RENT_PRICE = "40000"
+        const val RENT_START = "1718064000000"
+        const val RENT_END = "1718064000000"
+    }
 }
