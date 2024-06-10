@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 class DetailProductViewModel : ViewModel() {
     private val repository = ProductRepository()
 
-    private val _product = MutableLiveData<Product>()
-    val product: LiveData<Product> = _product
+    private val _product = MutableLiveData<Product?>()
+    val product: MutableLiveData<Product?> = _product
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading

@@ -3,6 +3,7 @@ package com.rentby.rentbymobile.ui.product.detail
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,8 +45,7 @@ class BookingCalendarFragment : BottomSheetDialogFragment() {
         }
 
         binding.orderButton.setOnClickListener {
-            val intent = Intent(context, OrderActivity::class.java)
-            context?.startActivity(intent)
+            viewModel.makeBooking(requireContext(), productId)
         }
 
         return binding.root

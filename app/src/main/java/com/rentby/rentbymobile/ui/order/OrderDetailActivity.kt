@@ -91,6 +91,7 @@ class OrderDetailActivity : AppCompatActivity() {
                         binding.layoutReturnTime.visibility = View.GONE
                         binding.layoutReview.visibility = View.GONE
                         binding.buttonPayNow.visibility = View.GONE
+                        binding.cardLateCharge.visibility = View.VISIBLE
                         "Order Needs to be Returned"
                     }
                     5 -> {
