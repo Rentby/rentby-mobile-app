@@ -13,10 +13,10 @@
         android:theme="@style/Theme.RentBy"
         tools:targetApi="31">
         <activity
-            android:name=".ui.order.OrderActivity"
+            android:name=".ui.BookedListActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.BookedListActivity"
+            android:name=".ui.order.OrderActivity"
             android:exported="false" />
         <activity
             android:name=".ui.order.OrderDetailActivity"
@@ -30,12 +30,6 @@
             android:exported="false" />
         <activity
             android:name=".ui.product.detail.DetailProductActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.ActivityDetailProduct"
-            android:exported="false" />
-        <activity
-            android:name=".ui.HomeActivity"
             android:exported="false" />
         <activity
             android:name=".ui.register.RegisterActivity"

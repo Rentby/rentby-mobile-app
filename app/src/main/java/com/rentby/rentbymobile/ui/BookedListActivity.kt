@@ -1,21 +1,28 @@
 package com.rentby.rentbymobile.ui
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.rentby.rentbymobile.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.rentby.rentbymobile.data.mock.OrderList
+import com.rentby.rentbymobile.databinding.ActivityBookedListBinding
+import com.rentby.rentbymobile.ui.adapter.BookedListAdapter
 
 class BookedListActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityBookedListBinding
+    private lateinit var orderAdapter: BookedListAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_booked_list)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivityBookedListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val orders = OrderList.getMockOrders()
+        orderAdapter = BookedListAdapter(orders)
+
+        binding.rvBookedItem.apply {
+            layoutManager = LinearLayoutManager(this@BookedListActivity)
+            adapter = orderAdapter
         }
     }
 }
