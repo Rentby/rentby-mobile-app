@@ -12,14 +12,16 @@ import com.rentby.rentbymobile.ui.adapter.BookedListAdapter
 
 class BookedFragment : Fragment() {
 
-    private var _binding: FragmentBookedListBinding? = null
-    private val binding get() = _binding!!
+//    private var _binding: FragmentBookedListBinding? = null
+//    private val binding get() = _binding!!
+
+    private lateinit var binding: FragmentBookedListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentBookedListBinding.inflate(inflater, container, false)
+        binding = FragmentBookedListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -29,11 +31,21 @@ class BookedFragment : Fragment() {
         val orders = OrderList.getMockOrders().filter { it.status == 2 }
 
         binding.rvBookedItem.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvBookedItem.adapter = BookedListAdapter(orders)
+        binding.rvBookedItem.adapter = BookedListAdapter(requireContext(), orders)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    companion object {
+        private const val ARG_DISPLAY_NAME = "display_name"
+        private const val ARG_PHOTO_URL = "photo_url"
+
+        fun newInstance(displayName: String?, photoUrl: String?): BookedFragment {
+            val fragment = BookedFragment()
+            val bundle = Bundle().apply {
+                putString(ARG_DISPLAY_NAME, displayName)
+                putString(ARG_PHOTO_URL, photoUrl)
+            }
+            fragment.arguments = bundle
+            return fragment
+        }
     }
 }

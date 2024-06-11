@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.CredentialManager
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
@@ -46,14 +47,21 @@ class MainActivity : AppCompatActivity() {
 
         setupAuth()
         setupNavigation()
-        setupRecyclerView()
+        setupDefaultFragment(savedInstanceState)
     }
 
-    private fun setupRecyclerView() {
-        val productAdapter = ProductAdapter(this, ProductList.getProducts())
-        binding.recyclerView.adapter = productAdapter
-        binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
-        binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
+    private fun setupDefaultFragment(savedInstanceState: Bundle?){
+        if (savedInstanceState == null) {
+            auth.currentUser?.let { user ->
+                loadFragment(HomeFragment.newInstance(user.displayName, user.photoUrl?.toString()))
+            }
+        }
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainerView, fragment)
+            .commit()
     }
 
     private fun setupNavigation() {
@@ -61,15 +69,19 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationItemView.setOnItemSelectedListener  { item ->
             when(item.itemId) {
                 R.id.home -> {
+                    auth.currentUser?.let { user ->
+                        loadFragment(HomeFragment.newInstance(user.displayName, user.photoUrl?.toString()))
+                    }
                     true
                 }
                 R.id.favorite -> {
                     true
                 }
                 R.id.booked -> {
-                    startActivity(Intent(this@MainActivity, BookedFragment::class.java))
-                    Log.d("TestNavi", "Clicked")
-//                    signOut()
+                    auth.currentUser?.let { user ->
+                        Log.d("Fragment", "Clicked")
+                        loadFragment(BookedFragment.newInstance(user.displayName, user.photoUrl?.toString()))
+                    }
                     true
                 }
                 else -> false
@@ -93,15 +105,6 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, RegisterActivity::class.java))
                 finish()
             }
-        }
-
-        firebaseUser.photoUrl?.let { photoUrl ->
-            Glide.with(this)
-                .load(photoUrl)
-                .circleCrop()
-                .placeholder(R.drawable.ic_profile) // Optional: placeholder image
-                .error(R.drawable.ic_profile) // Optional: error image
-                .into(binding.userPhoto) // Ensure the ID is correct
         }
     }
 
