@@ -14,17 +14,30 @@ class DetailProductViewModel : ViewModel() {
     private val repository = ProductRepository()
 
     private val _product = MutableLiveData<Product?>()
-    val product: MutableLiveData<Product?> = _product
+    val product: LiveData<Product?> = _product
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _toastMessage = MutableLiveData<String>()
+    val toastMessage: LiveData<String> = _toastMessage
+
     fun getProduct(productId: String) {
         _isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            val product = repository.getProductById(productId)
-            _product.postValue(product)
-            _isLoading.postValue(false)
+            try {
+                val product = repository.getProductById(productId)
+                if (product != null) {
+                    _product.postValue(product)
+                } else {
+                    _toastMessage.postValue("Product not found")
+                }
+            } catch (e: Exception) {
+                Log.e("DetailProductViewModel", "Error getting product", e)
+                _toastMessage.postValue("Error getting product")
+            } finally {
+                _isLoading.postValue(false)
+            }
         }
     }
 }
