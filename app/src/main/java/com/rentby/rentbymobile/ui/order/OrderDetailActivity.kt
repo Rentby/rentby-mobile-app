@@ -2,6 +2,7 @@ package com.rentby.rentbymobile.ui.order
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -9,14 +10,26 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
+import com.midtrans.sdk.corekit.callback.TransactionFinishedCallback
+import com.midtrans.sdk.corekit.core.MidtransSDK
+import com.midtrans.sdk.corekit.core.TransactionRequest
+import com.midtrans.sdk.corekit.core.UIKitCustomSetting
+import com.midtrans.sdk.corekit.core.themes.CustomColorTheme
+import com.midtrans.sdk.corekit.models.CustomerDetails
+import com.midtrans.sdk.corekit.models.ItemDetails
+import com.midtrans.sdk.corekit.models.snap.Gopay
+import com.midtrans.sdk.corekit.models.snap.Shopeepay
+import com.midtrans.sdk.corekit.models.snap.TransactionResult
+import com.midtrans.sdk.uikit.SdkUIFlowBuilder
 import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.databinding.ActivityOrderDetailBinding
+import com.rentby.rentbymobile.utils.midtransConfig
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
-class OrderDetailActivity : AppCompatActivity() {
+class OrderDetailActivity : AppCompatActivity(), TransactionFinishedCallback {
     private lateinit var binding: ActivityOrderDetailBinding
     private val viewModel: OrderDetailViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,11 +49,17 @@ class OrderDetailActivity : AppCompatActivity() {
 
         setupView()
         setupAction()
+        initMidtransSdk()
     }
 
     private fun setupAction(){
         binding.arrowLeft.setOnClickListener {
             finish()
+        }
+
+        binding.buttonPayNow.setOnClickListener {
+            val snapTokenValue: String = "4ab8ed5e-f62f-4ec6-a46b-e004424e2c0b"
+            MidtransSDK.getInstance().startPaymentUiFlow(this@OrderDetailActivity, snapTokenValue)
         }
     }
 
@@ -138,7 +157,70 @@ class OrderDetailActivity : AppCompatActivity() {
         return outputFormat.format(date)
     }
 
+    private fun initTransactionRequest(): TransactionRequest {
+        // Create new Transaction Request
+        val transactionRequestNew = TransactionRequest(System.currentTimeMillis().toString() + "", 36500.0)
+        transactionRequestNew.customerDetails = initCustomerDetails()
+        transactionRequestNew.gopay = Gopay("mysamplesdk:://midtrans")
+        transactionRequestNew.shopeepay = Shopeepay("mysamplesdk:://midtrans")
+
+        val itemDetails1 = ItemDetails("ITEM_ID_1", 36500.0, 1, "ITEM_NAME_1")
+        val itemDetailsList = ArrayList<ItemDetails>()
+        itemDetailsList.add(itemDetails1)
+        transactionRequestNew.itemDetails = itemDetailsList
+        return transactionRequestNew
+    }
+
+    private fun initCustomerDetails(): CustomerDetails {
+        //define customer detail (mandatory for coreflow)
+        val mCustomerDetails = CustomerDetails()
+        mCustomerDetails.phone = "085310102020"
+        mCustomerDetails.firstName = "user fullname"
+        mCustomerDetails.email = "mail@mail.com"
+        mCustomerDetails.customerIdentifier = "mail@mail.com"
+        return mCustomerDetails
+    }
+
+    private fun initMidtransSdk() {
+        val clientKey: String = midtransConfig.MERCHANT_CLIENT_KEY
+        val baseUrl: String = midtransConfig.MERCHANT_BASE_CHECKOUT_URL
+        val sdkUIFlowBuilder: SdkUIFlowBuilder = SdkUIFlowBuilder.init()
+            .setClientKey(clientKey) // client_key is mandatory
+            .setContext(this) // context is mandatory
+            .setTransactionFinishedCallback(this) // set transaction finish callback (sdk callback)
+            .setMerchantBaseUrl(baseUrl) //set merchant url
+            .enableLog(true) // enable sdk log
+            .setColorTheme(CustomColorTheme("#FFE51255", "#B61548", "#FFE51255")) // will replace theme on snap theme on MAP
+            .setLanguage("en")
+        sdkUIFlowBuilder.buildSDK()
+        uiKitCustomSetting()
+    }
+
+    private fun uiKitCustomSetting() {
+        val uIKitCustomSetting = UIKitCustomSetting()
+        uIKitCustomSetting.setSaveCardChecked(true)
+        MidtransSDK.getInstance().setUiKitCustomSetting(uIKitCustomSetting)
+    }
+
+    override fun onTransactionFinished(result: TransactionResult) {
+        if (result.response != null) {
+            when (result.status) {
+                TransactionResult.STATUS_SUCCESS -> Toast.makeText(this, "Transaction Finished. ID: " + result.response.transactionId, Toast.LENGTH_LONG).show()
+                TransactionResult.STATUS_PENDING -> Toast.makeText(this, "Transaction Pending. ID: " + result.response.transactionId, Toast.LENGTH_LONG).show()
+                TransactionResult.STATUS_FAILED -> Toast.makeText(this, "Transaction Failed. ID: " + result.response.transactionId.toString() + ". Message: " + result.response.statusMessage, Toast.LENGTH_LONG).show()
+            }
+        } else if (result.isTransactionCanceled) {
+            Toast.makeText(this, "Transaction Canceled", Toast.LENGTH_LONG).show()
+        } else {
+            if (result.status.equals(TransactionResult.STATUS_INVALID, true)) {
+                Toast.makeText(this, "Transaction Invalid", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "Transaction Finished with failure.", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
     companion object {
-        const val ORDER_ID = ""
+        const val ORDER_ID = "order_id"
     }
 }
