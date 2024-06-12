@@ -28,7 +28,7 @@ class BookedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val orders = OrderList.getMockOrders().filter { it.status == 2 }
+        val orders = OrderList.getMockOrders()
 
         binding.rvBookedItem.layoutManager = LinearLayoutManager(requireContext())
         binding.rvBookedItem.adapter = BookedListAdapter(requireContext(), orders)

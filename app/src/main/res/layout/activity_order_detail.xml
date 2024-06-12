@@ -496,6 +496,7 @@
                     android:layout_marginTop="8dp"
                     android:text="Batalkan Pesanan"
                     android:textColor="@color/rentby_primary"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/button_pay_now"
                     app:layout_constraintStart_toStartOf="@+id/button_pay_now"
                     app:layout_constraintTop_toBottomOf="@+id/button_pay_now"

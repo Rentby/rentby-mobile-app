@@ -7,6 +7,7 @@ data class Order (
     val orderTime: String,
     val pickupTime: String,
     val returnTime: String,
+    val snapToken: String,
     val payment: String,
     val sellerId: String,
     val sellerName: String,
