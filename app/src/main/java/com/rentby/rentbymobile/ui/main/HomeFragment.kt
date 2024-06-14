@@ -1,5 +1,6 @@
 package com.rentby.rentbymobile.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.data.mock.ProductList
 import com.rentby.rentbymobile.databinding.FragmentHomeBinding
 import com.rentby.rentbymobile.ui.adapter.ProductAdapter
+import com.rentby.rentbymobile.ui.profile.ProfileActivity
 import com.rentby.rentbymobile.utils.GridSpacingItemDecoration
 
 class HomeFragment : Fragment() {
@@ -32,10 +34,14 @@ class HomeFragment : Fragment() {
         Glide.with(this)
             .load(photoUrl)
             .circleCrop()
-            .placeholder(R.drawable.ic_profile) // Optional: placeholder image
-            .error(R.drawable.ic_profile) // Optional: error image
-            .into(binding.userPhoto) // Ensure the ID is correct
+            .placeholder(R.drawable.ic_profile_placeholder) // Placeholder image
+            .error(R.drawable.ic_profile_placeholder) // Error image if loading fails
+            .into(binding.userPhoto)
 
+        binding.userPhoto.setOnClickListener {
+            val intent = Intent(requireContext(), ProfileActivity::class.java)
+            startActivity(intent)
+        }
 
         setupRecyclerView()
 
@@ -48,6 +54,7 @@ class HomeFragment : Fragment() {
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
     }
+
     companion object {
         private const val ARG_DISPLAY_NAME = "display_name"
         private const val ARG_PHOTO_URL = "photo_url"

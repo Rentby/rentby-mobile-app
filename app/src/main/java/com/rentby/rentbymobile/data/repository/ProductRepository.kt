@@ -1,6 +1,5 @@
 package com.rentby.rentbymobile.data.repository
 
-import android.util.Log
 import com.rentby.rentbymobile.data.mock.ProductList
 import com.rentby.rentbymobile.data.model.Product
 

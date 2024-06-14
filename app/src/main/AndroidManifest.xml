@@ -25,8 +25,8 @@
             android:name=".ui.order.OrderDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.ProfileActivity"
-            android:exported="false" />
+            android:name=".ui.profile.ProfileActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.product.detail.DetailProductActivity"
             android:exported="true">

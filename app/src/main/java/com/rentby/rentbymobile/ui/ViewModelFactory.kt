@@ -7,6 +7,7 @@ import com.rentby.rentbymobile.data.repository.UserRepository
 import com.rentby.rentbymobile.di.UserInjection
 import com.rentby.rentbymobile.ui.login.LoginViewModel
 import com.rentby.rentbymobile.ui.main.MainViewModel
+import com.rentby.rentbymobile.ui.profile.ProfileViewModel
 import com.rentby.rentbymobile.ui.register.RegisterViewModel
 
 class ViewModelFactory(
@@ -25,6 +26,9 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(userRepository) as T
             }
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+                ProfileViewModel(userRepository) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
@@ -35,14 +39,11 @@ class ViewModelFactory(
 
         @JvmStatic
         fun getInstance(context: Context): ViewModelFactory {
-            if (INSTANCE == null) {
-                synchronized(ViewModelFactory::class.java) {
-                    INSTANCE = ViewModelFactory(
-                        UserInjection.provideRepository(context)
-                    )
-                }
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: ViewModelFactory(
+                    UserInjection.provideRepository(context)
+                ).also { INSTANCE = it }
             }
-            return INSTANCE as ViewModelFactory
         }
     }
 }

@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.map
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "session")
 
-class UserPreference private constructor(private val dataStore: DataStore<androidx.datastore.preferences.core.Preferences>) {
+class UserPreference private constructor(private val dataStore: DataStore<Preferences>) {
 
     suspend fun saveSession(user: UserModel) {
         dataStore.edit { preferences ->
@@ -54,6 +54,7 @@ class UserPreference private constructor(private val dataStore: DataStore<androi
         }
         Log.d("TestingRegister", "User Pref Cleared")
     }
+
     companion object {
         @Volatile
         private var INSTANCE: UserPreference? = null
@@ -64,7 +65,7 @@ class UserPreference private constructor(private val dataStore: DataStore<androi
         private val PHONE_NUMBER_KEY = stringPreferencesKey("phoneNumber")
         private val IS_REGISTERED_KEY = booleanPreferencesKey("isRegistered")
 
-        fun getInstance(dataStore: DataStore<androidx.datastore.preferences.core.Preferences>): UserPreference {
+        fun getInstance(dataStore: DataStore<Preferences>): UserPreference {
             return INSTANCE ?: synchronized(this) {
                 val instance = UserPreference(dataStore)
                 INSTANCE = instance
