@@ -62,7 +62,6 @@ class DetailProductActivity : AppCompatActivity() {
         setupView()
         setupBookingAction(productId)
         setupShareButton(productId)
-        setupSellerLayout()
 
         handleBackPress()
 
@@ -70,9 +69,10 @@ class DetailProductActivity : AppCompatActivity() {
 
     }
 
-    private fun setupSellerLayout() {
+    private fun setupSellerLayout(sellerId: String) {
         binding.sellerLayout.setOnClickListener {
             val intent = Intent(this@DetailProductActivity, SellerProfileActivity::class.java)
+            intent.putExtra(SellerProfileActivity.SELLER_ID, sellerId)
             startActivity(intent)
         }
     }
@@ -134,6 +134,7 @@ class DetailProductActivity : AppCompatActivity() {
                 it.image?.let { imageResId ->
                     binding.imageProduct.setImageResource(imageResId)
                 }
+                setupSellerLayout(it.sellerId)
             }
         }
 //        viewModel.isLoading.observe(this, Observer { isLoading ->

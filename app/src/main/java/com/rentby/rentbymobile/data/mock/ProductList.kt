@@ -13,7 +13,7 @@ object ProductList {
                 4.8f,
                 25,
                 "Makassar, Sulawesi Selatan",
-                "1233",
+                "seller1234",
                 R.drawable.tenda,
                 "Tenda dome ini memiliki kapasitas untuk 4 orang, cocok untuk berkemah bersama keluarga atau teman. Tenda ini terbuat dari bahan yang tahan air sehingga Anda tidak perlu khawatir saat hujan turun. Desainnya yang portable membuatnya mudah untuk dibawa dan dipasang di berbagai medan."
             ),
@@ -24,7 +24,7 @@ object ProductList {
                 4.5f,
                 30,
                 "Makassar, Sulawesi Selatan",
-                "1233",
+                "seller1234",
                 R.drawable.kompor,
                 "Kompor portable ini sangat praktis dan mudah dibawa kemana saja. Dengan desain mini, kompor ini tetap memberikan performa yang baik untuk memasak berbagai jenis makanan saat berkemah. Kompor ini dilengkapi dengan pengatur suhu yang memudahkan Anda mengontrol panas saat memasak."
             ),
@@ -35,7 +35,7 @@ object ProductList {
                 4.7f,
                 18,
                 "Makassar, Sulawesi Selatan",
-                "1233",
+                "seller1234",
                 R.drawable.carrier,
                 "Tas ransel gunung ini memiliki kapasitas 50L yang cukup untuk membawa perlengkapan hiking Anda. Dilengkapi dengan backsupport yang nyaman dan bahan water resistant, tas ini akan menjaga barang-barang Anda tetap kering dan terorganisir selama perjalanan."
             ),
@@ -46,7 +46,7 @@ object ProductList {
                 4.6f,
                 22,
                 "Makassar, Sulawesi Selatan",
-                "1233",
+                "seller1234",
                 R.drawable.sleeping_bag,
                 "Sleeping bag ini dirancang untuk memberikan kenyamanan maksimal saat tidur di luar ruangan. Terbuat dari bahan waterproof yang melindungi dari kelembaban, serta desain compact yang memudahkan Anda membawanya tanpa memakan banyak tempat di tas."
             ),
@@ -57,7 +57,7 @@ object ProductList {
                 4.2f,
                 35,
                 "Makassar, Sulawesi Selatan",
-                "1233",
+                "seller1234",
                 R.drawable.matras,
                 "Matras gulung ini sangat praktis untuk dibawa saat berkemah. Dengan desain yang portable dan mudah digulung, matras ini memberikan kenyamanan ekstra saat tidur di tanah. Bahan yang digunakan juga tahan lama dan mudah dibersihkan."
             ),
@@ -68,7 +68,7 @@ object ProductList {
                 4.3f,
                 40,
                 "Makassar, Sulawesi Selatan",
-                "1233",
+                "seller1234",
                 R.drawable.lampu,
                 "Lampu tenda ini menggunakan LED dan dapat diisi ulang, memberikan pencahayaan yang cukup terang untuk aktivitas di malam hari. Desainnya yang ringan dan mudah digantung membuatnya ideal untuk penerangan di dalam tenda atau area perkemahan."
             ),
@@ -79,7 +79,7 @@ object ProductList {
                 4.5f,
                 12,
                 "Makassar, Sulawesi Selatan",
-                "1233",
+                "seller1234",
                 R.drawable.kompor,
                 "Set alat masak ini sangat lengkap dan praktis untuk digunakan saat berkemah. Terdiri dari beberapa panci, wajan, dan alat makan, semuanya dapat disusun rapi menjadi satu set yang mudah dibawa. Bahan yang digunakan tahan lama dan mudah dibersihkan."
             ),
@@ -90,7 +90,7 @@ object ProductList {
                 4.1f,
                 28,
                 "Makassar, Sulawesi Selatan",
-                "1233",
+                "seller1234",
                 R.drawable.jas_hujan,
                 "Jas hujan ponco ini sangat ringan dan mudah dibawa kemana saja. Desainnya yang ultralight tidak akan menambah beban saat perjalanan. Jas ini juga terbuat dari bahan yang tahan air, melindungi Anda dari hujan deras saat beraktivitas di luar ruangan."
             ),
@@ -101,7 +101,7 @@ object ProductList {
                 4.4f,
                 15,
                 "Makassar, Sulawesi Selatan",
-                "1233",
+                "seller1234",
                 R.drawable.terkking_pole,
                 "Trekking pole ini terbuat dari aluminium yang kuat dan ringan. Dapat disesuaikan panjangnya sesuai kebutuhan, membantu Anda menjaga keseimbangan di berbagai medan. Dilengkapi dengan pegangan ergonomis yang nyaman digunakan dalam jangka waktu lama."
             ),
@@ -112,7 +112,7 @@ object ProductList {
                 4.8f,
                 10,
                 "Makassar, Sulawesi Selatan",
-                "1233",
+                "seller1234",
                 R.drawable.filter_air,
                 "Filter air portable ini sangat penting untuk memastikan Anda memiliki air minum yang bersih selama mendaki. Desainnya yang compact dan mudah digunakan memungkinkan Anda untuk memfilter air dari berbagai sumber dengan cepat dan efisien."
             )
