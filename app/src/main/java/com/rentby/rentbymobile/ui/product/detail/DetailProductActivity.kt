@@ -20,6 +20,7 @@ import com.rentby.rentbymobile.databinding.ActivityMainBinding
 import com.rentby.rentbymobile.helper.formatStringtoRP
 import com.rentby.rentbymobile.ui.main.MainActivity
 import com.rentby.rentbymobile.ui.order.OrderDetailActivity
+import com.rentby.rentbymobile.ui.seller.SellerProfileActivity
 
 class DetailProductActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailProductBinding
@@ -60,11 +61,20 @@ class DetailProductActivity : AppCompatActivity() {
 
         setupView()
         setupBookingAction(productId)
-        handleBackPress()
         setupShareButton(productId)
+        setupSellerLayout()
+
+        handleBackPress()
 
         // Set the back press callback if opened via deep link
 
+    }
+
+    private fun setupSellerLayout() {
+        binding.sellerLayout.setOnClickListener {
+            val intent = Intent(this@DetailProductActivity, SellerProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupShareButton(productId: String) {
