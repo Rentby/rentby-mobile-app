@@ -13,9 +13,10 @@ import com.rentby.rentbymobile.helper.calculateDay
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class OrderViewModel : ViewModel()  {
+class OrderViewModel(
+    private val productRepository: ProductRepository
+) : ViewModel()  {
     private val bookingRepository = BookingRepository()
-    private val productRepository = ProductRepository()
 
     private val _product = MutableLiveData<Product?>()
     val product: MutableLiveData<Product?> = _product

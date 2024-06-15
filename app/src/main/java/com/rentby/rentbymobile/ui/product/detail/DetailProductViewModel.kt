@@ -10,9 +10,9 @@ import com.rentby.rentbymobile.data.repository.ProductRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DetailProductViewModel : ViewModel() {
-    private val repository = ProductRepository()
-
+class DetailProductViewModel(
+    private val productRepository: ProductRepository
+) : ViewModel() {
     private val _product = MutableLiveData<Product?>()
     val product: LiveData<Product?> = _product
 
@@ -26,7 +26,7 @@ class DetailProductViewModel : ViewModel() {
         _isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val product = repository.getProductById(productId)
+                val product = productRepository.getProductById(productId)
                 if (product != null) {
                     _product.postValue(product)
                 } else {

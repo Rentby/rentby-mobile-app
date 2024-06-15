@@ -15,7 +15,9 @@ import com.rentby.rentbymobile.helper.calculateDay
 import com.rentby.rentbymobile.ui.order.OrderActivity
 import java.util.Calendar
 
-class BookingCalendarViewModel : ViewModel() {
+class BookingCalendarViewModel(
+    private val productRepository: ProductRepository
+) : ViewModel() {
     private val _product = MutableLiveData<Product>()
     val product: LiveData<Product> get() = _product
 
@@ -37,8 +39,6 @@ class BookingCalendarViewModel : ViewModel() {
     private val _rentPrice = MutableLiveData<String>()
     val rentPrice: LiveData<String> get() = _rentPrice
 
-    private val repository = ProductRepository()
-
     init {
         val tomorrow = tomorrow()
         _rentStart.value = tomorrow
@@ -51,7 +51,7 @@ class BookingCalendarViewModel : ViewModel() {
         viewModelScope.launch {
             _isLoading.value = true
             // Fetch the product from the repository
-            val fetchedProduct = repository.getProductById(productId)
+            val fetchedProduct = productRepository.getProductById(productId)
             _product.value = fetchedProduct!!
             _rentPrice.value = fetchedProduct.price
             calculateDurationAndTotal()

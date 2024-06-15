@@ -13,10 +13,13 @@ import com.rentby.rentbymobile.helper.calculateDay
 import com.rentby.rentbymobile.helper.dateToDay
 import com.rentby.rentbymobile.helper.dateToMilliseconds
 import com.rentby.rentbymobile.helper.formatStringtoMoney
+import com.rentby.rentbymobile.ui.ViewModelFactory
 
 class OrderActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOrderBinding
-    private val viewModel: OrderViewModel by viewModels()
+    private val viewModel by viewModels<OrderViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

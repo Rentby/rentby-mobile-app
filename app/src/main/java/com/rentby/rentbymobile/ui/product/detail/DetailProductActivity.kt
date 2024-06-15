@@ -18,13 +18,16 @@ import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.databinding.ActivityDetailProductBinding
 import com.rentby.rentbymobile.databinding.ActivityMainBinding
 import com.rentby.rentbymobile.helper.formatStringtoRP
+import com.rentby.rentbymobile.ui.ViewModelFactory
 import com.rentby.rentbymobile.ui.main.MainActivity
 import com.rentby.rentbymobile.ui.order.OrderDetailActivity
 import com.rentby.rentbymobile.ui.seller.SellerProfileActivity
 
 class DetailProductActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailProductBinding
-    private val viewModel: DetailProductViewModel by viewModels()
+    private val viewModel by viewModels<DetailProductViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
     private lateinit var orderActivityLauncher: ActivityResultLauncher<Intent>
     private var isDeepLink = false
 

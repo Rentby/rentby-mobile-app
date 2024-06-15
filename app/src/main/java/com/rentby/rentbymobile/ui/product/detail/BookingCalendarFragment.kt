@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.core.util.Pair
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -18,6 +19,7 @@ import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.rentby.rentbymobile.databinding.BookingCalendarFragmentBinding
+import com.rentby.rentbymobile.ui.ViewModelFactory
 import com.rentby.rentbymobile.ui.order.OrderActivity
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -26,7 +28,9 @@ import java.util.Locale
 
 class BookingCalendarFragment : BottomSheetDialogFragment() {
     private lateinit var binding: BookingCalendarFragmentBinding
-    private val viewModel: BookingCalendarViewModel by viewModels()
+    private val viewModel by viewModels<BookingCalendarViewModel> {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

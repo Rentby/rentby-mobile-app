@@ -6,11 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.rentby.rentbymobile.R
-import com.rentby.rentbymobile.data.mock.ProductList
 import com.rentby.rentbymobile.databinding.FragmentHomeBinding
+import com.rentby.rentbymobile.ui.ViewModelFactory
 import com.rentby.rentbymobile.ui.adapter.ProductAdapter
 import com.rentby.rentbymobile.ui.profile.ProfileActivity
 import com.rentby.rentbymobile.utils.GridSpacingItemDecoration
@@ -18,6 +19,9 @@ import com.rentby.rentbymobile.utils.GridSpacingItemDecoration
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+    private val viewModel by viewModels<MainViewModel> {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,14 +47,24 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        viewModel.getHikingProducts()
+
         setupRecyclerView()
+        setupObserver()
 
         return binding.root
     }
 
+    private fun setupObserver() {
+        viewModel.products.observe(requireActivity()) { products ->
+            if (products != null) {
+                val adapter = ProductAdapter(requireContext(), products)
+                binding.recyclerView.adapter = adapter
+            }
+        }
+    }
+
     private fun setupRecyclerView() {
-        val productAdapter = ProductAdapter(requireContext(), ProductList.getProducts())
-        binding.recyclerView.adapter = productAdapter
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
     }

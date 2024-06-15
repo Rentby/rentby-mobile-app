@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
+import com.rentby.rentbymobile.data.mock.ProductItemList
 import com.rentby.rentbymobile.data.mock.ProductList
 import com.rentby.rentbymobile.databinding.ActivitySellerProfileBinding
 import com.rentby.rentbymobile.ui.adapter.ProductAdapter
@@ -87,7 +88,7 @@ class SellerProfileActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        val productAdapter = ProductAdapter(this, ProductList.getProducts())
+        val productAdapter = ProductAdapter(this, ProductItemList.getProducts())
         binding.rvSellerProduct.adapter = productAdapter
         binding.rvSellerProduct.layoutManager = GridLayoutManager(this, 2)
         binding.rvSellerProduct.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
