@@ -68,7 +68,6 @@ class HomeFragment : Fragment() {
         val adapter = PagingProductCategotyAdapter()
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
 
         viewModel.products.observe(viewLifecycleOwner, {
             adapter.submitData(lifecycle, it)

@@ -25,9 +25,13 @@ class MainViewModel(
 ) : ViewModel() {
     private val _category = MutableLiveData<String>("hiking")
 
-    val products: LiveData<PagingData<ProductItem>> = _category.switchMap { category ->
-        productRepository.getProductsByCategory(category)
-            .cachedIn(viewModelScope)
+//    val products: LiveData<PagingData<ProductItem>> = _category.switchMap { category ->
+//        productRepository.getProductsByCategory(category)
+//            .cachedIn(viewModelScope)
+//    }
+
+    val products: LiveData<PagingData<ResultsItem>> by lazy {
+        productRepository.getProductsByCategory("hiking").cachedIn(viewModelScope)
     }
 
     fun setCategory(category: String) {

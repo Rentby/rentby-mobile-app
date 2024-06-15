@@ -1,10 +1,12 @@
 package com.rentby.rentbymobile.data.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
+import androidx.paging.map
 import com.rentby.rentbymobile.data.mock.ProductList
 import com.rentby.rentbymobile.data.model.Product
 import com.rentby.rentbymobile.data.model.ProductItem
@@ -28,12 +30,13 @@ class ProductRepository(private val apiService: ApiService) {
 //        )
 //    }
 
-    fun getProductsByCategory(category: String): LiveData<PagingData<ProductItem>> {
+    fun getProductsByCategory(category: String): LiveData<PagingData<ResultsItem>> {
         return Pager(
             config = PagingConfig(pageSize = 10),
             pagingSourceFactory = { ProductCategoryPagingSource(apiService, category) }
         ).liveData
     }
+
 
     companion object {
         @Volatile
