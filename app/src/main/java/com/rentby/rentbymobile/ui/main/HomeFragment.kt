@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.databinding.FragmentHomeBinding
 import com.rentby.rentbymobile.ui.ViewModelFactory
+import com.rentby.rentbymobile.ui.adapter.PagingProductCategotyAdapter
 import com.rentby.rentbymobile.ui.adapter.ProductAdapter
 import com.rentby.rentbymobile.ui.profile.ProfileActivity
 import com.rentby.rentbymobile.utils.GridSpacingItemDecoration
@@ -38,8 +39,8 @@ class HomeFragment : Fragment() {
         Glide.with(this)
             .load(photoUrl)
             .circleCrop()
-            .placeholder(R.drawable.ic_profile_placeholder) // Placeholder image
-            .error(R.drawable.ic_profile_placeholder) // Error image if loading fails
+            .placeholder(R.drawable.ic_profile) // Placeholder image
+            .error(R.drawable.ic_profile) // Error image if loading fails
             .into(binding.userPhoto)
 
         binding.userPhoto.setOnClickListener {
@@ -47,26 +48,31 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        viewModel.getHikingProducts()
 
+        setupCategory()
         setupRecyclerView()
-        setupObserver()
 
         return binding.root
     }
 
-    private fun setupObserver() {
-        viewModel.products.observe(requireActivity()) { products ->
-            if (products != null) {
-                val adapter = ProductAdapter(requireContext(), products)
-                binding.recyclerView.adapter = adapter
-            }
+    private fun setupCategory() {
+        binding.radio0.setOnClickListener {
+            viewModel.setCategory("hiking")
+        }
+        binding.radio0.setOnClickListener {
+            viewModel.setCategory("cosplay")
         }
     }
 
     private fun setupRecyclerView() {
+        val adapter = PagingProductCategotyAdapter()
+        binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
+
+        viewModel.products.observe(viewLifecycleOwner, {
+            adapter.submitData(lifecycle, it)
+        })
     }
 
     companion object {
