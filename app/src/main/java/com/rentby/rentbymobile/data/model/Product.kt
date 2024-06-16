@@ -1,16 +1,12 @@
 package com.rentby.rentbymobile.data.model
 
-import androidx.annotation.DrawableRes
-
 data class Product(
     val id: String,
     val name: String,
-    val price: String,
+    val rentPrice: Int,
+    val imageUrl: String,
     val rating: Float,
     val booked: Int,
-    val location: String,
-    val sellerId: String,
-    @DrawableRes
-    val image: Int?,
-    val description: String
+    val description: String,
+    val sellerId: String
 )

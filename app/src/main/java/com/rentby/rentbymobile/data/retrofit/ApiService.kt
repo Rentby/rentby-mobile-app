@@ -1,6 +1,7 @@
 package com.rentby.rentbymobile.data.retrofit
 
 import com.rentby.rentbymobile.data.request.RegisterRequest
+import com.rentby.rentbymobile.data.response.ProductDetailResponse
 import com.rentby.rentbymobile.data.response.ProductListResponse
 import com.rentby.rentbymobile.data.response.RegisterResponse
 import com.rentby.rentbymobile.data.response.UserDetailResponse
@@ -31,4 +32,7 @@ interface ApiService {
         @Query("category") category: String,
         @Query("page") page: Int,
     ): ProductListResponse
+
+    @GET("product/{product_id}")
+    fun getProductDetails(@Path("product_id") productId: String): Call<ProductDetailResponse>
 }

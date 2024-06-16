@@ -2,8 +2,6 @@ package com.rentby.rentbymobile.ui.product.detail
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
@@ -13,14 +11,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.databinding.ActivityDetailProductBinding
-import com.rentby.rentbymobile.databinding.ActivityMainBinding
+import com.rentby.rentbymobile.helper.formatInttoRp
 import com.rentby.rentbymobile.helper.formatStringtoRP
 import com.rentby.rentbymobile.ui.ViewModelFactory
 import com.rentby.rentbymobile.ui.main.MainActivity
-import com.rentby.rentbymobile.ui.order.OrderDetailActivity
 import com.rentby.rentbymobile.ui.seller.SellerProfileActivity
 
 class DetailProductActivity : AppCompatActivity() {
@@ -129,14 +126,16 @@ class DetailProductActivity : AppCompatActivity() {
         viewModel.product.observe(this) { product ->
             product?.let {
                 binding.textViewProductName.text = it.name
-                binding.tvPrice.text = formatStringtoRP(it.price)
+                binding.tvPrice.text = formatInttoRp(it.rentPrice)
                 binding.tvRatingCount.text = it.rating.toString()
                 binding.tvBooked.text = it.booked.toString()
-                binding.textViewLocation.text = it.location
+                binding.textViewLocation.text = "Testing"
                 binding.textViewDescription.text = it.description
-                it.image?.let { imageResId ->
-                    binding.imageProduct.setImageResource(imageResId)
-                }
+                Glide.with(this)
+                    .load(it.imageUrl)
+                    .placeholder(R.drawable.default_image) // Placeholder image
+                    .error(R.drawable.default_image) // Error image if loading fails
+                    .into(binding.imageProduct)
                 setupSellerLayout(it.sellerId)
             }
         }

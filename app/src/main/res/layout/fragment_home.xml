@@ -119,7 +119,7 @@
 
 
                 <RadioButton
-                    android:id="@+id/radio0"
+                    android:id="@+id/button_hiking"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_weight=".5"
@@ -140,7 +140,7 @@
                     android:layout_height="wrap_content" />
 
                 <RadioButton
-                    android:id="@+id/radio1"
+                    android:id="@+id/button_cosplay"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_weight=".5"

@@ -1,6 +1,7 @@
 package com.rentby.rentbymobile.data.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -9,19 +10,23 @@ import androidx.paging.liveData
 import androidx.paging.map
 import com.rentby.rentbymobile.data.mock.ProductList
 import com.rentby.rentbymobile.data.model.Product
+import com.rentby.rentbymobile.data.model.ProductMock
 import com.rentby.rentbymobile.data.model.ProductItem
 import com.rentby.rentbymobile.data.paging.ProductListPagingSource
-import com.rentby.rentbymobile.data.response.ProductListResponse
-import com.rentby.rentbymobile.data.response.ResultsItem
+import com.rentby.rentbymobile.data.response.ProductDetailResponse
+import com.rentby.rentbymobile.data.response.toProduct
 import com.rentby.rentbymobile.data.retrofit.ApiService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import retrofit2.Call
-import java.util.Locale.Category
+import retrofit2.Callback
+import retrofit2.Response
 
 class ProductRepository(private val apiService: ApiService) {
-    fun getProductById(productId: String): Product? {
+    fun getProductById(productId: String): ProductMock? {
         return ProductList.getProducts().find { it.id == productId }
+    }
+
+    fun getProductByIdApi(productId: String): Call<ProductDetailResponse> {
+        return apiService.getProductDetails(productId)
     }
 
 //    fun getHikingProduct(): Call<ProductListResponse> {

@@ -6,10 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rentby.rentbymobile.data.model.Booking
-import com.rentby.rentbymobile.data.model.Product
+import com.rentby.rentbymobile.data.model.ProductMock
 import com.rentby.rentbymobile.data.repository.BookingRepository
 import com.rentby.rentbymobile.data.repository.ProductRepository
-import com.rentby.rentbymobile.helper.calculateDay
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -18,8 +17,8 @@ class OrderViewModel(
 ) : ViewModel()  {
     private val bookingRepository = BookingRepository()
 
-    private val _product = MutableLiveData<Product?>()
-    val product: MutableLiveData<Product?> = _product
+    private val _productMock = MutableLiveData<ProductMock?>()
+    val productMock: MutableLiveData<ProductMock?> = _productMock
 
     private val _booking = MutableLiveData<Booking>()
     val booking: MutableLiveData<Booking> = _booking
@@ -31,7 +30,7 @@ class OrderViewModel(
         _isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val product = productRepository.getProductById(productId)
-            _product.postValue(product)
+            _productMock.postValue(product)
             _isLoading.postValue(false)
         }
     }

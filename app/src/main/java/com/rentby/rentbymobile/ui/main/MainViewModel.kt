@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -23,13 +24,20 @@ class MainViewModel(
     private val userRepository: UserRepository,
     private val productRepository: ProductRepository
 ) : ViewModel() {
+    private val _category = MutableLiveData<String>("hiking")
+
     private lateinit var state: Parcelable
     fun saveRecyclerViewState(parcelable: Parcelable) { state = parcelable }
     fun restoreRecyclerViewState() : Parcelable = state
     fun stateInitialized() : Boolean = ::state.isInitialized
 
-    val products: LiveData<PagingData<ProductItem>> by lazy {
-        productRepository.getProductsByCategory("hiking").cachedIn(viewModelScope)
+    val products: LiveData<PagingData<ProductItem>> = _category.switchMap { category ->
+        productRepository.getProductsByCategory(category)
+            .cachedIn(viewModelScope)
+    }
+
+    fun setCategory(category: String) {
+        _category.value = category
     }
 
     private val _loading = MutableLiveData<Boolean>()

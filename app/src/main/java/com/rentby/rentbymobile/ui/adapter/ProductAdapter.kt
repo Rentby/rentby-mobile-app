@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rentby.rentbymobile.R
-import com.rentby.rentbymobile.data.model.Product
 import com.rentby.rentbymobile.data.model.ProductItem
 import com.rentby.rentbymobile.databinding.ItemProductBinding
 import com.rentby.rentbymobile.helper.formatStringtoRP

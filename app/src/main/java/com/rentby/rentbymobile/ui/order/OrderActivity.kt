@@ -63,7 +63,7 @@ class OrderActivity : AppCompatActivity() {
             Log.d("OrderActivity", "Product ID is null")
         }
 
-        viewModel.product.observe(this) { product ->
+        viewModel.productMock.observe(this) { product ->
             binding.tvProductName.text = product?.name ?: ""
             product?.image?.let { imageResId ->
                 binding.imageProduct.setImageResource(imageResId)

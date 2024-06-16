@@ -7,8 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rentby.rentbymobile.data.model.Product
 import com.rentby.rentbymobile.data.repository.ProductRepository
+import com.rentby.rentbymobile.data.response.ProductDetailResponse
+import com.rentby.rentbymobile.data.response.toProduct
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DetailProductViewModel(
     private val productRepository: ProductRepository
@@ -24,20 +29,25 @@ class DetailProductViewModel(
 
     fun getProduct(productId: String) {
         _isLoading.value = true
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val product = productRepository.getProductById(productId)
-                if (product != null) {
-                    _product.postValue(product)
-                } else {
-                    _toastMessage.postValue("Product not found")
+        val client = productRepository.getProductByIdApi(productId)
+        client.enqueue(object : Callback<ProductDetailResponse> {
+            override fun onResponse(
+                call: Call<ProductDetailResponse>,
+                response: Response<ProductDetailResponse>
+            ) {
+                _isLoading.value = false
+                if (response.isSuccessful) {
+                    val productResponse = response.body()
+                    if (productResponse != null) {
+                        val data = productResponse.toProduct()
+                        _product.postValue(data)
+                    }
                 }
-            } catch (e: Exception) {
-                Log.e("DetailProductViewModel", "Error getting product", e)
-                _toastMessage.postValue("Error getting product")
-            } finally {
-                _isLoading.postValue(false)
             }
-        }
+
+            override fun onFailure(call: Call<ProductDetailResponse>, t: Throwable) {
+                _isLoading.value = false
+            }
+        })
     }
 }

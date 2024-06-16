@@ -1,16 +1,12 @@
 package com.rentby.rentbymobile.ui.product.detail
 
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.core.util.Pair
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -20,10 +16,8 @@ import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.rentby.rentbymobile.databinding.BookingCalendarFragmentBinding
 import com.rentby.rentbymobile.ui.ViewModelFactory
-import com.rentby.rentbymobile.ui.order.OrderActivity
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Locale
 
 class BookingCalendarFragment : BottomSheetDialogFragment() {
@@ -105,7 +99,7 @@ class BookingCalendarFragment : BottomSheetDialogFragment() {
             updateUI()
         }
 
-        viewModel.product.observe(viewLifecycleOwner) { product ->
+        viewModel.productMock.observe(viewLifecycleOwner) { product ->
             product?.let {
                 binding.tvRentPrice.text = NumberFormat.getNumberInstance(Locale("id", "ID")).format(it.price.toInt())
             }

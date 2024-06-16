@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import com.rentby.rentbymobile.data.model.Product
+import com.rentby.rentbymobile.data.model.ProductMock
 import com.rentby.rentbymobile.data.repository.ProductRepository
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.rentby.rentbymobile.helper.calculateDay
@@ -18,8 +18,8 @@ import java.util.Calendar
 class BookingCalendarViewModel(
     private val productRepository: ProductRepository
 ) : ViewModel() {
-    private val _product = MutableLiveData<Product>()
-    val product: LiveData<Product> get() = _product
+    private val _productMock = MutableLiveData<ProductMock>()
+    val productMock: LiveData<ProductMock> get() = _productMock
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
@@ -52,7 +52,7 @@ class BookingCalendarViewModel(
             _isLoading.value = true
             // Fetch the product from the repository
             val fetchedProduct = productRepository.getProductById(productId)
-            _product.value = fetchedProduct!!
+            _productMock.value = fetchedProduct!!
             _rentPrice.value = fetchedProduct.price
             calculateDurationAndTotal()
             _isLoading.value = false

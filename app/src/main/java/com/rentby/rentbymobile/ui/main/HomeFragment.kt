@@ -63,6 +63,9 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.buttonHiking.setOnClickListener { viewModel.setCategory("hiking") }
+        binding.buttonCosplay.setOnClickListener { viewModel.setCategory("cosplay") }
+
         setupRecyclerView()
         return binding.root
     }
