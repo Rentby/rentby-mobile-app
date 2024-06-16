@@ -75,6 +75,14 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.favorite -> {
+                    lifecycleScope.launch {
+                        val credentialManager = CredentialManager.create(this@MainActivity)
+                        auth.signOut()
+                        viewModel.logout()
+                        credentialManager.clearCredentialState(ClearCredentialStateRequest())
+                        startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                        finish()
+                    }
                     true
                 }
                 R.id.booked -> {

@@ -2,6 +2,7 @@ package com.rentby.rentbymobile.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,20 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentHomeBinding.inflate(layoutInflater)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.recyclerView.layoutManager?.onSaveInstanceState()?.let { viewModel.saveRecyclerViewState(it) }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (viewModel.stateInitialized()) {
+            binding.recyclerView.layoutManager?.onRestoreInstanceState(
+                viewModel.restoreRecyclerViewState()
+            )
+        }
     }
 
     override fun onCreateView(
@@ -57,6 +72,7 @@ class HomeFragment : Fragment() {
         val adapter = PagingProductCategoryAdapter()
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
 
         viewModel.products.observe(viewLifecycleOwner, {
             adapter.submitData(lifecycle, it)

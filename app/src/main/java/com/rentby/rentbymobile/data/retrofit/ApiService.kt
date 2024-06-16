@@ -16,7 +16,7 @@ import retrofit2.http.Query
 
 interface ApiService {
     @Headers("Content-Type: application/json")
-    @POST("user-register")
+    @POST("user")
     suspend fun register(
         @Body request: RegisterRequest
     ): RegisterResponse
