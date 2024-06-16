@@ -15,7 +15,7 @@ class ProductRepository(private val apiService: ApiService) {
     }
 
     fun getHikingProduct(): Call<ProductListResponse> {
-        return apiService.searchCategory("hiking", 10, 0)
+        return apiService.searchCategory("hiking", 1)
     }
 
     companion object {

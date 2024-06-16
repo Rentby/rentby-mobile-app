@@ -29,7 +29,6 @@ interface ApiService {
     @GET("search-category")
     fun searchCategory(
         @Query("category") category: String,
-        @Query("limit") limit: Int,
-        @Query("offset") offset: Int
+        @Query("page") page: Int,
     ): Call<ProductListResponse>
 }

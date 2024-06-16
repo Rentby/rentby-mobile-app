@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class ProductListResponse(
 
+	@field:SerializedName("nextPage")
+	val nextPage: Int? = null,
+
 	@field:SerializedName("hasMore")
 	val hasMore: Boolean? = null,
-
-	@field:SerializedName("nextOffset")
-	val nextOffset: Int? = null,
 
 	@field:SerializedName("results")
 	val results: List<ResultsItem?>? = null
