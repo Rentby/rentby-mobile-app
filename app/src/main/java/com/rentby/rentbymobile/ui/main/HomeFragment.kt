@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.databinding.FragmentHomeBinding
@@ -47,10 +48,24 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        viewModel.getHikingProducts()
-
         setupRecyclerView()
         setupObserver()
+
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val layoutManager = recyclerView.layoutManager as GridLayoutManager
+                val visibleItemCount = layoutManager.childCount
+                val totalItemCount = layoutManager.itemCount
+                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+
+                if (!viewModel.loading.value!! && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount) {
+                    viewModel.loadMoreHikingProducts()
+                }
+            }
+        })
+
 
         return binding.root
     }

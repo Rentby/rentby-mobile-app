@@ -21,14 +21,21 @@ class MainViewModel(
     private val productRepository: ProductRepository
 ) : ViewModel() {
     private val _products = MutableLiveData<List<ProductItem>?>()
-    val products: MutableLiveData<List<ProductItem>?> = _products
+    val products: LiveData<List<ProductItem>?> = _products
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
 
-    fun getHikingProducts() {
+    private var currentOffset = 0
+    private val limit = 10 // Define the limit for each page
+
+    init {
+        loadMoreHikingProducts()
+    }
+
+    fun loadMoreHikingProducts() {
         _loading.value = true
-        val client = productRepository.getHikingProduct()
+        val client = productRepository.getHikingProducts(limit, currentOffset)
         client.enqueue(object : Callback<ProductListResponse> {
             override fun onResponse(
                 call: Call<ProductListResponse>,
@@ -40,8 +47,14 @@ class MainViewModel(
                     if (productResponse != null) {
                         val productItems = productResponse.results?.filterNotNull()?.map { resultsItem ->
                             convertResultsItemToProductItem(resultsItem)
-                        }
-                        _products.postValue(productItems)
+                        } ?: emptyList()
+
+                        val currentProducts = _products.value?.toMutableList() ?: mutableListOf()
+                        currentProducts.addAll(productItems)
+                        _products.postValue(currentProducts)
+
+                        // Increment the offset for the next page
+                        currentOffset += limit
                     }
                 }
             }
