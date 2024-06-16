@@ -13,12 +13,16 @@ import com.bumptech.glide.Glide
 import com.rentby.rentbymobile.data.mock.ProductItemList
 import com.rentby.rentbymobile.data.mock.ProductList
 import com.rentby.rentbymobile.databinding.ActivitySellerProfileBinding
+import com.rentby.rentbymobile.ui.ViewModelFactory
 import com.rentby.rentbymobile.ui.adapter.ProductAdapter
 import com.rentby.rentbymobile.utils.GridSpacingItemDecoration
 
 class SellerProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySellerProfileBinding
-    private val viewModel: SellerProfileViewModel by viewModels()
+    private val viewModel by viewModels<SellerProfileViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

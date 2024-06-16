@@ -4,6 +4,7 @@ import com.rentby.rentbymobile.data.request.RegisterRequest
 import com.rentby.rentbymobile.data.response.ProductDetailResponse
 import com.rentby.rentbymobile.data.response.ProductListResponse
 import com.rentby.rentbymobile.data.response.RegisterResponse
+import com.rentby.rentbymobile.data.response.SellerDetailResponse
 import com.rentby.rentbymobile.data.response.UserDetailResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -35,4 +36,7 @@ interface ApiService {
 
     @GET("product/{product_id}")
     fun getProductDetails(@Path("product_id") productId: String): Call<ProductDetailResponse>
+
+    @GET("seller/{seller_id}")
+    fun getSellerDetails(@Path("seller_id") sellerId: String): Call<SellerDetailResponse>
 }

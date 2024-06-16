@@ -6,12 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rentby.rentbymobile.data.model.Seller
+import com.rentby.rentbymobile.data.repository.ProductRepository
 import com.rentby.rentbymobile.data.repository.SellerRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SellerProfileViewModel : ViewModel() {
-    val repository = SellerRepository()
+class SellerProfileViewModel(
+    private val productRepository: ProductRepository,
+    private val sellerRepository: SellerRepository
+) : ViewModel() {
 
     private val _seller = MutableLiveData<Seller?>()
     val seller: MutableLiveData<Seller?> = _seller
@@ -26,7 +29,7 @@ class SellerProfileViewModel : ViewModel() {
         _isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val seller = repository.getSellerById(sellerId)
+                val seller = sellerRepository.getSellerById(sellerId)
                 if (seller != null) {
                     _seller.postValue(seller)
                 } else {
