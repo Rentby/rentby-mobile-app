@@ -22,7 +22,7 @@ interface ApiService {
         @Body request: RegisterRequest
     ): RegisterResponse
 
-    @GET("user-detail/{email}")
+    @GET("user/{email}")
     suspend fun getUserDetail(
         @Path("email") email: String
     ): UserDetailResponse

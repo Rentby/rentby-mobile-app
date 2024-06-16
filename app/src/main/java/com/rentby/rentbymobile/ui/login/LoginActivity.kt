@@ -126,9 +126,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateUI(currentUser: FirebaseUser?) {
         if (currentUser != null) {
-            // Set isLogin to true
-//            viewModel.setIsLoggedIn(true)
-
             viewModel.isRegistered(Firebase.auth.currentUser?.email.toString()) { isRegistered ->
                 if (isRegistered) {
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))

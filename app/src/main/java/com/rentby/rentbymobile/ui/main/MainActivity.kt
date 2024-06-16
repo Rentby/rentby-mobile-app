@@ -110,8 +110,12 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getSession().observe(this) { user ->
             if (auth.currentUser != null && !user.isRegistered) {
-                startActivity(Intent(this, RegisterActivity::class.java))
-                finish()
+                viewModel.isRegistered(Firebase.auth.currentUser?.email.toString()) { isRegistered ->
+                    if (!isRegistered) {
+                        startActivity(Intent(this, RegisterActivity::class.java))
+                        finish()
+                    }
+                }
             }
         }
     }
