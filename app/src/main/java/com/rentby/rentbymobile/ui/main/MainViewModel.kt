@@ -47,6 +47,28 @@ class MainViewModel(
         return userRepository.getSession().asLiveData()
     }
 
+    fun isRegistered(email: String, onResult: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            try {
+                _loading.value = true
+                val userDetail = userRepository.getUserDetail(email)
+                if (userDetail != null) {
+                    val name = userDetail.data?.name.toString()
+                    val address = userDetail.data?.address.toString()
+                    val phoneNumber = userDetail.data?.phoneNumber.toString()
+                    userRepository.saveSession(UserModel(email, name, address, phoneNumber))
+                    onResult(true)
+                } else {
+                    _loading.value = false
+                    onResult(false)
+                }
+            } catch (e: Exception) {
+                _loading.value = false
+                onResult(false)
+            }
+        }
+    }
+
     fun logout() {
         viewModelScope.launch {
             userRepository.logout()

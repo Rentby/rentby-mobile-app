@@ -53,7 +53,7 @@ class PagingProductCategoryAdapter : PagingDataAdapter<ProductItem, PagingProduc
 
             Glide.with(context)
                 .load(product.imageUrl)
-                .placeholder(R.drawable.default_image) // Placeholder image
+                .placeholder(R.color.gray_200) // Placeholder image
                 .error(R.drawable.default_image) // Error image if loading fails
                 .into(binding.itemImage)
 

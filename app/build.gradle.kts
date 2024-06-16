@@ -74,5 +74,7 @@ dependencies {
 
     implementation ("com.midtrans:uikit:2.0.0-SANDBOX")
     implementation("androidx.paging:paging-runtime:3.3.0")
+    implementation("com.ericktijerou.koleton:koleton:1.0.0-beta01")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
 
 }

@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.databinding.ActivityDetailProductBinding
@@ -19,6 +20,8 @@ import com.rentby.rentbymobile.helper.formatStringtoRP
 import com.rentby.rentbymobile.ui.ViewModelFactory
 import com.rentby.rentbymobile.ui.main.MainActivity
 import com.rentby.rentbymobile.ui.seller.SellerProfileActivity
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 
 class DetailProductActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailProductBinding
@@ -133,15 +136,35 @@ class DetailProductActivity : AppCompatActivity() {
                 binding.textViewDescription.text = it.description
                 Glide.with(this)
                     .load(it.imageUrl)
-                    .placeholder(R.drawable.default_image) // Placeholder image
                     .error(R.drawable.default_image) // Error image if loading fails
                     .into(binding.imageProduct)
                 setupSellerLayout(it.sellerId)
             }
         }
-//        viewModel.isLoading.observe(this, Observer { isLoading ->
-//            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-//        })
+
+        viewModel.isLoading.observe(this, Observer { isLoading ->
+            if (isLoading) {
+                binding.imageProduct.loadSkeleton()
+                binding.layoutProductInfo.loadSkeleton()
+                binding.textViewProductName.loadSkeleton(48)
+                binding.textViewLocation.loadSkeleton(16) { color(R.color.gray_200) }
+                binding.textViewProfileName.loadSkeleton(16)
+                binding.textViewProductCount.loadSkeleton(8) { color(R.color.gray_200) }
+                binding.textDescription.loadSkeleton(9)
+                binding.textViewDescription.loadSkeleton(128) { color(R.color.gray_200) }
+                binding.priceLayout.loadSkeleton()
+            } else {
+                binding.imageProduct.hideSkeleton()
+                binding.layoutProductInfo.hideSkeleton()
+                binding.textViewProductName.hideSkeleton()
+                binding.textViewLocation.hideSkeleton()
+                binding.textViewProfileName.hideSkeleton()
+                binding.textViewProductCount.hideSkeleton()
+                binding.textDescription.hideSkeleton()
+                binding.textViewDescription.hideSkeleton()
+                binding.priceLayout.hideSkeleton()
+            }
+        })
     }
 
     private fun setupBookingAction(productId: String) {

@@ -7,7 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.rentby.rentbymobile.R
@@ -76,6 +79,37 @@ class HomeFragment : Fragment() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
+
+        // Observe LoadState
+        adapter.addLoadStateListener { loadState ->
+            // Only show the list if refresh succeeds.
+            binding.recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+            val successState = loadState.source.refresh as? LoadState.NotLoading
+            successState?.let {
+                binding.textViewErrorMessage.isVisible = false
+                binding.swipeRefreshLayout.isRefreshing = false
+            }
+
+
+            // Show loading spinner during initial load or refresh.
+            binding.progressBarHome.isVisible = loadState.source.refresh is LoadState.Loading
+            val loadingState = loadState.source.refresh as? LoadState.Loading
+            loadingState?.let {
+                binding.textViewErrorMessage.isVisible = false
+            }
+
+            // Show error message if initial load or refresh fails.
+            val errorState = loadState.source.refresh as? LoadState.Error
+            errorState?.let {
+                binding.textViewErrorMessage.isVisible = true
+                binding.swipeRefreshLayout.isRefreshing = false
+            }
+        }
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            // Trigger the reload of data
+            adapter.refresh()
+        }
 
         viewModel.products.observe(viewLifecycleOwner, {
             adapter.submitData(lifecycle, it)
