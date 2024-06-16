@@ -73,6 +73,4 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
 
     implementation ("com.midtrans:uikit:2.0.0-SANDBOX")
-
-    implementation("androidx.paging:paging-runtime:3.3.0")
 }

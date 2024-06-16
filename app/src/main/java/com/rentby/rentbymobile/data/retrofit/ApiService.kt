@@ -5,7 +5,6 @@ import com.rentby.rentbymobile.data.response.ProductListResponse
 import com.rentby.rentbymobile.data.response.RegisterResponse
 import com.rentby.rentbymobile.data.response.UserDetailResponse
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -28,9 +27,9 @@ interface ApiService {
     ): UserDetailResponse
 
     @GET("search-category")
-    suspend fun searchCategory(
+    fun searchCategory(
         @Query("category") category: String,
         @Query("limit") limit: Int,
         @Query("offset") offset: Int
-    ): ProductListResponse
+    ): Call<ProductListResponse>
 }
