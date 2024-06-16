@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.databinding.FragmentHomeBinding
 import com.rentby.rentbymobile.ui.ViewModelFactory
+import com.rentby.rentbymobile.ui.adapter.PagingProductCategoryAdapter
 import com.rentby.rentbymobile.ui.adapter.ProductAdapter
 import com.rentby.rentbymobile.ui.profile.ProfileActivity
 import com.rentby.rentbymobile.utils.GridSpacingItemDecoration
@@ -47,26 +48,19 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        viewModel.getHikingProducts()
-
         setupRecyclerView()
-        setupObserver()
-
         return binding.root
     }
 
-    private fun setupObserver() {
-        viewModel.products.observe(requireActivity()) { products ->
-            if (products != null) {
-                val adapter = ProductAdapter(requireContext(), products)
-                binding.recyclerView.adapter = adapter
-            }
-        }
-    }
 
     private fun setupRecyclerView() {
+        val adapter = PagingProductCategoryAdapter()
+        binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
+
+        viewModel.products.observe(viewLifecycleOwner, {
+            adapter.submitData(lifecycle, it)
+        })
     }
 
     companion object {

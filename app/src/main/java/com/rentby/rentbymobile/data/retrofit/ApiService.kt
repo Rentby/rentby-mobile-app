@@ -27,8 +27,8 @@ interface ApiService {
     ): UserDetailResponse
 
     @GET("search-category")
-    fun searchCategory(
+    suspend fun searchCategory(
         @Query("category") category: String,
         @Query("page") page: Int,
-    ): Call<ProductListResponse>
+    ): ProductListResponse
 }
