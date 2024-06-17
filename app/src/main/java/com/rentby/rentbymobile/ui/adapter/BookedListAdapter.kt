@@ -9,7 +9,6 @@ import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.data.model.Order
 import com.rentby.rentbymobile.databinding.ItemBookedBinding
 import com.rentby.rentbymobile.ui.order.OrderDetailActivity
-import com.rentby.rentbymobile.ui.product.detail.DetailProductActivity
 
 class BookedListAdapter(
     private val context: Context,
@@ -40,11 +39,13 @@ class BookedListAdapter(
             binding.rentTotal.text = "Total: ${order.rentTotal}"
             binding.orderStatus.text = getStatusText(order.status)
 
-            val imageRes = order.image ?: R.drawable.default_image // Provide a default image
+            val imageRes = order.image ?: R.drawable.default_image
             binding.orderImage.setImageResource(imageRes)
 
             binding.root.setOnClickListener {
-                // Handle item click
+                val intent = Intent(context, OrderDetailActivity::class.java)
+                intent.putExtra(OrderDetailActivity.ORDER_ID, order.id)
+                context.startActivity(intent)
             }
         }
 

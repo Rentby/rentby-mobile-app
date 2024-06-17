@@ -1,5 +1,6 @@
 package com.rentby.rentbymobile.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import com.rentby.rentbymobile.data.mock.OrderList
 import com.rentby.rentbymobile.data.model.Order
 import com.rentby.rentbymobile.databinding.FragmentBookedListBinding
 import com.rentby.rentbymobile.ui.adapter.BookedListAdapter
+import com.rentby.rentbymobile.ui.order.OrderDetailActivity
 
 class BookedFragment : Fragment() {
 
