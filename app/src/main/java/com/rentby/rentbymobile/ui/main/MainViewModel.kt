@@ -53,9 +53,9 @@ class MainViewModel(
                 _loading.value = true
                 val userDetail = userRepository.getUserDetail(email)
                 if (userDetail != null) {
-                    val name = userDetail.data?.name.toString()
-                    val address = userDetail.data?.address.toString()
-                    val phoneNumber = userDetail.data?.phoneNumber.toString()
+                    val name = userDetail.name.toString()
+                    val address = userDetail.address.toString()
+                    val phoneNumber = userDetail.phoneNumber.toString()
                     userRepository.saveSession(UserModel(email, name, address, phoneNumber))
                     onResult(true)
                 } else {

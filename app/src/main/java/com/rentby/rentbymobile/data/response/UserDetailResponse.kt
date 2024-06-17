@@ -4,15 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class UserDetailResponse(
 
-	@field:SerializedName("data")
-	val data: Data? = null,
-
-	@field:SerializedName("id")
-	val id: String? = null
-)
-
-data class Data(
-
 	@field:SerializedName("address")
 	val address: String? = null,
 
