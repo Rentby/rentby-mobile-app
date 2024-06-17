@@ -34,6 +34,9 @@ class OrderViewModel(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _isOrderLoading = MutableLiveData<Boolean>()
+    val isOrderLoading: LiveData<Boolean> = _isOrderLoading
+
     private val _estimateOrderResponse = MutableLiveData<OrderEstimation>()
     val estimateOrderResponse: LiveData<OrderEstimation> = _estimateOrderResponse
 
@@ -41,6 +44,7 @@ class OrderViewModel(
     val error: LiveData<String> get() = _error
 
     fun estimateOrder(productId: String, rentStart: Long, rentEnd: Long) {
+        _isOrderLoading.value = true
         viewModelScope.launch {
             orderRepository.estimateOrder(
                 productId = productId,
@@ -50,9 +54,11 @@ class OrderViewModel(
                     if (it != null) {
                         _estimateOrderResponse.postValue(it.toOrderEstimation())
                     }
+                    _isOrderLoading.value = false
                 },
                 onError = {
                     _error.postValue(it?.message)
+                    _isOrderLoading.value = false
                 }
             )
         }
@@ -78,6 +84,9 @@ class OrderViewModel(
 
             override fun onFailure(call: Call<ProductDetailResponse>, t: Throwable) {
                 _isLoading.value = false
+                _product.postValue(
+                    Product("", "", 0, "", 0.0f, 0, "", "")
+                )
             }
         })
     }

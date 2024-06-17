@@ -109,11 +109,13 @@ class BookingCalendarViewModel(
 
     fun makeBooking(context: Context, productId: String) {
         Log.d("OrderActivity", "Order Button Clicked - Product ID: $productId., Rent Start: ${rentStart.value.toString()}, Rent End: ${rentEnd.value.toString()}")
-        val intent = Intent(context, OrderActivity::class.java).apply {
-            putExtra(OrderActivity.PRODUCT_ID, productId)
-            putExtra(OrderActivity.RENT_START, _rentStart.value)
-            putExtra(OrderActivity.RENT_END, _rentEnd.value)
+        if ((product.value?.id ?: "") != "") {
+            val intent = Intent(context, OrderActivity::class.java).apply {
+                putExtra(OrderActivity.PRODUCT_ID, productId)
+                putExtra(OrderActivity.RENT_START, _rentStart.value)
+                putExtra(OrderActivity.RENT_END, _rentEnd.value)
+            }
+            context.startActivity(intent)
         }
-        context.startActivity(intent)
     }
 }

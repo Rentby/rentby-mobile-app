@@ -21,16 +21,14 @@
 
     <Button
         android:id="@+id/orderButton"
-        android:layout_width="0dp"
+        android:layout_width="160dp"
         android:layout_height="56dp"
-        android:layout_marginStart="64dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/rentby_primary"
         android:text="Lanjut"
         android:textColor="@color/rentby_secondary"
         app:layout_constraintBottom_toBottomOf="@+id/tv_rent_total_day"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_rent_total"
         app:layout_constraintTop_toTopOf="@+id/textView8" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -119,7 +117,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
-        android:text="40.000"
+        android:text="0"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/tv_rent_total_day"
         app:layout_constraintTop_toTopOf="@+id/tv_rent_total_day" />
@@ -130,7 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
         android:fontFamily="sans-serif-medium"
-        android:text=" = Rp80.000"
+        android:text=" = Rp0"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_rent_price"

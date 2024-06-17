@@ -17,6 +17,8 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.rentby.rentbymobile.databinding.BookingCalendarFragmentBinding
 import com.rentby.rentbymobile.helper.formatInttoRp
 import com.rentby.rentbymobile.ui.ViewModelFactory
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -47,7 +49,23 @@ class BookingCalendarFragment : BottomSheetDialogFragment() {
             viewModel.makeBooking(requireContext(), productId)
         }
 
+        setupSkeleton()
+
         return binding.root
+    }
+
+    private fun setupSkeleton() {
+        viewModel.isLoading.observe(this) { isLoading ->
+            if (isLoading) {
+                binding.tvRentTotalDay.loadSkeleton()
+                binding.tvRentTotal.loadSkeleton()
+                binding.tvRentPrice.loadSkeleton()
+            } else {
+                binding.tvRentTotalDay.hideSkeleton()
+                binding.tvRentTotal.hideSkeleton()
+                binding.tvRentPrice.hideSkeleton()
+            }
+        }
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

@@ -57,6 +57,13 @@ class DetailProductViewModel(
 
             override fun onFailure(call: Call<ProductDetailResponse>, t: Throwable) {
                 _isLoading.value = false
+                _product.postValue(
+                    Product("", "", 0, "", 0.0f, 0, "", "")
+                )
+
+                _seller.postValue(
+                    Seller("", "", "", "", 0, "", "",)
+                )
             }
         })
     }
@@ -71,9 +78,9 @@ class DetailProductViewModel(
             ) {
                 if (response.isSuccessful) {
                     _isSellerLoading.value = false
-                    val SellerDetailResponse = response.body()
-                    if (SellerDetailResponse != null) {
-                        val sellerData = SellerDetailResponse.toSeller()
+                    val sellerDetailResponse = response.body()
+                    if (sellerDetailResponse != null) {
+                        val sellerData = sellerDetailResponse.toSeller()
                         _seller.postValue(sellerData)
 
                         product.value?.let { Log.d("DetailProduct", it.name) }
@@ -83,6 +90,17 @@ class DetailProductViewModel(
 
             override fun onFailure(call: Call<SellerDetailResponse>, t: Throwable) {
                 _isSellerLoading.value = false
+                _seller.postValue(
+                    Seller(
+                        "",
+                        "",
+                        "",
+                        "",
+                        0,
+                        "",
+                        "",
+                    )
+                )
             }
         })
     }

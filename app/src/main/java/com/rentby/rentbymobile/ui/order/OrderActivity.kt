@@ -18,6 +18,8 @@ import com.rentby.rentbymobile.helper.formatInttoMoney
 import com.rentby.rentbymobile.helper.formatInttoRp
 import com.rentby.rentbymobile.helper.formatStringtoMoney
 import com.rentby.rentbymobile.ui.ViewModelFactory
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 
 class OrderActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOrderBinding
@@ -48,6 +50,53 @@ class OrderActivity : AppCompatActivity() {
         }
 
         setupView()
+        setupSkeleton()
+    }
+
+    private fun setupSkeleton() {
+        viewModel.isLoading.observe(this) { isLoading ->
+            if (isLoading) {
+                binding.tvSellerName.loadSkeleton(22)
+                binding.tvProductName.loadSkeleton(56)
+                binding.imageProduct.loadSkeleton()
+                binding.tvRentDaterange.loadSkeleton(16)
+                binding.tvOrderPrice.loadSkeleton(10)
+            } else {
+                binding.tvSellerName.hideSkeleton()
+                binding.tvProductName.hideSkeleton()
+                binding.imageProduct.hideSkeleton()
+                binding.tvRentDaterange.hideSkeleton()
+                binding.tvOrderPrice.hideSkeleton()
+            }
+        }
+
+        viewModel.isOrderLoading.observe(this) { isLoading ->
+            if (isLoading) {
+                binding.titleRentSummary.loadSkeleton(17)
+                binding.textView14.loadSkeleton(10)
+                binding.textView16.loadSkeleton(10)
+                binding.textView5.loadSkeleton(10)
+                binding.textView18.loadSkeleton(14)
+                binding.tvPriceTotal.loadSkeleton(8)
+                binding.tvServiceFee.loadSkeleton(8)
+                binding.tvDeposit.loadSkeleton(8)
+                binding.tvOrderTotal.loadSkeleton(8)
+
+                binding.buttonConfirmOrder.loadSkeleton()
+            } else {
+                binding.titleRentSummary.hideSkeleton()
+                binding.textView14.hideSkeleton()
+                binding.textView16.hideSkeleton()
+                binding.textView5.hideSkeleton()
+                binding.textView18.hideSkeleton()
+                binding.tvPriceTotal.hideSkeleton()
+                binding.tvServiceFee.hideSkeleton()
+                binding.tvDeposit.hideSkeleton()
+                binding.tvOrderTotal.hideSkeleton()
+
+                binding.buttonConfirmOrder.hideSkeleton()
+            }
+        }
     }
 
     private fun setupView() {

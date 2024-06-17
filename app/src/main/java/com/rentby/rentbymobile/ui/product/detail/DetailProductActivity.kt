@@ -150,8 +150,10 @@ class DetailProductActivity : AppCompatActivity() {
     private fun setupBookingAction(productId: String) {
         binding.apply {
             buttonBook.setOnClickListener {
-                val modal = BookingCalendarFragment.newInstance(productId)
-                supportFragmentManager.let { modal.show(it, BookingCalendarFragment.TAG) }
+                if ((viewModel.product.value?.id ?: "") != ""){
+                    val modal = BookingCalendarFragment.newInstance(productId)
+                    supportFragmentManager.let { modal.show(it, BookingCalendarFragment.TAG) }
+                }
             }
         }
     }
