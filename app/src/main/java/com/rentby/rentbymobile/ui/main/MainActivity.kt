@@ -31,9 +31,16 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
+
     private val viewModel by viewModels<MainViewModel> {
         ViewModelFactory.getInstance(this)
     }
+
+    // Store references to the fragments
+    private val homeFragment by lazy { HomeFragment.newInstance(auth.currentUser?.displayName, auth.currentUser?.photoUrl?.toString()) }
+    val searchFragment by lazy { SearchFragment.newInstance() }
+    private val bookedFragment by lazy { BookedFragment.newInstance(auth.currentUser?.displayName, auth.currentUser?.photoUrl?.toString()) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -53,7 +60,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupDefaultFragment(savedInstanceState: Bundle?){
         if (savedInstanceState == null) {
             auth.currentUser?.let { user ->
-                loadFragment(HomeFragment.newInstance(user.displayName, user.photoUrl?.toString()))
+                loadFragment(homeFragment)
             }
         }
     }
@@ -64,37 +71,54 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+    fun showFragment(fragment: Fragment) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+
+        // Hide all other fragments
+        supportFragmentManager.fragments.forEach { existingFragment ->
+            fragmentTransaction.hide(existingFragment)
+        }
+
+        if (fragment.isAdded) {
+            fragmentTransaction.show(fragment)
+        } else {
+            fragmentTransaction.add(R.id.fragmentContainerView, fragment)
+        }
+
+        fragmentTransaction.commit()
+    }
+
     private fun setupNavigation() {
         val bottomNavigationItemView = binding.bottomNavigation
         bottomNavigationItemView.setOnItemSelectedListener  { item ->
             when(item.itemId) {
                 R.id.home -> {
-                    auth.currentUser?.let { user ->
-                        loadFragment(HomeFragment.newInstance(user.displayName, user.photoUrl?.toString()))
+                    auth.currentUser?.let {
+                        showFragment(homeFragment)
                     }
                     true
                 }
-                R.id.favorite -> {
+                R.id.search -> {
                     lifecycleScope.launch {
-                        val credentialManager = CredentialManager.create(this@MainActivity)
-                        auth.signOut()
-                        viewModel.logout()
-                        credentialManager.clearCredentialState(ClearCredentialStateRequest())
-                        startActivity(Intent(this@MainActivity, LoginActivity::class.java))
-                        finish()
+                        showFragment(searchFragment)
                     }
                     true
                 }
                 R.id.booked -> {
-                    auth.currentUser?.let { user ->
+                    auth.currentUser?.let {
                         Log.d("Fragment", "Clicked")
-                        loadFragment(BookedFragment.newInstance(user.displayName, user.photoUrl?.toString()))
+                        showFragment(bookedFragment)
                     }
                     true
                 }
                 else -> false
             }
         }
+    }
+
+    fun updateSelectedNavigationItem(itemId: Int) {
+        val bottomNavigation = binding.bottomNavigation
+        bottomNavigation.selectedItemId = itemId
     }
 
     private fun setupAuth(){

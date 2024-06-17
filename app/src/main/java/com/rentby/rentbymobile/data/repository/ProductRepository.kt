@@ -13,6 +13,7 @@ import com.rentby.rentbymobile.data.model.Product
 import com.rentby.rentbymobile.data.model.ProductMock
 import com.rentby.rentbymobile.data.model.ProductItem
 import com.rentby.rentbymobile.data.paging.ProductListPagingSource
+import com.rentby.rentbymobile.data.paging.ProductSearchPagingSource
 import com.rentby.rentbymobile.data.response.ProductDetailResponse
 import com.rentby.rentbymobile.data.response.toProduct
 import com.rentby.rentbymobile.data.retrofit.ApiService
@@ -37,6 +38,23 @@ class ProductRepository(private val apiService: ApiService) {
         return Pager(
             config = PagingConfig(pageSize = 20, enablePlaceholders = false),
             pagingSourceFactory = { ProductListPagingSource(apiService, category) }
+        ).liveData.map { pagingData ->
+            pagingData.map { resultsItem ->
+                ProductItem(
+                    id = resultsItem.productId ?: "",
+                    name = resultsItem.productName ?: "",
+                    price = resultsItem.rentPrice?.toString() ?: "0",
+                    rating = resultsItem.rating?.toFloatOrNull() ?: 0.0f,
+                    imageUrl = resultsItem.urlPhoto ?: ""
+                )
+            }
+        }
+    }
+
+    fun getProductsByQuery(query: String): LiveData<PagingData<ProductItem>> {
+        return Pager(
+            config = PagingConfig(pageSize = 20, enablePlaceholders = false),
+            pagingSourceFactory = { ProductSearchPagingSource(apiService, query) }
         ).liveData.map { pagingData ->
             pagingData.map { resultsItem ->
                 ProductItem(

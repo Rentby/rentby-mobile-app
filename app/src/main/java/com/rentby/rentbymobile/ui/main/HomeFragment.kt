@@ -66,6 +66,16 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.searchView2.setOnClickListener {
+            val mainActivity = activity as MainActivity
+            val fragment = mainActivity.searchFragment.apply {
+                arguments = Bundle().apply {
+                    putBoolean(SearchFragment.ARG_OPEN_SEARCH_VIEW, true)
+                }
+            }
+            mainActivity.updateSelectedNavigationItem(R.id.search)
+        }
+
         binding.buttonHiking.setOnClickListener { viewModel.setCategory("hiking") }
         binding.buttonCosplay.setOnClickListener { viewModel.setCategory("cosplay") }
 

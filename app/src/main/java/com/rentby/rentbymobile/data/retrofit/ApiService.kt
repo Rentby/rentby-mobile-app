@@ -47,4 +47,10 @@ interface ApiService {
     fun estimateOrder(
         @Body request: EstimateOrderRequest
     ): Call<EstimateOrderResponse>
+
+    @GET("search")
+    suspend fun searchProduct(
+        @Query("query") query: String,
+        @Query("page") page: Int,
+    ): ProductListResponse
 }

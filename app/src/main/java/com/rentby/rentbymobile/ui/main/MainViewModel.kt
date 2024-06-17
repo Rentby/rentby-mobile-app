@@ -19,12 +19,16 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.http.Query
 
 class MainViewModel(
     private val userRepository: UserRepository,
     private val productRepository: ProductRepository
 ) : ViewModel() {
     private val _category = MutableLiveData<String>("hiking")
+
+    private val _query = MutableLiveData<String>("")
+    val query: LiveData<String> = _query
 
     private lateinit var state: Parcelable
     fun saveRecyclerViewState(parcelable: Parcelable) { state = parcelable }
@@ -36,8 +40,21 @@ class MainViewModel(
             .cachedIn(viewModelScope)
     }
 
+    val searchProducts: LiveData<PagingData<ProductItem>> = _query.switchMap { query ->
+        if (query.isNotEmpty()) {
+            productRepository.getProductsByQuery(query)
+                .cachedIn(viewModelScope)
+        } else {
+            MutableLiveData<PagingData<ProductItem>>(PagingData.empty())
+        }
+    }
+
     fun setCategory(category: String) {
         _category.value = category
+    }
+
+    fun setQuery(query: String) {
+        _query.value = query
     }
 
     private val _loading = MutableLiveData<Boolean>()
