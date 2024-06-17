@@ -11,33 +11,39 @@ import kotlinx.coroutines.launch
 import com.rentby.rentbymobile.data.model.ProductMock
 import com.rentby.rentbymobile.data.repository.ProductRepository
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.rentby.rentbymobile.data.model.Product
+import com.rentby.rentbymobile.data.response.ProductDetailResponse
+import com.rentby.rentbymobile.data.response.toProduct
 import com.rentby.rentbymobile.helper.calculateDay
 import com.rentby.rentbymobile.ui.order.OrderActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.Calendar
 
 class BookingCalendarViewModel(
     private val productRepository: ProductRepository
 ) : ViewModel() {
-    private val _productMock = MutableLiveData<ProductMock>()
-    val productMock: LiveData<ProductMock> get() = _productMock
+    private val _product = MutableLiveData<Product>()
+    val product: LiveData<Product> = _product
 
     private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> get() = _isLoading
+    val isLoading: LiveData<Boolean> = _isLoading
 
     private val _rentStart = MutableLiveData<Long>()
-    val rentStart: LiveData<Long> get() = _rentStart
+    val rentStart: LiveData<Long> = _rentStart
 
     private val _rentEnd = MutableLiveData<Long>()
-    val rentEnd: LiveData<Long> get() = _rentEnd
+    val rentEnd: LiveData<Long> = _rentEnd
 
     private val _duration = MutableLiveData<Int>()
-    val duration: LiveData<Int> get() = _duration
+    val duration: LiveData<Int> = _duration
 
     private val _rentTotal = MutableLiveData<Int>()
-    val rentTotal: LiveData<Int> get() = _rentTotal
+    val rentTotal: LiveData<Int> = _rentTotal
 
     private val _rentPrice = MutableLiveData<String>()
-    val rentPrice: LiveData<String> get() = _rentPrice
+    val rentPrice: LiveData<String> = _rentPrice
 
     init {
         val tomorrow = tomorrow()
@@ -48,15 +54,29 @@ class BookingCalendarViewModel(
     }
 
     fun getProduct(productId: String) {
-        viewModelScope.launch {
-            _isLoading.value = true
-            // Fetch the product from the repository
-            val fetchedProduct = productRepository.getProductById(productId)
-            _productMock.value = fetchedProduct!!
-            _rentPrice.value = fetchedProduct.price
-            calculateDurationAndTotal()
-            _isLoading.value = false
-        }
+        _isLoading.value = true
+        val client = productRepository.getProductByIdApi(productId)
+        client.enqueue(object : Callback<ProductDetailResponse> {
+            override fun onResponse(
+                call: Call<ProductDetailResponse>,
+                response: Response<ProductDetailResponse>
+            ) {
+                _isLoading.value = false
+                if (response.isSuccessful) {
+                    val productResponse = response.body()
+                    if (productResponse != null) {
+                        val data = productResponse.toProduct()
+                        _product.postValue(data)
+                        _rentPrice.value = data.rentPrice.toString()
+                        calculateDurationAndTotal()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ProductDetailResponse>, t: Throwable) {
+                _isLoading.value = false
+            }
+        })
     }
 
     fun setRentDates(start: Long, end: Long) {

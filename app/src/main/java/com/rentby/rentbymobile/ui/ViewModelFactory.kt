@@ -3,9 +3,11 @@ package com.rentby.rentbymobile.ui
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.rentby.rentbymobile.data.repository.OrderRepository
 import com.rentby.rentbymobile.data.repository.ProductRepository
 import com.rentby.rentbymobile.data.repository.SellerRepository
 import com.rentby.rentbymobile.data.repository.UserRepository
+import com.rentby.rentbymobile.di.OrderInjection
 import com.rentby.rentbymobile.di.ProductInjection
 import com.rentby.rentbymobile.di.SellerInjection
 import com.rentby.rentbymobile.di.UserInjection
@@ -21,7 +23,8 @@ import com.rentby.rentbymobile.ui.seller.SellerProfileViewModel
 class ViewModelFactory(
     private val userRepository: UserRepository,
     private val productRepository: ProductRepository,
-    private val sellerRepository: SellerRepository
+    private val sellerRepository: SellerRepository,
+    private val orderRepository: OrderRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -40,7 +43,7 @@ class ViewModelFactory(
                 ProfileViewModel(userRepository) as T
             }
             modelClass.isAssignableFrom(OrderViewModel::class.java) -> {
-                OrderViewModel(productRepository) as T
+                OrderViewModel(productRepository, orderRepository) as T
             }
             modelClass.isAssignableFrom(BookingCalendarViewModel::class.java) -> {
                 BookingCalendarViewModel(productRepository) as T
@@ -65,7 +68,8 @@ class ViewModelFactory(
                 INSTANCE ?: ViewModelFactory(
                     UserInjection.provideRepository(context),
                     ProductInjection.provideRepository(),
-                    SellerInjection.provideRepository()
+                    SellerInjection.provideRepository(),
+                    OrderInjection.provideRepository()
                 ).also { INSTANCE = it }
             }
         }

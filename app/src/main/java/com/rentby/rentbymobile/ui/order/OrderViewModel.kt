@@ -6,37 +6,84 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rentby.rentbymobile.data.model.Booking
+import com.rentby.rentbymobile.data.model.OrderEstimation
+import com.rentby.rentbymobile.data.model.Product
 import com.rentby.rentbymobile.data.model.ProductMock
 import com.rentby.rentbymobile.data.repository.BookingRepository
+import com.rentby.rentbymobile.data.repository.OrderRepository
 import com.rentby.rentbymobile.data.repository.ProductRepository
+import com.rentby.rentbymobile.data.response.EstimateOrderResponse
+import com.rentby.rentbymobile.data.response.ProductDetailResponse
+import com.rentby.rentbymobile.data.response.toOrderEstimation
+import com.rentby.rentbymobile.data.response.toProduct
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class OrderViewModel(
-    private val productRepository: ProductRepository
+    private val productRepository: ProductRepository,
+    private val orderRepository: OrderRepository
 ) : ViewModel()  {
     private val bookingRepository = BookingRepository()
 
-    private val _productMock = MutableLiveData<ProductMock?>()
-    val productMock: MutableLiveData<ProductMock?> = _productMock
-
-    private val _booking = MutableLiveData<Booking>()
-    val booking: MutableLiveData<Booking> = _booking
+    private val _product = MutableLiveData<Product?>()
+    val product: LiveData<Product?> = _product
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _estimateOrderResponse = MutableLiveData<OrderEstimation>()
+    val estimateOrderResponse: LiveData<OrderEstimation> = _estimateOrderResponse
+
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> get() = _error
+
+    fun estimateOrder(productId: String, rentStart: Long, rentEnd: Long) {
+        viewModelScope.launch {
+            orderRepository.estimateOrder(
+                productId = productId,
+                rentStart = rentStart,
+                rentEnd = rentEnd,
+                onResult = {
+                    if (it != null) {
+                        _estimateOrderResponse.postValue(it.toOrderEstimation())
+                    }
+                },
+                onError = {
+                    _error.postValue(it?.message)
+                }
+            )
+        }
+    }
+
     fun getProduct(productId: String) {
         _isLoading.value = true
-        viewModelScope.launch(Dispatchers.IO) {
-            val product = productRepository.getProductById(productId)
-            _productMock.postValue(product)
-            _isLoading.postValue(false)
-        }
+        val client = productRepository.getProductByIdApi(productId)
+        client.enqueue(object : Callback<ProductDetailResponse> {
+            override fun onResponse(
+                call: Call<ProductDetailResponse>,
+                response: Response<ProductDetailResponse>
+            ) {
+                _isLoading.value = false
+                if (response.isSuccessful) {
+                    val productResponse = response.body()
+                    if (productResponse != null) {
+                        val data = productResponse.toProduct()
+                        _product.postValue(data)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ProductDetailResponse>, t: Throwable) {
+                _isLoading.value = false
+            }
+        })
     }
 
     fun generateBookingData(productId: String, rentStart: Long, rentEnd: Long){
         Log.d("OrderViewModel", "start ${rentStart.toString()} end ${rentEnd.toString()}")
-        _booking.postValue(bookingRepository.makeBooking(productId, rentStart, rentEnd))
+//        _booking.postValue(bookingRepository.makeBooking(productId, rentStart, rentEnd))
     }
 }

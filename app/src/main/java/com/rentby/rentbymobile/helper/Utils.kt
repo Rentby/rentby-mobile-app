@@ -17,6 +17,10 @@ fun formatStringtoMoney(nominal: String): String {
     return NumberFormat.getNumberInstance(Locale("id", "ID")).format(nominal.toInt())
 }
 
+fun formatInttoMoney(nominal: Int): String {
+    return NumberFormat.getNumberInstance(Locale("id", "ID")).format(nominal)
+}
+
 
 fun calculateDay(start: Long, end: Long): Int {
     return ((end - start) / (1000 * 60 * 60 * 24)).toInt() + 1

@@ -1,6 +1,8 @@
 package com.rentby.rentbymobile.data.retrofit
 
+import com.rentby.rentbymobile.data.request.EstimateOrderRequest
 import com.rentby.rentbymobile.data.request.RegisterRequest
+import com.rentby.rentbymobile.data.response.EstimateOrderResponse
 import com.rentby.rentbymobile.data.response.ProductDetailResponse
 import com.rentby.rentbymobile.data.response.ProductListResponse
 import com.rentby.rentbymobile.data.response.RegisterResponse
@@ -39,4 +41,10 @@ interface ApiService {
 
     @GET("seller/{seller_id}")
     fun getSellerDetails(@Path("seller_id") sellerId: String): Call<SellerDetailResponse>
+
+    @Headers("Content-Type: application/json")
+    @POST("estimate-order")
+    fun estimateOrder(
+        @Body request: EstimateOrderRequest
+    ): Call<EstimateOrderResponse>
 }

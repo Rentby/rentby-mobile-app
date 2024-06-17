@@ -8,10 +8,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
+import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.databinding.ActivityOrderBinding
 import com.rentby.rentbymobile.helper.calculateDay
 import com.rentby.rentbymobile.helper.dateToDay
 import com.rentby.rentbymobile.helper.dateToMilliseconds
+import com.rentby.rentbymobile.helper.formatInttoMoney
+import com.rentby.rentbymobile.helper.formatInttoRp
 import com.rentby.rentbymobile.helper.formatStringtoMoney
 import com.rentby.rentbymobile.ui.ViewModelFactory
 
@@ -52,38 +56,35 @@ class OrderActivity : AppCompatActivity() {
         val rentEnd = intent.getLongExtra(RENT_END, 0L)
 
         if (productId != null) {
-            Log.d("OrderActivity", productId)
-        }
-        if (productId != null) {
             viewModel.getProduct(productId)
-            Log.d("OrderActivity", rentStart.toString() + rentEnd.toString())
-            viewModel.generateBookingData(productId, rentStart, rentEnd)
-            Log.d("OrderActivity", "Product found and booking data generated")
+            viewModel.estimateOrder(productId, rentStart, rentEnd)
         } else {
             Log.d("OrderActivity", "Product ID is null")
         }
 
-        viewModel.productMock.observe(this) { product ->
+        viewModel.product.observe(this) { product ->
             binding.tvProductName.text = product?.name ?: ""
-            product?.image?.let { imageResId ->
-                binding.imageProduct.setImageResource(imageResId)
-            }
+            Glide.with(this)
+                .load(product?.imageUrl)
+                .placeholder(R.color.gray_200)
+                .error(R.drawable.default_image)
+                .into(binding.imageProduct)
         }
 
-        viewModel.booking.observe(this){ booking ->
-            val dateRange = "${dateToDay(booking.rentStart)} - ${dateToDay(booking.rentEnd)}"
-            Log.d("OrderActivity", "start $booking.rentStart")
-            Log.d("OrderActivity", "end ${booking.rentEnd}")
-            val duration = calculateDay(dateToMilliseconds(booking.rentStart), dateToMilliseconds(booking.rentEnd))
-            val orderPrice = "$duration x ${formatStringtoMoney(booking.rentPrice)}"
+        viewModel.estimateOrderResponse.observe(this){ order ->
+            val dateRange = "${dateToDay(order.rentStart)} - ${dateToDay(order.rentEnd)}"
+            Log.d("OrderActivity", "start ${order.rentStart}")
+            Log.d("OrderActivity", "end ${order.rentEnd}")
+            val duration = calculateDay(dateToMilliseconds(order.rentStart), dateToMilliseconds(order.rentEnd))
+            val orderPrice = "$duration x ${formatInttoMoney(order.rentPrice)}"
 
             binding.tvRentDaterange.text = dateRange
             binding.tvOrderPrice.text = orderPrice
 
-            binding.tvPriceTotal.text = formatStringtoMoney(booking.rentTotal)
-            binding.tvServiceFee.text = formatStringtoMoney(booking.serviceFee)
-            binding.tvDeposit.text = formatStringtoMoney(booking.deposit)
-            binding.tvOrderTotal.text = formatStringtoMoney(booking.orderTotal)
+            binding.tvPriceTotal.text = formatInttoMoney(order.rentTotal)
+            binding.tvServiceFee.text = formatInttoMoney(order.serviceFee)
+            binding.tvDeposit.text = formatInttoMoney(order.deposit)
+            binding.tvOrderTotal.text = formatInttoMoney(order.orderTotal)
         }
     }
 

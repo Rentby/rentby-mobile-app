@@ -15,6 +15,7 @@ import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.rentby.rentbymobile.databinding.BookingCalendarFragmentBinding
+import com.rentby.rentbymobile.helper.formatInttoRp
 import com.rentby.rentbymobile.ui.ViewModelFactory
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -99,9 +100,9 @@ class BookingCalendarFragment : BottomSheetDialogFragment() {
             updateUI()
         }
 
-        viewModel.productMock.observe(viewLifecycleOwner) { product ->
+        viewModel.product.observe(viewLifecycleOwner) { product ->
             product?.let {
-                binding.tvRentPrice.text = NumberFormat.getNumberInstance(Locale("id", "ID")).format(it.price.toInt())
+                binding.tvRentPrice.text = formatInttoRp(it.rentPrice)
             }
         }
     }
