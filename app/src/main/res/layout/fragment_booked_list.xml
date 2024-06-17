@@ -1,24 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout"
     android:name="com.rentby.rentbymobile.ui.main.BookedFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <RadioGroup
+            android:id="@+id/button_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/button_all"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/radio_flat_selector"
+                android:button="@android:color/transparent"
+                android:checked="true"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:paddingLeft="16dp"
+                android:paddingTop="3dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="3dp"
+                android:text="All"
+                android:textColor="@color/radio_flat_text_selector" />
+
+            <RadioButton
+                android:id="@+id/button_pending"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/radio_flat_selector"
+                android:button="@android:color/transparent"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:paddingLeft="16dp"
+                android:paddingTop="3dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="3dp"
+                android:text="Pending"
+                android:textColor="@color/radio_flat_text_selector" />
+
+            <RadioButton
+                android:id="@+id/button_booked"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/radio_flat_selector"
+                android:button="@android:color/transparent"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:paddingLeft="16dp"
+                android:paddingTop="3dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="3dp"
+                android:text="Booked"
+                android:textColor="@color/radio_flat_text_selector" />
+
+            <RadioButton
+                android:id="@+id/button_pickedup"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/radio_flat_selector"
+                android:button="@android:color/transparent"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:paddingLeft="16dp"
+                android:paddingTop="3dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="3dp"
+                android:text="Picked Up"
+                android:textColor="@color/radio_flat_text_selector" />
+
+            <RadioButton
+                android:id="@+id/button_returned"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/radio_flat_selector"
+                android:button="@android:color/transparent"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:paddingLeft="16dp"
+                android:paddingTop="3dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="3dp"
+                android:text="Returned"
+                android:textColor="@color/radio_flat_text_selector" />
+
+            <RadioButton
+                android:id="@+id/button_completed"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/radio_flat_selector"
+                android:button="@android:color/transparent"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:paddingLeft="16dp"
+                android:paddingTop="3dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="3dp"
+                android:text="Completed"
+                android:textColor="@color/radio_flat_text_selector" />
+        </RadioGroup>
+    </HorizontalScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBookedItem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layoutManager="LinearLayoutManager"
+        android:padding="8dp"
+        tools:context=".ui.main.BookedFragment"
+        tools:listitem="@layout/item_booked" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_home"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:context=".ui.main.BookedFragment"
-        tools:listitem="@layout/item_booked" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/filter" />
+</LinearLayout>

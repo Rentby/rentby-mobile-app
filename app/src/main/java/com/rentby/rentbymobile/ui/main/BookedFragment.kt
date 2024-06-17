@@ -7,15 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rentby.rentbymobile.data.mock.OrderList
+import com.rentby.rentbymobile.data.model.Order
 import com.rentby.rentbymobile.databinding.FragmentBookedListBinding
 import com.rentby.rentbymobile.ui.adapter.BookedListAdapter
 
 class BookedFragment : Fragment() {
 
-//    private var _binding: FragmentBookedListBinding? = null
-//    private val binding get() = _binding!!
-
     private lateinit var binding: FragmentBookedListBinding
+    private lateinit var orders: List<Order>
+    private lateinit var adapter: BookedListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,10 +28,27 @@ class BookedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val orders = OrderList.getMockOrders()
+        orders = OrderList.getMockOrders()
+        adapter = BookedListAdapter(requireContext(), orders)
 
         binding.rvBookedItem.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvBookedItem.adapter = BookedListAdapter(requireContext(), orders)
+        binding.rvBookedItem.adapter = adapter
+
+        binding.buttonAll.setOnClickListener { filterOrders(null) }
+        binding.buttonPending.setOnClickListener { filterOrders(1) }
+        binding.buttonBooked.setOnClickListener { filterOrders(2) }
+        binding.buttonPickedup.setOnClickListener { filterOrders(3) }
+        binding.buttonReturned.setOnClickListener { filterOrders(4) }
+        binding.buttonCompleted.setOnClickListener { filterOrders(5) }
+    }
+
+    private fun filterOrders(status: Int?) {
+        val filteredOrders = if (status == null) {
+            orders
+        } else {
+            orders.filter { it.status == status }
+        }
+        adapter.updateOrders(filteredOrders)
     }
 
     companion object {

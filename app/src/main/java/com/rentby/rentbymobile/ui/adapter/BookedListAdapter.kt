@@ -13,9 +13,8 @@ import com.rentby.rentbymobile.ui.product.detail.DetailProductActivity
 
 class BookedListAdapter(
     private val context: Context,
-    private val orders: List<Order>
-) :
-    RecyclerView.Adapter<BookedListAdapter.BookedViewHolder>() {
+    private var orders: List<Order>
+) : RecyclerView.Adapter<BookedListAdapter.BookedViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookedViewHolder {
         val binding = ItemBookedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -27,6 +26,11 @@ class BookedListAdapter(
     }
 
     override fun getItemCount(): Int = orders.size
+
+    fun updateOrders(newOrders: List<Order>) {
+        orders = newOrders
+        notifyDataSetChanged()
+    }
 
     inner class BookedViewHolder(private val binding: ItemBookedBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(order: Order) {
@@ -40,9 +44,7 @@ class BookedListAdapter(
             binding.orderImage.setImageResource(imageRes)
 
             binding.root.setOnClickListener {
-                val intent = Intent(context, OrderDetailActivity::class.java)
-                intent.putExtra(OrderDetailActivity.ORDER_ID, order.id)
-                context.startActivity(intent)
+                // Handle item click
             }
         }
 
@@ -50,7 +52,7 @@ class BookedListAdapter(
             return when (status) {
                 1 -> "Pending"
                 2 -> "Booked"
-                3 -> "Picked up"
+                3 -> "Picked Up"
                 4 -> "Returned"
                 5 -> "Completed"
                 else -> "Unknown"
