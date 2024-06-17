@@ -36,6 +36,10 @@
                 android:text="All"
                 android:textColor="@color/radio_flat_text_selector" />
 
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="wrap_content" />
+
             <RadioButton
                 android:id="@+id/button_pending"
                 android:layout_width="wrap_content"
@@ -50,6 +54,10 @@
                 android:paddingBottom="3dp"
                 android:text="Pending"
                 android:textColor="@color/radio_flat_text_selector" />
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="wrap_content" />
 
             <RadioButton
                 android:id="@+id/button_booked"
@@ -66,6 +74,10 @@
                 android:text="Booked"
                 android:textColor="@color/radio_flat_text_selector" />
 
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="wrap_content" />
+
             <RadioButton
                 android:id="@+id/button_pickedup"
                 android:layout_width="wrap_content"
@@ -81,6 +93,10 @@
                 android:text="Picked Up"
                 android:textColor="@color/radio_flat_text_selector" />
 
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="wrap_content" />
+
             <RadioButton
                 android:id="@+id/button_returned"
                 android:layout_width="wrap_content"
@@ -95,6 +111,10 @@
                 android:paddingBottom="3dp"
                 android:text="Returned"
                 android:textColor="@color/radio_flat_text_selector" />
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="wrap_content" />
 
             <RadioButton
                 android:id="@+id/button_completed"
