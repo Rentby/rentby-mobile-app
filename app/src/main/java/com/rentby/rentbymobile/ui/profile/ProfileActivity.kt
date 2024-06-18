@@ -58,6 +58,8 @@ class ProfileActivity : AppCompatActivity() {
         observeViewModel()
         setupTextChangeListeners()
         setupSaveButton()
+
+        loadUserProfilePhoto()
     }
 
     private fun setupToolbar() {
@@ -77,7 +79,6 @@ class ProfileActivity : AppCompatActivity() {
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                 profileViewModel.clearMessage()
 
-                // If message indicates logout, navigate to login
                 if (message == "Logged out successfully") {
                     navigateToLogin()
                 }
@@ -97,6 +98,7 @@ class ProfileActivity : AppCompatActivity() {
         binding.username.setText(user.name)
         binding.phoneNumber.setText(user.phoneNumber)
         binding.address.setText(user.address)
+
         photoUrl = Firebase.auth.currentUser?.photoUrl.toString()
 
         Glide.with(this)
@@ -148,6 +150,17 @@ class ProfileActivity : AppCompatActivity() {
         val phoneNumber = binding.phoneNumber.text.toString()
 
         profileViewModel.updateProfile(name, address, phoneNumber)
+    }
+
+    private fun loadUserProfilePhoto() {
+        Firebase.auth.currentUser?.photoUrl?.let { uri ->
+            Glide.with(this)
+                .load(uri)
+                .circleCrop()
+                .placeholder(R.color.gray_200) // Placeholder image
+                .error(R.color.gray_200) // Error image if loading fails
+                .into(binding.imageprofile)
+        }
     }
 
     private fun signOut() {
