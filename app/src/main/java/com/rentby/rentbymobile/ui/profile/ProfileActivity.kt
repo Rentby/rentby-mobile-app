@@ -13,6 +13,8 @@ import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.data.pref.UserModel
 import com.rentby.rentbymobile.databinding.ActivityProfileBinding
@@ -157,21 +159,13 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun loadUserProfilePhoto() {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail()
-            .build()
+        photoUrl = Firebase.auth.currentUser?.photoUrl.toString()
 
-        val googleSignInClient = GoogleSignIn.getClient(this, gso)
-        val account = GoogleSignIn.getLastSignedInAccount(this)
-
-        account?.photoUrl?.let { url ->
-            photoUrl = url.toString() // Store the photo URL
-            Glide.with(this)
-                .load(url)
-                .circleCrop()
-                .placeholder(R.drawable.ic_profile)
-                .error(R.drawable.ic_profile)
-                .into(binding.imageprofile)
-        }
+        Glide.with(this)
+            .load(photoUrl)
+            .circleCrop()
+            .placeholder(R.color.gray_200) // Placeholder image
+            .error(R.color.gray_200) // Error image if loading fails
+            .into(binding.imageprofile)
     }
 }
