@@ -38,22 +38,21 @@
             android:background="@drawable/circle_background" />
 
         <TextView
-            android:id="@+id/username"
+            android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Clara Shinta"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:text="clarashinta@gmail.com"
+            android:textSize="16sp"
             android:textColor="#000000" />
     </LinearLayout>
 
     <TextView
-        android:id="@+id/email_label"
+        android:id="@+id/username_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Email"
+        android:text="Nama"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,10 +61,10 @@
         app:layout_constraintTop_toBottomOf="@id/profile_header" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email_layout"
+        android:id="@+id/username_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/email_label"
+        app:layout_constraintTop_toBottomOf="@id/username_label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"
@@ -73,11 +72,11 @@
         android:layout_marginEnd="32dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email"
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="clarashinta@gmail.com"
-            android:inputType="textEmailAddress"
+            android:text="Clara Shinta"
+            android:inputType="text"
             android:background="@null"
             android:textColor="@android:color/black" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -87,13 +86,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Phone Number"
+        android:text="Nomor Handphone"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.104"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email_layout" />
+        app:layout_constraintTop_toBottomOf="@id/username_layout" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/phone_number_layout"
@@ -150,32 +149,19 @@
             android:textColor="@android:color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
-<!--    <Button-->
-<!--        android:id="@+id/buttonLogout"-->
-<!--        android:layout_width="125dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="32dp"-->
-<!--        android:background="@drawable/button_background"-->
-<!--        android:padding="16dp"-->
-<!--        android:text="Logout"-->
-<!--        android:textColor="@android:color/white"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.9"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/buttonSave"-->
-<!--        android:layout_width="125dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="32dp"-->
-<!--        android:background="@drawable/button_background"-->
-<!--        android:padding="16dp"-->
-<!--        android:text="Save"-->
-<!--        android:textColor="@android:color/white"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.099"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/rentby_primary"
+        android:text="Simpan Perubahan"
+        android:textColor="@color/rentby_secondary"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

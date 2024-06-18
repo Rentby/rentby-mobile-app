@@ -27,13 +27,15 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
 
     fun getSession(): Flow<UserModel> {
         return dataStore.data.map { preferences ->
-            UserModel(
+            val userModel = UserModel(
                 preferences[EMAIL_KEY] ?: "",
                 preferences[NAME_KEY] ?: "",
                 preferences[ADDRESS_KEY] ?: "",
                 preferences[PHONE_NUMBER_KEY] ?: "",
                 preferences[IS_REGISTERED_KEY] ?: false
             )
+            Log.d("UserPreference", "Retrieved session: $userModel")
+            userModel
         }
     }
 
