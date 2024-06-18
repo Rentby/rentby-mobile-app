@@ -13,6 +13,7 @@ import com.rentby.rentbymobile.di.SellerInjection
 import com.rentby.rentbymobile.di.UserInjection
 import com.rentby.rentbymobile.ui.login.LoginViewModel
 import com.rentby.rentbymobile.ui.main.MainViewModel
+import com.rentby.rentbymobile.ui.order.OrderDetailViewModel
 import com.rentby.rentbymobile.ui.order.OrderViewModel
 import com.rentby.rentbymobile.ui.product.detail.BookingCalendarViewModel
 import com.rentby.rentbymobile.ui.product.detail.DetailProductViewModel
@@ -53,6 +54,9 @@ class ViewModelFactory(
             }
             modelClass.isAssignableFrom(SellerProfileViewModel::class.java) -> {
                 SellerProfileViewModel(productRepository, sellerRepository) as T
+            }
+            modelClass.isAssignableFrom(OrderDetailViewModel::class.java) -> {
+                OrderDetailViewModel(orderRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

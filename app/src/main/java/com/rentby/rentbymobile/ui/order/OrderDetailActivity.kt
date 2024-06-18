@@ -2,40 +2,31 @@ package com.rentby.rentbymobile.ui.order
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.Observer
-import com.midtrans.sdk.corekit.callback.TransactionFinishedCallback
-import com.midtrans.sdk.corekit.core.MidtransSDK
-import com.midtrans.sdk.corekit.core.TransactionRequest
-import com.midtrans.sdk.corekit.core.UIKitCustomSetting
-import com.midtrans.sdk.corekit.core.themes.CustomColorTheme
-import com.midtrans.sdk.corekit.models.CustomerDetails
-import com.midtrans.sdk.corekit.models.ItemDetails
-import com.midtrans.sdk.corekit.models.snap.Gopay
-import com.midtrans.sdk.corekit.models.snap.Shopeepay
-import com.midtrans.sdk.corekit.models.snap.TransactionResult
-import com.midtrans.sdk.uikit.SdkUIFlowBuilder
+import com.bumptech.glide.Glide
 import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.databinding.ActivityOrderDetailBinding
-import com.rentby.rentbymobile.ui.login.LoginActivity
+import com.rentby.rentbymobile.ui.ViewModelFactory
 import com.rentby.rentbymobile.ui.payment.PaymentActivity
-import com.rentby.rentbymobile.utils.midtransConfig
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
-import java.util.concurrent.TimeUnit
 
 class OrderDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOrderDetailBinding
-    private val viewModel: OrderDetailViewModel by viewModels()
+    private val viewModel by viewModels<OrderDetailViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -53,6 +44,13 @@ class OrderDetailActivity : AppCompatActivity() {
 
         setupView(this)
         setupAction()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onResume() {
+        super.onResume()
+        val orderId = intent.getStringExtra(ORDER_ID) ?: ""
+        viewModel.getOrderDetail(orderId)
     }
 
     private fun setupAction(){
@@ -154,9 +152,11 @@ class OrderDetailActivity : AppCompatActivity() {
                 binding.tvCharge.text = lateCharge
                 binding.tvTotalCharge.text = formattedTotalCharge
 
-                order.image?.let {
-                    binding.imageProduct.setImageResource(it)
-                }
+                Glide.with(this)
+                    .load(order.imageUrl)
+                    .placeholder(R.color.gray_200)
+                    .error(R.drawable.default_image)
+                    .into(binding.imageProduct)
             }
         }
     }

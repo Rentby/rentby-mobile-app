@@ -1,8 +1,11 @@
 package com.rentby.rentbymobile.data.retrofit
 
 import com.rentby.rentbymobile.data.request.EstimateOrderRequest
+import com.rentby.rentbymobile.data.request.MakeOrderRequest
 import com.rentby.rentbymobile.data.request.RegisterRequest
 import com.rentby.rentbymobile.data.response.EstimateOrderResponse
+import com.rentby.rentbymobile.data.response.OrderDetailResponse
+import com.rentby.rentbymobile.data.response.OrderIdResponse
 import com.rentby.rentbymobile.data.response.ProductDetailResponse
 import com.rentby.rentbymobile.data.response.ProductListResponse
 import com.rentby.rentbymobile.data.response.RegisterResponse
@@ -60,4 +63,15 @@ interface ApiService {
         @Path("seller_id") sellerId: String,
         @Query("page") page: Int,
         ): SellerProductResponse
+
+    @Headers("Content-Type: application/json")
+    @POST("payment/order")
+    fun makeOrder(
+        @Body request: MakeOrderRequest
+    ): Call<OrderIdResponse>
+
+    @GET("order/{order_id}")
+    fun getOrderDetail(
+        @Path("order_id") orderId: String,
+    ): Call<OrderDetailResponse>
 }
