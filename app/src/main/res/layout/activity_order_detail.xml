@@ -528,7 +528,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="#FFFFFF"
-                android:paddingBottom="400dp">
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
                     android:id="@+id/title_review"
