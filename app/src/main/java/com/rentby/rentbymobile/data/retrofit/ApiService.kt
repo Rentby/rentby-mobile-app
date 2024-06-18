@@ -7,6 +7,7 @@ import com.rentby.rentbymobile.data.response.ProductDetailResponse
 import com.rentby.rentbymobile.data.response.ProductListResponse
 import com.rentby.rentbymobile.data.response.RegisterResponse
 import com.rentby.rentbymobile.data.response.SellerDetailResponse
+import com.rentby.rentbymobile.data.response.SellerProductResponse
 import com.rentby.rentbymobile.data.response.UserDetailResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -53,4 +54,10 @@ interface ApiService {
         @Query("query") query: String,
         @Query("page") page: Int,
     ): ProductListResponse
+
+    @GET("product-seller/{seller_id}")
+    suspend fun getSellerProducts(
+        @Path("seller_id") sellerId: String,
+        @Query("page") page: Int,
+        ): SellerProductResponse
 }

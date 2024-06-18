@@ -62,7 +62,7 @@ class DetailProductViewModel(
                 )
 
                 _seller.postValue(
-                    Seller("", "", "", "", 0, "", "",)
+                    Seller("", "", "", "", 0, "", "")
                 )
             }
         })
@@ -82,8 +82,6 @@ class DetailProductViewModel(
                     if (sellerDetailResponse != null) {
                         val sellerData = sellerDetailResponse.toSeller()
                         _seller.postValue(sellerData)
-
-                        product.value?.let { Log.d("DetailProduct", it.name) }
                     }
                 }
             }
@@ -91,14 +89,7 @@ class DetailProductViewModel(
             override fun onFailure(call: Call<SellerDetailResponse>, t: Throwable) {
                 _isSellerLoading.value = false
                 _seller.postValue(
-                    Seller(
-                        "",
-                        "",
-                        "",
-                        "",
-                        0,
-                        "",
-                        "",
+                    Seller("", "", "", "", 0, "", "",
                     )
                 )
             }

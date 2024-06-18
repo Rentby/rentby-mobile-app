@@ -9,11 +9,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
-import com.rentby.rentbymobile.R
-import com.rentby.rentbymobile.databinding.FragmentHomeBinding
 import com.rentby.rentbymobile.databinding.FragmentSearchBinding
 import com.rentby.rentbymobile.ui.ViewModelFactory
-import com.rentby.rentbymobile.ui.adapter.PagingProductCategoryAdapter
+import com.rentby.rentbymobile.ui.adapter.PagingProductListAdapter
 import com.rentby.rentbymobile.utils.GridSpacingItemDecoration
 
 class SearchFragment : Fragment() {
@@ -57,7 +55,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        val adapter = PagingProductCategoryAdapter()
+        val adapter = PagingProductListAdapter()
         binding.recyclerView2.adapter = adapter
         binding.recyclerView2.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.recyclerView2.addItemDecoration(GridSpacingItemDecoration(2, 16, true))

@@ -1,6 +1,7 @@
 package com.rentby.rentbymobile.data.response
 
 import com.google.gson.annotations.SerializedName
+import com.rentby.rentbymobile.data.model.ProductItem
 
 data class ProductListResponse(
 
@@ -31,3 +32,13 @@ data class ResultsItem(
 	@field:SerializedName("product_name")
 	val productName: String? = null
 )
+
+fun ResultsItem.toProductItem(): ProductItem {
+	return ProductItem(
+		id = productId ?: "",
+		name = productName ?: "",
+		price = rentPrice?.toString() ?: "0",
+		rating = rating?.toFloatOrNull() ?: 0.0f,
+		imageUrl = urlPhoto ?: ""
+	)
+}

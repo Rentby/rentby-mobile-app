@@ -4,6 +4,7 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.TimeZone
 
 fun formatStringtoRP(nominal: String): String {
     return "Rp" + NumberFormat.getNumberInstance(Locale("id", "ID")).format(nominal.toInt())
@@ -42,6 +43,14 @@ fun dateToMilliseconds(dateString: String): Long {
     val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     val date = sdf.parse(dateString)
     return date?.time ?: 0L
+}
+
+fun millisecondsToDateString(millis: Long): String {
+    val date = Date(millis)
+    val timeZone = TimeZone.getDefault()
+    val sdf = SimpleDateFormat("MMMM d, yyyy 'at' h:mm:ss a 'UTC'XXX", Locale.getDefault())
+    sdf.timeZone = timeZone
+    return sdf.format(date)
 }
 
 fun dateToDay(dateString: String): String {

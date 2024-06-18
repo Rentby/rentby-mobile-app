@@ -6,8 +6,14 @@ import com.rentby.rentbymobile.data.model.Seller
 
 data class SellerDetailResponse(
 
+	@field:SerializedName("image_url")
+	val imageUrl: String? = null,
+
 	@field:SerializedName("name")
 	val name: String? = null,
+
+	@field:SerializedName("description")
+	val description: String? = null,
 
 	@field:SerializedName("location")
 	val location: String? = null,
@@ -26,10 +32,10 @@ fun SellerDetailResponse.toSeller(): Seller {
 	return Seller(
 		id = this.id ?: "",
 		name = this.name ?: "",
-		image = "",
+		image = this.imageUrl ?: "",
 		whatsappLink = this.whatsappLink ?: "",
 		productTotal = this.productTotal ?: 0,
 		location = this.location ?: "",
-		description = ""
+		description = this.description ?: ""
 	)
 }

@@ -3,6 +3,7 @@ package com.rentby.rentbymobile.ui.seller
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +15,9 @@ import com.rentby.rentbymobile.data.mock.ProductItemList
 import com.rentby.rentbymobile.data.mock.ProductList
 import com.rentby.rentbymobile.databinding.ActivitySellerProfileBinding
 import com.rentby.rentbymobile.ui.ViewModelFactory
+import com.rentby.rentbymobile.ui.adapter.PagingProductListAdapter
 import com.rentby.rentbymobile.ui.adapter.ProductAdapter
+import com.rentby.rentbymobile.ui.product.detail.DetailProductActivity
 import com.rentby.rentbymobile.utils.GridSpacingItemDecoration
 
 class SellerProfileActivity : AppCompatActivity() {
@@ -22,6 +25,7 @@ class SellerProfileActivity : AppCompatActivity() {
     private val viewModel by viewModels<SellerProfileViewModel> {
         ViewModelFactory.getInstance(this)
     }
+    private var isDeepLink = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,13 +39,16 @@ class SellerProfileActivity : AppCompatActivity() {
             insets
         }
 
-        intent.getStringExtra(SELLER_ID)?.let {
-            viewModel.getSeller(it)
-        }
+        val sellerId = intent.getStringExtra(SellerProfileActivity.SELLER_ID) ?: handleDeepLink(intent)
+        viewModel.getSeller(sellerId)
+
+        // Check if the activity was opened via a deep link
+        isDeepLink = intent.data != null
 
         setupView()
         setupRecyclerView()
     }
+
 
     private fun setupView() {
         binding.floatingActionButtonBack.setOnClickListener {
@@ -86,16 +93,29 @@ class SellerProfileActivity : AppCompatActivity() {
         return "https://open.rentby.com/seller/$sellerId"
     }
 
+    private fun handleDeepLink(intent: Intent): String {
+        intent.data?.let { uri ->
+            if (uri.pathSegments.size > 1) {
+                return uri.pathSegments[1]
+            }
+        }
+        return ""
+    }
+
     private fun showDescription(description: String) {
         val modal = SellerDescriptionFragment.newInstance(description)
         supportFragmentManager.let { modal.show(it, SellerDescriptionFragment.TAG) }
     }
 
     private fun setupRecyclerView() {
-        val productAdapter = ProductAdapter(this, ProductItemList.getProducts())
-        binding.rvSellerProduct.adapter = productAdapter
+        val adapter = PagingProductListAdapter()
+        binding.rvSellerProduct.adapter = adapter
         binding.rvSellerProduct.layoutManager = GridLayoutManager(this, 2)
         binding.rvSellerProduct.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
+
+        viewModel.products.observe(this, {
+            adapter.submitData(lifecycle, it)
+        })
     }
 
     companion object {

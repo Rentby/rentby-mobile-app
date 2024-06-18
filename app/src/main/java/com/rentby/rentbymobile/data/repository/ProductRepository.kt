@@ -14,8 +14,14 @@ import com.rentby.rentbymobile.data.model.ProductMock
 import com.rentby.rentbymobile.data.model.ProductItem
 import com.rentby.rentbymobile.data.paging.ProductListPagingSource
 import com.rentby.rentbymobile.data.paging.ProductSearchPagingSource
+import com.rentby.rentbymobile.data.paging.SellerProductListPagingSource
+import com.rentby.rentbymobile.data.response.EstimateOrderResponse
 import com.rentby.rentbymobile.data.response.ProductDetailResponse
+import com.rentby.rentbymobile.data.response.ProductListResponse
+import com.rentby.rentbymobile.data.response.ProductsItem
+import com.rentby.rentbymobile.data.response.SellerProductResponse
 import com.rentby.rentbymobile.data.response.toProduct
+import com.rentby.rentbymobile.data.response.toProductItem
 import com.rentby.rentbymobile.data.retrofit.ApiService
 import retrofit2.Call
 import retrofit2.Callback
@@ -64,6 +70,17 @@ class ProductRepository(private val apiService: ApiService) {
                     rating = resultsItem.rating?.toFloatOrNull() ?: 0.0f,
                     imageUrl = resultsItem.urlPhoto ?: ""
                 )
+            }
+        }
+    }
+
+    fun getSellerProducts(sellerId: String) : LiveData<PagingData<ProductItem>> {
+        return Pager(
+            config = PagingConfig(pageSize = 20, enablePlaceholders = false),
+            pagingSourceFactory = { SellerProductListPagingSource(apiService, sellerId) }
+        ).liveData.map { pagingData ->
+            pagingData.map { productsItem ->
+                productsItem.toProductItem()
             }
         }
     }

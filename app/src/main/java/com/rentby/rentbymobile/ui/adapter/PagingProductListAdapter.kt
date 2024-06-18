@@ -14,7 +14,7 @@ import com.rentby.rentbymobile.databinding.ItemProductBinding
 import com.rentby.rentbymobile.helper.formatStringtoRP
 import com.rentby.rentbymobile.ui.product.detail.DetailProductActivity
 
-class PagingProductCategoryAdapter : PagingDataAdapter<ProductItem, PagingProductCategoryAdapter.ProductViewHolder>(DIFF_CALLBACK) {
+class PagingProductListAdapter : PagingDataAdapter<ProductItem, PagingProductListAdapter.ProductViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val inflater = LayoutInflater.from(parent.context)
