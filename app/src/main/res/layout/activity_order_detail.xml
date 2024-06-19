@@ -211,6 +211,7 @@
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="17 Mei 2024 - 08:34 WIB" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -287,6 +288,7 @@
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/product" />
+
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -590,6 +592,17 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <ImageView
+        android:id="@+id/button_order_help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:tint="@color/gray_300"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:srcCompat="@drawable/baseline_help_outline_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

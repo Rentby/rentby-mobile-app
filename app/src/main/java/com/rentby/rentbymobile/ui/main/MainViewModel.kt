@@ -1,8 +1,6 @@
 package com.rentby.rentbymobile.ui.main
 
-import android.os.Build
 import android.os.Parcelable
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -35,6 +33,9 @@ class MainViewModel(
     private val _orders = MutableLiveData<List<OrderItem>>()
     val orders: LiveData<List<OrderItem>> = _orders
 
+    private val _orderFilter = MutableLiveData<Int?>(null)
+    val orderFilter: LiveData<Int?> = _orderFilter
+
     private lateinit var state: Parcelable
     fun saveRecyclerViewState(parcelable: Parcelable) { state = parcelable }
     fun restoreRecyclerViewState() : Parcelable = state
@@ -52,6 +53,10 @@ class MainViewModel(
         } else {
             MutableLiveData<PagingData<ProductItem>>(PagingData.empty())
         }
+    }
+
+    fun setOrderFilter(filter: Int?) {
+        _orderFilter.value = filter
     }
 
     fun setCategory(category: String) {

@@ -17,6 +17,7 @@ import com.rentby.rentbymobile.databinding.ItemBookedBinding
 import com.rentby.rentbymobile.helper.calculateDay
 import com.rentby.rentbymobile.helper.calculateDayFromDate
 import com.rentby.rentbymobile.helper.formatDateToReadable
+import com.rentby.rentbymobile.helper.formatStringtoRP
 import com.rentby.rentbymobile.ui.order.OrderDetailActivity
 import java.text.NumberFormat
 import java.util.*
@@ -47,7 +48,7 @@ class BookedListAdapter(
             binding.productName.text = order.productName
             binding.orderTime.text = "${formatDateToReadable(order.rentStart)} - ${formatDateToReadable(order.rentEnd)}"
             binding.rentDuration.text = "Duration: ${calculateDayFromDate(order.rentStart, order.rentEnd)} days"
-            binding.rentTotal.text = "Total: ${order.orderTotal}"
+            binding.rentTotal.text = "${formatStringtoRP(order.orderTotal.toString())}"
             binding.orderStatus.text = getStatusText(order.status.toIntOrNull() ?: 7)
 
             Glide.with(context)
@@ -67,8 +68,8 @@ class BookedListAdapter(
             return when (status) {
                 1 -> "Pending"
                 2 -> "Booked"
-                3 -> "Picked Up"
-                4 -> "Returned"
+                3 -> "Active"
+                4 -> "Late"
                 5 -> "Completed"
                 6 -> "Canceled"
                 else -> "Unknown"

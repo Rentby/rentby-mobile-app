@@ -2,6 +2,7 @@ package com.rentby.rentbymobile.ui.order
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -17,6 +18,8 @@ import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.databinding.ActivityOrderDetailBinding
 import com.rentby.rentbymobile.ui.ViewModelFactory
 import com.rentby.rentbymobile.ui.payment.PaymentActivity
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -44,6 +47,7 @@ class OrderDetailActivity : AppCompatActivity() {
 
         setupView(this)
         setupAction()
+        setupSkeleton()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -53,7 +57,27 @@ class OrderDetailActivity : AppCompatActivity() {
         viewModel.getOrderDetail(orderId)
     }
 
+    private fun setupSkeleton() {
+        viewModel.isLoading.observe(this) { isLoading ->
+            if (isLoading) {
+                binding.root.loadSkeleton()
+            } else {
+                binding.root.hideSkeleton()
+            }
+        }
+    }
+
     private fun setupAction(){
+        binding.arrowLeft.setOnClickListener {
+            finish()
+        }
+
+        binding.buttonOrderHelp.setOnClickListener {
+            val url = "https://frontend-dot-rent-by.et.r.appspot.com/"
+            val chatIntent = Intent(Intent.ACTION_VIEW).apply { data = Uri.parse(url) }
+            startActivity(chatIntent)
+        }
+
         binding.arrowLeft.setOnClickListener {
             finish()
         }
@@ -160,6 +184,7 @@ class OrderDetailActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun formatDate(dateString: String): String {
         val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
