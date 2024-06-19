@@ -32,7 +32,7 @@ RentBy is a mobile application designed to facilitate the rental process. Users 
     <img src="screenshoots/hiking.jpg" alt="Hiking" width="200" />
     <img src="screenshoots/cosplay.jpg" alt="Cosplay" width="200" />
     <img src="screenshoots/detail_product.jpg" alt="Detail Product Sreen" width="200" />
-    <img src="screenshoots/rental_duration.jpg" alt="Calendar" width="200" />
+    <img src="screenshoots/rent_duration.jpg" alt="Calendar" width="200" />
     <img src="screenshoots/detail_order.jpg" alt="Detail Order Screen" width="200" />
     <img src="screenshoots/detail_payment.jpg" alt="Detail Payment Screen" width="200" />
     <img src="screenshoots/detail_booking.jpg" alt="Booking Detail Screen" width="200" />
