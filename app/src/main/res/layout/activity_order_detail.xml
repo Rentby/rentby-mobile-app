@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -36,562 +35,570 @@
             tools:layout_editor_absoluteY="20dp" />
     </androidx.appcompat.widget.Toolbar>
 
-    <ScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayoutOrder"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:paddingBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:paddingBottom="16dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_booking_status"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white">
-
-                <TextView
-                    android:id="@+id/tv_order_status"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    android:elevation="0dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="Status"
-                    android:textAlignment="viewStart"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <View
-                    android:id="@+id/view3"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/gray_100"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_order_status"
-                    app:layout_constraintStart_toStartOf="@+id/tv_order_status"
-                    app:layout_constraintTop_toBottomOf="@id/card_late_charge" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/card_late_charge"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/order_status_card"
-                    android:padding="8dp"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_order_status"
-                    app:layout_constraintStart_toStartOf="@+id/tv_order_status"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_order_status"
-                    tools:visibility="visible">
+                    android:id="@+id/layout_booking_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white">
 
                     <TextView
-                        android:id="@+id/textView13"
+                        android:id="@+id/tv_order_status"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:text="Keterlambatan pengembalian barang dikenakan denda sebesar harga sewa per hari"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toStartOf="@+id/imageView5"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:elevation="0dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Status"
+                        android:textAlignment="viewStart"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:id="@+id/imageView5"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/baseline_access_time_24" />
+                    <View
+                        android:id="@+id/view3"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/gray_100"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_order_status"
+                        app:layout_constraintStart_toStartOf="@+id/tv_order_status"
+                        app:layout_constraintTop_toBottomOf="@id/card_late_charge" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/card_late_charge"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/order_status_card"
+                        android:padding="8dp"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_order_status"
+                        app:layout_constraintStart_toStartOf="@+id/tv_order_status"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_order_status"
+                        tools:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/textView13"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="Keterlambatan pengembalian barang dikenakan denda sebesar harga sewa per hari"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toStartOf="@+id/imageView5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView5"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/baseline_access_time_24" />
+
+                        <TextView
+                            android:id="@+id/textView15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Denda : "
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="@+id/textView13"
+                            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+                        <TextView
+                            android:id="@+id/tvTotalCharge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Rp15.000"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toEndOf="@+id/tvCharge"
+                            app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+                        <TextView
+                            android:id="@+id/tvCharge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1 x 15.000 = "
+                            app:layout_constraintStart_toEndOf="@+id/textView15"
+                            app:layout_constraintTop_toTopOf="@+id/textView15" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_booking_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical"
+                    android:paddingStart="24dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="24dp"
+                    android:paddingBottom="16dp">
+
 
                     <TextView
-                        android:id="@+id/textView15"
+                        android:id="@+id/tv_order_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="Denda : "
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toStartOf="@+id/textView13"
-                        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                        android:text="INV#124124WU340"
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:id="@+id/layout_order_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/transaction_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:text="Tanggal Pemesanan"
+                            android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:id="@+id/tv_order_date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="16 Mei 2024 - 17:09 WIB" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_pick_up_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/pick_up_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:text="Tanggal Pengambilan"
+                            android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:id="@+id/tv_pick_up_datetime"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="17 Mei 2024 - 08:34 WIB" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_return_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/return_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:text="Tanggal Pengambilan"
+                            android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:id="@+id/tv_return_datetime"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="20 Mei 2024 - 07:18 WIB" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_payment_method"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/payment_method"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:text="Metode Pembayaran"
+                            android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:id="@+id/tv_payment"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="GoPay" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_product_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/title_product_detail"
+                        app:layout_constraintTop_toBottomOf="@+id/title_product_detail">
+
+                        <ImageView
+                            android:id="@+id/image_product"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/product" />
+
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
-                        android:id="@+id/tvTotalCharge"
+                        android:id="@+id/title_product_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Detail Produk"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_seller_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:fontFamily="sans-serif"
+                        android:text="Makassar Cosplay Store"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_product_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="24dp"
+                        android:text="Tas Ransel Gunung Carrier 50L Backsupport Water Resistant"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/cardView2"
+                        app:layout_constraintTop_toTopOf="@+id/cardView2" />
+
+                    <TextView
+                        android:id="@+id/tv_order_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:text="2 x 40.000"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_rent_daterange"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_rent_daterange" />
+
+                    <TextView
+                        android:id="@+id/tv_rent_daterange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="08 Jun - 09 Jun"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_product_name"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_product_name" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_pick_up_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical"
+                    android:paddingStart="24dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="24dp"
+                    android:paddingBottom="16dp">
+
+                    <TextView
+                        android:id="@+id/title_pick_up_location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-medium"
-                        android:text="Rp15.000"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toEndOf="@+id/tvCharge"
-                        app:layout_constraintTop_toTopOf="@+id/textView15" />
+                        android:text="Lokasi Pengambilan"
+                        android:textColor="#000000" />
 
                     <TextView
-                        android:id="@+id/tvCharge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1 x 15.000 = "
-                        app:layout_constraintStart_toEndOf="@+id/textView15"
-                        app:layout_constraintTop_toTopOf="@+id/textView15" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_booking_details"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:orientation="vertical"
-                android:paddingStart="24dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="24dp"
-                android:paddingBottom="16dp">
-
-
-                <TextView
-                    android:id="@+id/tv_order_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="INV#124124WU340"
-                    android:textColor="@color/black" />
-
-                <LinearLayout
-                    android:id="@+id/layout_order_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/transaction_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        android:text="Tanggal Pemesanan"
-                        android:textColor="@color/text_secondary" />
-
-                    <TextView
-                        android:id="@+id/tv_order_date"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="16 Mei 2024 - 17:09 WIB" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layout_pick_up_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/pick_up_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        android:text="Tanggal Pengambilan"
-                        android:textColor="@color/text_secondary" />
-
-                    <TextView
-                        android:id="@+id/tv_pick_up_datetime"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="17 Mei 2024 - 08:34 WIB" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layout_return_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/return_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        android:text="Tanggal Pengambilan"
-                        android:textColor="@color/text_secondary" />
-
-                    <TextView
-                        android:id="@+id/tv_return_datetime"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="20 Mei 2024 - 07:18 WIB" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layout_payment_method"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/payment_method"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        android:text="Metode Pembayaran"
-                        android:textColor="@color/text_secondary" />
-
-                    <TextView
-                        android:id="@+id/tv_payment"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="GoPay" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_product_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@color/white">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/title_product_detail"
-                    app:layout_constraintTop_toBottomOf="@+id/title_product_detail">
-
-                    <ImageView
-                        android:id="@+id/image_product"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/product" />
-
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:id="@+id/title_product_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="Detail Produk"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_seller_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    android:fontFamily="sans-serif"
-                    android:text="Makassar Cosplay Store"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_product_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="24dp"
-                    android:text="Tas Ransel Gunung Carrier 50L Backsupport Water Resistant"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/cardView2"
-                    app:layout_constraintTop_toTopOf="@+id/cardView2" />
-
-                <TextView
-                    android:id="@+id/tv_order_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="2 x 40.000"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@+id/tv_rent_daterange"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_rent_daterange" />
-
-                <TextView
-                    android:id="@+id/tv_rent_daterange"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="08 Jun - 09 Jun"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@+id/tv_product_name"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_product_name" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_pick_up_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="#FFFFFF"
-                android:orientation="vertical"
-                android:paddingStart="24dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="24dp"
-                android:paddingBottom="16dp">
-
-                <TextView
-                    android:id="@+id/title_pick_up_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="Lokasi Pengambilan"
-                    android:textColor="#000000" />
-
-                <TextView
-                    android:id="@+id/tv_pick_up_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Jl. Racing Centre No.18, Karampuang, Kec. Panakkukang, Kota Makassar, Sulawesi Selatan 90231"
-                    android:textColor="#000000" />
-
-            </LinearLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_rent_summary"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:background="@color/white"
-                android:paddingBottom="16dp">
-
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="sans-serif"
-                    android:text="Total Harga"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@+id/title_rent_summary"
-                    app:layout_constraintTop_toBottomOf="@+id/title_rent_summary" />
-
-                <TextView
-                    android:id="@+id/tv_price_total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:fontFamily="sans-serif"
-                    android:text="Rp80.000"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView14" />
-
-                <TextView
-                    android:id="@+id/textView16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Biaya Layanan"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@+id/textView14"
-                    app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-                <TextView
-                    android:id="@+id/tv_service_fee"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Rp1.000"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_price_total"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_price_total" />
-
-                <TextView
-                    android:id="@+id/textView18"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Total Sewa"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/view"
-                    app:layout_constraintTop_toBottomOf="@id/view" />
-
-                <TextView
-                    android:id="@+id/tv_order_total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="Rp88.000"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@+id/view"
-                    app:layout_constraintTop_toTopOf="@+id/textView18" />
-
-                <TextView
-                    android:id="@+id/title_rent_summary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="Ringkasan Sewa"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/gray_100"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_service_fee"
-                    app:layout_constraintStart_toStartOf="@+id/textView16"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-                <Button
-                    android:id="@+id/button_pay_now"
-                    android:layout_width="0dp"
-                    android:layout_height="64dp"
-                    android:layout_marginTop="16dp"
-                    android:backgroundTint="@color/rentby_primary"
-                    android:text="Bayar Sekarang"
-                    android:textColor="@color/rentby_secondary"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_order_total"
-                    app:layout_constraintStart_toStartOf="@+id/textView18"
-                    app:layout_constraintTop_toBottomOf="@+id/textView18" />
-
-                <Button
-                    android:id="@+id/button_cancel_order"
-                    style="?attr/materialButtonOutlinedStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="64dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Batalkan Pesanan"
-                    android:textColor="@color/rentby_primary"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="@+id/button_pay_now"
-                    app:layout_constraintStart_toStartOf="@+id/button_pay_now"
-                    app:layout_constraintTop_toBottomOf="@+id/button_pay_now"
-                    app:strokeColor="@color/rentby_primary" />
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Deposit"
-                    android:textColor="@color/text_secondary"
-                    app:layout_constraintStart_toStartOf="@+id/textView16"
-                    app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-                <TextView
-                    android:id="@+id/tv_deposit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Rp8.000"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_service_fee"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_service_fee" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_review"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="#FFFFFF"
-                app:layout_constraintBottom_toBottomOf="parent">
-
-                <TextView
-                    android:id="@+id/title_review"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="Bagaimana Pengalaman Anda"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <RatingBar
-                    android:id="@+id/rating_bar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:numStars="5"
-                    android:stepSize="1"
-                    android:progressTint="@color/yellow"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/title_review" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rating_bar">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/input_review"
+                        android:id="@+id/tv_pick_up_location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Tulis komentar"
-                        android:inputType="textMultiLine"
-                        android:textSize="14sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginTop="8dp"
+                        android:text="Jl. Racing Centre No.18, Karampuang, Kec. Panakkukang, Kota Makassar, Sulawesi Selatan 90231"
+                        android:textColor="#000000" />
 
-                <Button
-                    android:id="@+id/button_submit_review"
-                    android:layout_width="0dp"
-                    android:layout_height="64dp"
-                    android:layout_marginTop="16dp"
-                    android:backgroundTint="@color/rentby_secondary"
-                    android:paddingHorizontal="32dp"
-                    android:paddingVertical="12dp"
-                    android:text="Beri Penilaian"
-                    android:textColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-                    app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
-        </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_rent_summary"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:paddingBottom="16dp">
 
-    </ScrollView>
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="sans-serif"
+                        android:text="Total Harga"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="@+id/title_rent_summary"
+                        app:layout_constraintTop_toBottomOf="@+id/title_rent_summary" />
+
+                    <TextView
+                        android:id="@+id/tv_price_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:fontFamily="sans-serif"
+                        android:text="Rp80.000"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textView14" />
+
+                    <TextView
+                        android:id="@+id/textView16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Biaya Layanan"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="@+id/textView14"
+                        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+                    <TextView
+                        android:id="@+id/tv_service_fee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Rp1.000"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_price_total"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_price_total" />
+
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Total Sewa"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="@id/view"
+                        app:layout_constraintTop_toBottomOf="@id/view" />
+
+                    <TextView
+                        android:id="@+id/tv_order_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Rp88.000"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="@+id/view"
+                        app:layout_constraintTop_toTopOf="@+id/textView18" />
+
+                    <TextView
+                        android:id="@+id/title_rent_summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Ringkasan Sewa"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/gray_100"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_service_fee"
+                        app:layout_constraintStart_toStartOf="@+id/textView16"
+                        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+                    <Button
+                        android:id="@+id/button_pay_now"
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="@color/rentby_primary"
+                        android:text="Bayar Sekarang"
+                        android:textColor="@color/rentby_secondary"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_order_total"
+                        app:layout_constraintStart_toStartOf="@+id/textView18"
+                        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+                    <Button
+                        android:id="@+id/button_cancel_order"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Batalkan Pesanan"
+                        android:textColor="@color/rentby_primary"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="@+id/button_pay_now"
+                        app:layout_constraintStart_toStartOf="@+id/button_pay_now"
+                        app:layout_constraintTop_toBottomOf="@+id/button_pay_now"
+                        app:strokeColor="@color/rentby_primary" />
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Deposit"
+                        android:textColor="@color/text_secondary"
+                        app:layout_constraintStart_toStartOf="@+id/textView16"
+                        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+                    <TextView
+                        android:id="@+id/tv_deposit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Rp8.000"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_service_fee"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_service_fee" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView
+                        android:id="@+id/title_review"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Bagaimana Pengalaman Anda"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <RatingBar
+                        android:id="@+id/rating_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:numStars="5"
+                        android:progressTint="@color/yellow"
+                        android:stepSize="1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/title_review" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/rating_bar">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/input_review"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Tulis komentar"
+                            android:inputType="textMultiLine"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/button_submit_review"
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="@color/rentby_secondary"
+                        android:paddingHorizontal="32dp"
+                        android:paddingVertical="12dp"
+                        android:text="Beri Penilaian"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+                        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+                        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ImageView
         android:id="@+id/button_order_help"

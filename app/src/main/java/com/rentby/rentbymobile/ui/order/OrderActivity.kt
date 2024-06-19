@@ -3,6 +3,7 @@ package com.rentby.rentbymobile.ui.order
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -39,18 +40,33 @@ class OrderActivity : AppCompatActivity() {
         }
 
         binding.buttonConfirmOrder.setOnClickListener {
-            val orderId = "dfc94ab4-4893-41b1-8e75-59e3d3b1cbc9" // Replace with the actual order ID you want to pass
-            val intent = Intent(this, OrderDetailActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                putExtra(OrderDetailActivity.ORDER_ID, orderId)
+            val userId = getString(R.string.user_id)
+            val productId = intent.getStringExtra(PRODUCT_ID)
+            val rentStart = intent.getLongExtra(RENT_START, 0L)
+            val rentEnd = intent.getLongExtra(RENT_END, 0L)
+            if (productId != null) {
+                viewModel.makeOrder(productId, userId, rentStart, rentEnd)
             }
-            startActivity(intent)
-            setResult(RESULT_OK)
-            finish()
         }
 
         setupView()
         setupSkeleton()
+        setupObserver()
+    }
+
+    private fun setupObserver() {
+        viewModel.error.observe(this) {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        }
+
+        viewModel.orderId.observe(this) {
+            val intent = Intent(this, OrderDetailActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                putExtra(OrderDetailActivity.ORDER_ID, it)
+            }
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun setupSkeleton() {

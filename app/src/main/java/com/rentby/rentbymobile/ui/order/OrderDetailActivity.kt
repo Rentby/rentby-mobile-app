@@ -24,6 +24,7 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+// Bismillahhirrahmanirrahim
 class OrderDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOrderDetailBinding
     private val viewModel by viewModels<OrderDetailViewModel> {
@@ -67,6 +68,7 @@ class OrderDetailActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setupAction(){
         binding.arrowLeft.setOnClickListener {
             finish()
@@ -80,6 +82,13 @@ class OrderDetailActivity : AppCompatActivity() {
 
         binding.arrowLeft.setOnClickListener {
             finish()
+        }
+
+        binding.swipeRefreshLayoutOrder.setOnRefreshListener {
+            // Trigger data refresh
+            val orderId = intent.getStringExtra(ORDER_ID) ?: ""
+            viewModel.getOrderDetail(orderId)
+
         }
     }
 
@@ -149,6 +158,15 @@ class OrderDetailActivity : AppCompatActivity() {
                         binding.buttonPayNow.visibility = View.GONE
                         if(order.isRated){ binding.layoutReview.visibility = View.GONE }
                         "Order Finished"
+                    }
+                    6 -> {
+                        binding.layoutPaymentMethod.visibility = View.GONE
+                        binding.layoutPickUpTime.visibility = View.GONE
+                        binding.layoutReturnTime.visibility = View.GONE
+                        binding.layoutPickUpLocation.visibility = View.GONE
+                        binding.layoutReview.visibility = View.GONE
+                        binding.buttonPayNow.visibility = View.GONE
+                        "Order Canceled"
                     }
                     else -> "Unknown Status"
                 }

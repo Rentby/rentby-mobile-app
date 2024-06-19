@@ -14,6 +14,7 @@ import com.rentby.rentbymobile.data.response.toOrderItem
 import com.rentby.rentbymobile.data.retrofit.ApiService
 import com.rentby.rentbymobile.helper.calculateDay
 import com.rentby.rentbymobile.helper.millisecondsToDate
+import com.rentby.rentbymobile.helper.millisecondsToDateString
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -64,8 +65,8 @@ class OrderRepository(private val apiService: ApiService) {
         val request = MakeOrderRequest(
             productId,
             userId,
-            millisecondsToDate(rentStart),
-            millisecondsToDate(rentEnd),
+            millisecondsToDateString(rentStart),
+            millisecondsToDateString(rentEnd),
         )
 
         val call = apiService.makeOrder(request)
