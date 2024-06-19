@@ -5,19 +5,24 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.data.model.Order
+import com.rentby.rentbymobile.data.model.OrderItem
 import com.rentby.rentbymobile.databinding.ItemBookedBinding
+import com.rentby.rentbymobile.helper.calculateDay
+import com.rentby.rentbymobile.helper.calculateDayFromDate
+import com.rentby.rentbymobile.helper.formatDateToReadable
 import com.rentby.rentbymobile.ui.order.OrderDetailActivity
 
 class BookedListAdapter(
     private val context: Context,
-    private var orders: List<Order>
+    private var orders: List<OrderItem>
 ) : RecyclerView.Adapter<BookedListAdapter.BookedViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookedViewHolder {
         val binding = ItemBookedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return BookedViewHolder(binding)
+        return BookedViewHolder(binding, parent.context)
     }
 
     override fun onBindViewHolder(holder: BookedViewHolder, position: Int) {
@@ -26,25 +31,28 @@ class BookedListAdapter(
 
     override fun getItemCount(): Int = orders.size
 
-    fun updateOrders(newOrders: List<Order>) {
+    fun updateOrders(newOrders: List<OrderItem>) {
         orders = newOrders
         notifyDataSetChanged()
     }
 
-    inner class BookedViewHolder(private val binding: ItemBookedBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(order: Order) {
+    inner class BookedViewHolder(private val binding: ItemBookedBinding, context: Context) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(order: OrderItem) {
             binding.productName.text = order.productName
-            binding.orderTime.text = order.orderTime
-            binding.rentDuration.text = "Duration: ${order.rentDuration} days"
-            binding.rentTotal.text = "Total: ${order.rentTotal}"
-            binding.orderStatus.text = getStatusText(order.status)
+            binding.orderTime.text = "${formatDateToReadable(order.rentStart)} - ${formatDateToReadable(order.rentEnd)}"
+            binding.rentDuration.text = "Duration: ${calculateDayFromDate(order.rentStart, order.rentEnd)} days"
+            binding.rentTotal.text = "Total: ${order.orderTotal}"
+            binding.orderStatus.text = getStatusText(order.status.toIntOrNull() ?: 7)
 
-            val imageRes = order.image ?: R.drawable.default_image
-            binding.orderImage.setImageResource(imageRes)
+            Glide.with(context)
+                .load(order.imageUrl)
+                .placeholder(R.color.gray_200) // Placeholder image
+                .error(R.drawable.default_image) // Error image if loading fails
+                .into(binding.orderImage)
 
             binding.root.setOnClickListener {
                 val intent = Intent(context, OrderDetailActivity::class.java)
-                intent.putExtra(OrderDetailActivity.ORDER_ID, order.id)
+                intent.putExtra(OrderDetailActivity.ORDER_ID, order.orderId)
                 context.startActivity(intent)
             }
         }
@@ -56,6 +64,7 @@ class BookedListAdapter(
                 3 -> "Picked Up"
                 4 -> "Returned"
                 5 -> "Completed"
+                6 -> "Canceled"
                 else -> "Unknown"
             }
         }

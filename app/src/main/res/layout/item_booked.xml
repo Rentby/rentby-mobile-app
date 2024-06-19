@@ -1,74 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
-    <RelativeLayout
-        android:id="@+id/rv_booked_item"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_booked_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
 
         <ImageView
             android:id="@+id/orderImage"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginEnd="16dp"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/product" />
 
         <TextView
             android:id="@+id/productName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/orderImage"
+            android:layout_marginStart="16dp"
             android:text="Product Name"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/orderImage"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/orderTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/productName"
-            android:layout_toEndOf="@id/orderImage"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
             android:text="Order Time"
+            android:textColor="@android:color/darker_gray"
             android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
+            app:layout_constraintStart_toEndOf="@id/orderImage"
+            app:layout_constraintTop_toBottomOf="@id/productName" />
 
         <TextView
             android:id="@+id/rentDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/orderTime"
-            android:layout_toEndOf="@id/orderImage"
+            android:layout_marginStart="16dp"
             android:text="Rent Duration"
+            android:textColor="@android:color/darker_gray"
             android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
+            app:layout_constraintBottom_toBottomOf="@+id/orderImage"
+            app:layout_constraintStart_toEndOf="@id/orderImage" />
 
         <TextView
             android:id="@+id/rentTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
             android:text="Total Price"
+            android:textAlignment="textEnd"
+            android:textColor="@color/rentby_primary"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@android:color/holo_green_dark" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rentDuration" />
 
         <TextView
             android:id="@+id/orderStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/rentTotal"
-            android:layout_alignParentEnd="true"
             android:text="Order Status"
+            android:textAlignment="textEnd"
+            android:textColor="@android:color/holo_red_dark"
             android:textSize="14sp"
-            android:textColor="@android:color/holo_red_dark" />
-    </RelativeLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/orderTime" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -5,24 +5,35 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.datastore.preferences.protobuf.Empty
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Firebase
+import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.data.mock.OrderList
 import com.rentby.rentbymobile.data.model.Order
+import com.rentby.rentbymobile.data.model.OrderItem
 import com.rentby.rentbymobile.databinding.FragmentBookedListBinding
+import com.rentby.rentbymobile.ui.ViewModelFactory
 import com.rentby.rentbymobile.ui.adapter.BookedListAdapter
 import com.rentby.rentbymobile.ui.order.OrderDetailActivity
 
 class BookedFragment : Fragment() {
 
     private lateinit var binding: FragmentBookedListBinding
-    private lateinit var orders: List<Order>
+    private var orders: List<OrderItem> = emptyList()
     private lateinit var adapter: BookedListAdapter
+
+    private val viewModel by viewModels<MainViewModel> {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewModel.getUserOrder(getString(R.string.user_id))
         binding = FragmentBookedListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -30,11 +41,15 @@ class BookedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        orders = OrderList.getMockOrders()
         adapter = BookedListAdapter(requireContext(), orders)
-
-        binding.rvBookedItem.layoutManager = LinearLayoutManager(requireContext())
         binding.rvBookedItem.adapter = adapter
+        binding.rvBookedItem.layoutManager = LinearLayoutManager(requireContext())
+
+        viewModel.orders.observe(viewLifecycleOwner) { newOrders ->
+            orders = newOrders
+            adapter.updateOrders(orders)
+        }
+
 
         binding.buttonAll.setOnClickListener { filterOrders(null) }
         binding.buttonPending.setOnClickListener { filterOrders(1) }
@@ -42,13 +57,14 @@ class BookedFragment : Fragment() {
         binding.buttonPickedup.setOnClickListener { filterOrders(3) }
         binding.buttonReturned.setOnClickListener { filterOrders(4) }
         binding.buttonCompleted.setOnClickListener { filterOrders(5) }
+
     }
 
     private fun filterOrders(status: Int?) {
         val filteredOrders = if (status == null) {
             orders
         } else {
-            orders.filter { it.status == status }
+            orders.filter { it.status.toIntOrNull() == status }
         }
         adapter.updateOrders(filteredOrders)
     }

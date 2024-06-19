@@ -1,6 +1,8 @@
 package com.rentby.rentbymobile.ui.main
 
+import android.os.Build
 import android.os.Parcelable
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,26 +11,29 @@ import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.rentby.rentbymobile.data.model.OrderItem
 import com.rentby.rentbymobile.data.model.ProductItem
 import com.rentby.rentbymobile.data.pref.UserModel
+import com.rentby.rentbymobile.data.repository.OrderRepository
 import com.rentby.rentbymobile.data.repository.ProductRepository
 import com.rentby.rentbymobile.data.repository.UserRepository
-import com.rentby.rentbymobile.data.response.ProductListResponse
-import com.rentby.rentbymobile.data.response.ResultsItem
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.http.Query
 
 class MainViewModel(
     private val userRepository: UserRepository,
-    private val productRepository: ProductRepository
+    private val productRepository: ProductRepository,
+    private val orderRepository: OrderRepository
 ) : ViewModel() {
     private val _category = MutableLiveData<String>("hiking")
 
     private val _query = MutableLiveData<String>("")
     val query: LiveData<String> = _query
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _orders = MutableLiveData<List<OrderItem>>()
+    val orders: LiveData<List<OrderItem>> = _orders
 
     private lateinit var state: Parcelable
     fun saveRecyclerViewState(parcelable: Parcelable) { state = parcelable }
@@ -83,6 +88,22 @@ class MainViewModel(
                 _loading.value = false
                 onResult(false)
             }
+        }
+    }
+
+    fun getUserOrder(userId: String) {
+        _isLoading.value = true
+        viewModelScope.launch {
+            orderRepository.getUserOrder(
+                userId,
+                onResult = {
+                    _orders.postValue(it)
+                    _isLoading.value = false
+                },
+                onError = {
+                    _isLoading.value = false
+                }
+            )
         }
     }
 

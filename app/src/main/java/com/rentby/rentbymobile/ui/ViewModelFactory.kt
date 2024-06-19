@@ -35,7 +35,7 @@ class ViewModelFactory(
                 RegisterViewModel(userRepository) as T
             }
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-                MainViewModel(userRepository, productRepository) as T
+                MainViewModel(userRepository, productRepository, orderRepository) as T
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(userRepository) as T

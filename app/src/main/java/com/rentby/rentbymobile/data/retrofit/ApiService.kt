@@ -6,6 +6,8 @@ import com.rentby.rentbymobile.data.request.RegisterRequest
 import com.rentby.rentbymobile.data.response.EstimateOrderResponse
 import com.rentby.rentbymobile.data.response.OrderDetailResponse
 import com.rentby.rentbymobile.data.response.OrderIdResponse
+import com.rentby.rentbymobile.data.response.OrderListResponse
+import com.rentby.rentbymobile.data.response.OrderListResponseItem
 import com.rentby.rentbymobile.data.response.ProductDetailResponse
 import com.rentby.rentbymobile.data.response.ProductListResponse
 import com.rentby.rentbymobile.data.response.RegisterResponse
@@ -14,8 +16,6 @@ import com.rentby.rentbymobile.data.response.SellerProductResponse
 import com.rentby.rentbymobile.data.response.UserDetailResponse
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
@@ -74,4 +74,9 @@ interface ApiService {
     fun getOrderDetail(
         @Path("order_id") orderId: String,
     ): Call<OrderDetailResponse>
+
+    @GET("active-order/{user_id}")
+    fun getUserOrder(
+        @Path("user_id") userId: String
+    ): Call<List<OrderListResponseItem>>
 }
