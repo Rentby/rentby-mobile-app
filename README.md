@@ -26,18 +26,18 @@ RentBy is a mobile application designed to facilitate the rental process. Users 
 ## Screenshots
 
 <p align="center">
-    <img src="splashscreen.jpg" alt="Splash Screen" width="200" />
-    <img src="register.jpg" alt="Register Screen" width="200" />
-    <img src="login.jpg" alt="Login Screen" width="200" />
-    <img src="hiking.jpg" alt="Home Screen" width="200" />
-    <img src="cosplay.jpg" alt="Cosplay Screen" width="200" />
-    <img src="detailproduct.jpg" alt="Product Screen" width="200" />
-    <img src="calender.jpg" alt="Calendar" width="200" />
-    <img src="detailorder.jpg" alt="Detail Order Screen" width="200" />
-    <img src="detailpayment.jpg" alt="Detail Payment Screen" width="200" />
-    <img src="bookingdetail.jpg" alt="Booking Detail Screen" width="200" />
-    <img src="profile.jpg" alt="Profile Screen" width="200" />
-    <img src="sellerscreen.jpg" alt="Seller Screen" width="200" />
+    <img src="screenshoots/splashscreen.jpg" alt="Splash Screen" width="200" />
+    <img src="screenshoots/register.jpg" alt="Register Screen" width="200" />
+    <img src="screenshoots/login.jpg" alt="Login Screen" width="200" />
+    <img src="screenshoots/hiking.jpg" alt="Hiking" width="200" />
+    <img src="screenshoots/cosplay.jpg" alt="Cosplay" width="200" />
+    <img src="screenshoots/detail_product.jpg" alt="Detail Product Sreen" width="200" />
+    <img src="screenshoots/rental_duration.jpg" alt="Calendar" width="200" />
+    <img src="screenshoots/detail_order.jpg" alt="Detail Order Screen" width="200" />
+    <img src="screenshoots/detail_payment.jpg" alt="Detail Payment Screen" width="200" />
+    <img src="screenshoots/detail_booking.jpg" alt="Booking Detail Screen" width="200" />
+    <img src="screenshoots/user_profile.jpg" alt="User Profile Screen" width="200" />
+    <img src="screenshoots/seller_profile.jpg" alt="Seller Profile Screen" width="200" />
 </p>
 
 ## Requirements
