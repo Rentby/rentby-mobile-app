@@ -25,20 +25,20 @@ RentBy is a mobile application designed to facilitate the rental process. Users 
 
 ## Screenshots
 
-![Splash_Screen](splashscreen.jpg)
-![Register_Screen](register.jpg)
-![Login_Screen](login.jpg)
-![Home Screen](hiking.jpg)
-![Cosplay_Screen](cosplay.jpg)
-![Product_Screen](detailproduct.jpg)
-![Calender](calender.jpg)
-![DetailOrder_Screen](detailorder.jpg)
-![DetailPayment_Screen](detailpayment.jpg)
-![BookedList_Screen]
-![BookingDetail_Screen](bookingdetail.jpg)
-![Profile_Screen](profile.jpg)
-![Seller_Screen]
-
+<p align="center">
+    <img src="splashscreen.jpg" alt="Splash Screen" width="200" />
+    <img src="register.jpg" alt="Register Screen" width="200" />
+    <img src="login.jpg" alt="Login Screen" width="200" />
+    <img src="hiking.jpg" alt="Home Screen" width="200" />
+    <img src="cosplay.jpg" alt="Cosplay Screen" width="200" />
+    <img src="detailproduct.jpg" alt="Product Screen" width="200" />
+    <img src="calender.jpg" alt="Calendar" width="200" />
+    <img src="detailorder.jpg" alt="Detail Order Screen" width="200" />
+    <img src="detailpayment.jpg" alt="Detail Payment Screen" width="200" />
+    <img src="bookingdetail.jpg" alt="Booking Detail Screen" width="200" />
+    <img src="profile.jpg" alt="Profile Screen" width="200" />
+    <img src="sellerscreen.jpg" alt="Seller Screen" width="200" />
+</p>
 
 ## Requirements
 
