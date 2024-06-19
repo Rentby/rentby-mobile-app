@@ -85,9 +85,9 @@ class BookedListAdapter(
                 1 -> Color.parseColor("#0A1931") // Gray for Pending
                 2 -> Color.parseColor("#0000FF") // Blue for Booked
                 3 -> Color.parseColor("#FFA500") // Orange for Active
-                4 -> Color.parseColor("#800080") // Purple for Late
+                4 -> Color.parseColor("#FF0000") // Purple for Late
                 5 -> Color.parseColor("#008000") // Green for Completed
-                6 -> Color.parseColor("#FF0000") // Red for Canceled
+                6 -> Color.parseColor("#000000") // Red for Canceled
                 else -> Color.parseColor("#000000") // Black for Unknown
             }
         }
