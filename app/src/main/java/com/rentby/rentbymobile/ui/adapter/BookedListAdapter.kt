@@ -49,7 +49,11 @@ class BookedListAdapter(
             binding.orderTime.text = "${formatDateToReadable(order.rentStart)} - ${formatDateToReadable(order.rentEnd)}"
             binding.rentDuration.text = "Duration: ${calculateDayFromDate(order.rentStart, order.rentEnd)} days"
             binding.rentTotal.text = "${formatStringtoRP(order.orderTotal.toString())}"
-            binding.orderStatus.text = getStatusText(order.status.toIntOrNull() ?: 7)
+
+            val statusText = getStatusText(order.status.toIntOrNull() ?: 7)
+            val statusColor = getStatusColor(order.status.toIntOrNull() ?: 7)
+            binding.orderStatus.text = statusText
+            binding.orderStatus.setTextColor(statusColor)
 
             Glide.with(context)
                 .load(order.imageUrl)
@@ -80,10 +84,11 @@ class BookedListAdapter(
             return when (status) {
                 1 -> Color.parseColor("#0A1931") // Gray for Pending
                 2 -> Color.parseColor("#0000FF") // Blue for Booked
-                3 -> Color.parseColor("#FFA500") // Orange for Picked Up
-                4 -> Color.parseColor("#800080") // Purple for Returned
+                3 -> Color.parseColor("#FFA500") // Orange for Active
+                4 -> Color.parseColor("#800080") // Purple for Late
                 5 -> Color.parseColor("#008000") // Green for Completed
-                else -> Color.parseColor("#000000")
+                6 -> Color.parseColor("#FF0000") // Red for Canceled
+                else -> Color.parseColor("#000000") // Black for Unknown
             }
         }
     }

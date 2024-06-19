@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/rentby_primary"
     tools:context=".ui.seller.SellerProfileActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -15,6 +16,7 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:contentDescription="@string/back"
+        android:backgroundTint="@color/rentby_secondary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back" />
@@ -29,6 +31,7 @@
         android:contentDescription="@string/share"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="@color/rentby_secondary"
         app:srcCompat="@drawable/baseline_ios_share_24" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,6 +70,7 @@
             android:text="Pendaki Makassar"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="18sp"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cardView3"
             app:layout_constraintTop_toTopOf="@+id/cardView3" />
@@ -76,7 +80,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Makassar, Sulawesi Selatan"
-            android:textColor="@color/text_secondary"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/tv_seller_name_profile"
             app:layout_constraintStart_toStartOf="@+id/tv_seller_name_profile"
             app:layout_constraintTop_toBottomOf="@+id/tv_seller_name_profile" />
@@ -89,9 +93,9 @@
             android:layout_marginTop="8dp"
             android:text="Kirim Pesan"
             android:textColor="@color/rentby_primary"
+            android:backgroundTint="@color/white"
             app:layout_constraintStart_toStartOf="@+id/tv_seller_location"
-            app:layout_constraintTop_toBottomOf="@+id/tv_seller_location"
-            app:strokeColor="@color/rentby_primary" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_seller_location" />
 
         <Button
             android:id="@+id/button_seller_description"
@@ -101,10 +105,10 @@
             android:layout_marginStart="8dp"
             android:text=""
             app:icon="@drawable/baseline_more_horiz_24"
-            app:iconTint="@color/gray_400"
+            app:iconTint="@color/white"
             app:layout_constraintStart_toEndOf="@+id/button_message_seller"
             app:layout_constraintTop_toTopOf="@+id/button_message_seller"
-            app:strokeColor="@color/gray_400" />
+            app:strokeColor="@color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -114,7 +118,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:text="Seller Profile"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/floatingActionButtonBack"
         app:layout_constraintEnd_toEndOf="parent"
