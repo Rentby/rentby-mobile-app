@@ -528,7 +528,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="#FFFFFF"
-                android:paddingBottom="400dp">
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
                     android:id="@+id/title_review"
@@ -548,6 +548,7 @@
                     android:layout_marginTop="16dp"
                     android:numStars="5"
                     android:stepSize="1"
+                    android:progressTint="@color/yellow"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/title_review" />
@@ -576,11 +577,11 @@
                     android:layout_width="0dp"
                     android:layout_height="64dp"
                     android:layout_marginTop="16dp"
-                    android:backgroundTint="@color/rentby_primary"
+                    android:backgroundTint="@color/rentby_secondary"
                     android:paddingHorizontal="32dp"
                     android:paddingVertical="12dp"
                     android:text="Beri Penilaian"
-                    android:textColor="@color/rentby_secondary"
+                    android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
                     app:layout_constraintStart_toStartOf="@+id/textInputLayout"
                     app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />

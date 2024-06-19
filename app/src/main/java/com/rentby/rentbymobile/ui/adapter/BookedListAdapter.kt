@@ -2,6 +2,10 @@ package com.rentby.rentbymobile.ui.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +18,8 @@ import com.rentby.rentbymobile.helper.calculateDay
 import com.rentby.rentbymobile.helper.calculateDayFromDate
 import com.rentby.rentbymobile.helper.formatDateToReadable
 import com.rentby.rentbymobile.ui.order.OrderDetailActivity
+import java.text.NumberFormat
+import java.util.*
 
 class BookedListAdapter(
     private val context: Context,
@@ -66,6 +72,17 @@ class BookedListAdapter(
                 5 -> "Completed"
                 6 -> "Canceled"
                 else -> "Unknown"
+            }
+        }
+
+        private fun getStatusColor(status: Int): Int {
+            return when (status) {
+                1 -> Color.parseColor("#0A1931") // Gray for Pending
+                2 -> Color.parseColor("#0000FF") // Blue for Booked
+                3 -> Color.parseColor("#FFA500") // Orange for Picked Up
+                4 -> Color.parseColor("#800080") // Purple for Returned
+                5 -> Color.parseColor("#008000") // Green for Completed
+                else -> Color.parseColor("#000000")
             }
         }
     }

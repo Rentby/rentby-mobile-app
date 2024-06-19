@@ -11,16 +11,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.data.pref.UserModel
 import com.rentby.rentbymobile.databinding.ActivityProfileBinding
 import com.rentby.rentbymobile.ui.ViewModelFactory
 import com.rentby.rentbymobile.ui.login.LoginActivity
-import com.rentby.rentbymobile.ui.register.RegisterActivity
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -41,7 +38,7 @@ class ProfileActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_logout -> {
-                profileViewModel.logout()
+                signOut()
                 true
             }
             android.R.id.home -> {
@@ -62,7 +59,6 @@ class ProfileActivity : AppCompatActivity() {
         setupTextChangeListeners()
         setupSaveButton()
 
-        // Load user profile photo if available
         loadUserProfilePhoto()
     }
 
@@ -83,7 +79,6 @@ class ProfileActivity : AppCompatActivity() {
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                 profileViewModel.clearMessage()
 
-                // If message indicates logout, navigate to login
                 if (message == "Logged out successfully") {
                     navigateToLogin()
                 }
@@ -104,19 +99,18 @@ class ProfileActivity : AppCompatActivity() {
         binding.phoneNumber.setText(user.phoneNumber)
         binding.address.setText(user.address)
 
-        // Load user profile photo if available
-        photoUrl?.let { url ->
-            Glide.with(this)
-                .load(url)
-                .circleCrop()
-                .placeholder(R.drawable.ic_profile)
-                .error(R.drawable.ic_profile)
-                .into(binding.imageprofile)
-        }
+        photoUrl = Firebase.auth.currentUser?.photoUrl.toString()
+
+        Glide.with(this)
+            .load(photoUrl)
+            .circleCrop()
+            .placeholder(R.color.gray_200) // Placeholder image
+            .error(R.color.gray_200) // Error image if loading fails
+            .into(binding.imageprofile)
     }
 
     private fun navigateToLogin() {
-        val intent = Intent(this, RegisterActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
@@ -159,13 +153,19 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun loadUserProfilePhoto() {
-        photoUrl = Firebase.auth.currentUser?.photoUrl.toString()
+        Firebase.auth.currentUser?.photoUrl?.let { uri ->
+            Glide.with(this)
+                .load(uri)
+                .circleCrop()
+                .placeholder(R.color.gray_200) // Placeholder image
+                .error(R.color.gray_200) // Error image if loading fails
+                .into(binding.imageprofile)
+        }
+    }
 
-        Glide.with(this)
-            .load(photoUrl)
-            .circleCrop()
-            .placeholder(R.color.gray_200) // Placeholder image
-            .error(R.color.gray_200) // Error image if loading fails
-            .into(binding.imageprofile)
+    private fun signOut() {
+        Firebase.auth.signOut()
+        profileViewModel.logout()
+        navigateToLogin()
     }
 }
