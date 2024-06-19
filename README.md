@@ -1,6 +1,6 @@
 # RentBy Mobile App
 
-<img src="app/src/main/res/drawable/logokuning.png" alt="RentBy Logo" width="200" />
+<img src="app/src/main/res/drawable/logokuning.png" alt="RentBy Logo" width="200" align="center" />
 
 RentBy is a mobile application designed to facilitate the rental process. Users can browse, book, and manage their rentals seamlessly. This repository contains the source code for the RentBy mobile application built using Android and Kotlin.
 
