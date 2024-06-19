@@ -1,6 +1,6 @@
 # RentBy Mobile App
 
-![RentBy Logo](app/src/main/res/drawable/logokuning.png)
+<img src="app/src/main/res/drawable/logokuning.png" alt="RentBy Logo" width="200" />
 
 RentBy is a mobile application designed to facilitate the rental process. Users can browse, book, and manage their rentals seamlessly. This repository contains the source code for the RentBy mobile application built using Android and Kotlin.
 
@@ -25,11 +25,18 @@ RentBy is a mobile application designed to facilitate the rental process. Users 
 
 ## Screenshots
 
-![Home Screen]
-![Product_Screen]
-![Order_Screen]
-![BookedList Screen]
-![Profile_Screen]
+![Splash_Screen](splashscreen.jpg)
+![Register_Screen](register.jpg)
+![Login_Screen](login.jpg)
+![Home Screen](hiking.jpg)
+![Cosplay_Screen](cosplay.jpg)
+![Product_Screen](detailproduct.jpg)
+![Calender](calender.jpg)
+![DetailOrder_Screen](detailorder.jpg)
+![DetailPayment_Screen](detailpayment.jpg)
+![BookedList_Screen]
+![BookingDetail_Screen](bookingdetail.jpg)
+![Profile_Screen](profile.jpg)
 ![Seller_Screen]
 
 
@@ -69,16 +76,6 @@ To get a local copy up and running, follow these steps:
 - Manage your bookings from the profile section.
 - View booking details and statuses in the orders section.
 - Make payments securely within the app.
-
-## Contributing
-
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project.
-2. Create your feature branch: `git checkout -b feature/AmazingFeature`.
-3. Commit your changes: `git commit -m 'Add some AmazingFeature'`.
-4. Push to the branch: `git push origin feature/AmazingFeature`.
-5. Open a pull request.
 
 ## License
 
