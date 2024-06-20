@@ -55,4 +55,42 @@ class OrderDetailViewModel(
             )
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun setOrderReceived(orderId: String) {
+        _isLoading.value = true
+
+        viewModelScope.launch {
+            orderRepository.setOrderReceived(
+                orderId,
+                onResult = {
+                    _isLoading.value = false
+                },
+                onError = {
+                    _isLoading.value = false
+                }
+            )
+        }
+
+        getOrderDetail(orderId)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun setOrderCanceled(orderId: String) {
+        _isLoading.value = true
+
+        viewModelScope.launch {
+            orderRepository.setOrderCanceled(
+                orderId,
+                onResult = {
+                    _isLoading.value = false
+                },
+                onError = {
+                    _isLoading.value = false
+                }
+            )
+        }
+
+        getOrderDetail(orderId)
+    }
 }

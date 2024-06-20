@@ -44,7 +44,7 @@ class ViewModelFactory(
                 ProfileViewModel(userRepository) as T
             }
             modelClass.isAssignableFrom(OrderViewModel::class.java) -> {
-                OrderViewModel(productRepository, orderRepository) as T
+                OrderViewModel(productRepository, orderRepository, userRepository) as T
             }
             modelClass.isAssignableFrom(BookingCalendarViewModel::class.java) -> {
                 BookingCalendarViewModel(productRepository) as T

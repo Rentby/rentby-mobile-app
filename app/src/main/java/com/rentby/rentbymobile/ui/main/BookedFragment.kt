@@ -29,7 +29,7 @@ class BookedFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel.getUserOrder(getString(R.string.user_id))
+        viewModel.getUserOrder()
         binding = FragmentBookedListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -54,7 +54,7 @@ class BookedFragment : Fragment() {
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             // Trigger data refresh
-            viewModel.getUserOrder(getString(R.string.user_id))
+            viewModel.getUserOrder()
         }
 
         binding.buttonAll.setOnClickListener { viewModel.setOrderFilter(null) }

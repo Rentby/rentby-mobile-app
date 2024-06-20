@@ -10,10 +10,12 @@ import com.rentby.rentbymobile.data.response.EstimateOrderResponse
 import com.rentby.rentbymobile.data.response.OrderDetailResponse
 import com.rentby.rentbymobile.data.response.OrderIdResponse
 import com.rentby.rentbymobile.data.response.OrderListResponseItem
+import com.rentby.rentbymobile.data.response.SuccessResponse
 import com.rentby.rentbymobile.data.response.toOrderItem
 import com.rentby.rentbymobile.data.retrofit.ApiService
 import com.rentby.rentbymobile.helper.calculateDay
 import com.rentby.rentbymobile.helper.millisecondsToDate
+import com.rentby.rentbymobile.helper.millisecondsToDateString
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -64,8 +66,8 @@ class OrderRepository(private val apiService: ApiService) {
         val request = MakeOrderRequest(
             productId,
             userId,
-            millisecondsToDate(rentStart),
-            millisecondsToDate(rentEnd),
+            millisecondsToDateString(rentStart),
+            millisecondsToDateString(rentEnd),
         )
 
         val call = apiService.makeOrder(request)
@@ -116,7 +118,6 @@ class OrderRepository(private val apiService: ApiService) {
         onResult: (List<OrderItem>) -> Unit,
         onError: (Throwable?) -> Unit
     ) {
-        Log.d("7575", "Preparing to call enqueue for userId: $userId")
         val call = apiService.getUserOrder(userId)
         call.enqueue(object : Callback<List<OrderListResponseItem>> {
             @RequiresApi(Build.VERSION_CODES.O)
@@ -124,9 +125,7 @@ class OrderRepository(private val apiService: ApiService) {
                 call: Call<List<OrderListResponseItem>>,
                 response: Response<List<OrderListResponseItem>>
             ) {
-                Log.d("7575", "onResponse called with status: ${response.code()}")
                 if (response.isSuccessful) {
-                    Log.d("7575", "Response Success")
                     val orderListResponseItems = response.body()
                     if (orderListResponseItems != null) {
                         val orderItems = orderListResponseItems.map { it.toOrderItem() }
@@ -136,13 +135,59 @@ class OrderRepository(private val apiService: ApiService) {
                     }
                 } else {
                     val errorBody = response.errorBody()?.string()
-                    Log.d("7575", "Response Error: $errorBody")
                     onError(Throwable(errorBody))
                 }
             }
 
             override fun onFailure(call: Call<List<OrderListResponseItem>>, t: Throwable) {
-                Log.d("7575", "onFailure called with throwable: ${t.message}")
+                onError(t)
+            }
+        })
+    }
+
+    fun setOrderReceived(
+        orderID: String,
+        onResult: (SuccessResponse?) -> Unit,
+        onError: (Throwable?) -> Unit
+    ) {
+        val call = apiService.setOrderReceived(orderID)
+        call.enqueue(object  : Callback<SuccessResponse> {
+            override fun onResponse(
+                call: Call<SuccessResponse>,
+                response: Response<SuccessResponse>
+            ) {
+                if (response.isSuccessful) {
+                    onResult(response.body())
+                } else {
+                    onError(Throwable(response.errorBody()?.string()))
+                }
+            }
+
+            override fun onFailure(call: Call<SuccessResponse>, t: Throwable) {
+                onError(t)
+            }
+        })
+    }
+
+    fun setOrderCanceled(
+        orderID: String,
+        onResult: (SuccessResponse?) -> Unit,
+        onError: (Throwable?) -> Unit
+    ) {
+        val call = apiService.setOrderCanceled(orderID)
+        call.enqueue(object  : Callback<SuccessResponse> {
+            override fun onResponse(
+                call: Call<SuccessResponse>,
+                response: Response<SuccessResponse>
+            ) {
+                if (response.isSuccessful) {
+                    onResult(response.body())
+                } else {
+                    onError(Throwable(response.errorBody()?.string()))
+                }
+            }
+
+            override fun onFailure(call: Call<SuccessResponse>, t: Throwable) {
                 onError(t)
             }
         })

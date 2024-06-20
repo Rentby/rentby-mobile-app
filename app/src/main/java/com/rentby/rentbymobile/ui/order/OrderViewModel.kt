@@ -1,17 +1,24 @@
 package com.rentby.rentbymobile.ui.order
 
+import android.content.Context
+import android.content.Intent
 import android.util.Log
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.rentby.rentbymobile.R
 import com.rentby.rentbymobile.data.model.Booking
 import com.rentby.rentbymobile.data.model.OrderEstimation
 import com.rentby.rentbymobile.data.model.Product
 import com.rentby.rentbymobile.data.model.ProductMock
+import com.rentby.rentbymobile.data.pref.UserModel
 import com.rentby.rentbymobile.data.repository.BookingRepository
 import com.rentby.rentbymobile.data.repository.OrderRepository
 import com.rentby.rentbymobile.data.repository.ProductRepository
+import com.rentby.rentbymobile.data.repository.UserRepository
 import com.rentby.rentbymobile.data.response.EstimateOrderResponse
 import com.rentby.rentbymobile.data.response.ProductDetailResponse
 import com.rentby.rentbymobile.data.response.toOrderEstimation
@@ -24,8 +31,9 @@ import retrofit2.Response
 
 class OrderViewModel(
     private val productRepository: ProductRepository,
-    private val orderRepository: OrderRepository
-) : ViewModel()  {
+    private val orderRepository: OrderRepository,
+    private val userRepository: UserRepository
+) : ViewModel() {
     private val bookingRepository = BookingRepository()
 
     private val _product = MutableLiveData<Product?>()
@@ -37,11 +45,27 @@ class OrderViewModel(
     private val _isOrderLoading = MutableLiveData<Boolean>()
     val isOrderLoading: LiveData<Boolean> = _isOrderLoading
 
+    private val _orderId = MutableLiveData<String>()
+    val orderId: LiveData<String> = _orderId
+
     private val _estimateOrderResponse = MutableLiveData<OrderEstimation>()
     val estimateOrderResponse: LiveData<OrderEstimation> = _estimateOrderResponse
 
+    private val _startOrderDetailActivity = MutableLiveData<Intent?>()
+    val startOrderDetailActivity: LiveData<Intent?> = _startOrderDetailActivity
+
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
+
+    private val session = MutableLiveData<UserModel>()
+
+    init {
+        viewModelScope.launch {
+            userRepository.getSession().collect { user ->
+                session.value = user
+            }
+        }
+    }
 
     fun estimateOrder(productId: String, rentStart: Long, rentEnd: Long) {
         _isOrderLoading.value = true
@@ -91,8 +115,28 @@ class OrderViewModel(
         })
     }
 
-    fun generateBookingData(productId: String, rentStart: Long, rentEnd: Long){
-        Log.d("OrderViewModel", "start ${rentStart.toString()} end ${rentEnd.toString()}")
-//        _booking.postValue(bookingRepository.makeBooking(productId, rentStart, rentEnd))
+    fun makeOrder(productId: String, rentStart: Long, rentEnd: Long) {
+        _isOrderLoading.value = true
+        viewModelScope.launch {
+            session.value?.let {
+                orderRepository.makeOrder(
+                    productId = productId,
+                    userId = it.userId,
+                    rentStart = rentStart,
+                    rentEnd = rentEnd,
+                    onResult = {
+                        if (it != null) {
+                            _orderId.value = it.orderId.toString()
+                        }
+                        _isOrderLoading.value = false
+                    },
+                    onError = {
+                        _error.postValue(it?.message)
+                        _isOrderLoading.value = false
+                    }
+                )
+            }
+
+        }
     }
 }

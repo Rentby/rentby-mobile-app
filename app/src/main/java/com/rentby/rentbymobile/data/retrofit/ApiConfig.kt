@@ -1,5 +1,6 @@
 package com.rentby.rentbymobile.data.retrofit
 
+import com.rentby.rentbymobile.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,7 +14,7 @@ class ApiConfig {
             val authInterceptor = Interceptor { chain ->
                 val req = chain.request()
                 val requestHeaders = req.newBuilder()
-                    .addHeader("api-key", "f38bde21800e00d75d9b5486629ca79c710f904e233ff149528507a8eb6c43ee")
+                    .addHeader("api-key", BuildConfig.RENTBY_API_KEY)
                     .build()
                 chain.proceed(requestHeaders)
             }
@@ -24,7 +25,7 @@ class ApiConfig {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://rent-by.et.r.appspot.com/api/")
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

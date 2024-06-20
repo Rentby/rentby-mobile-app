@@ -32,8 +32,6 @@ class RegisterViewModel(private val userRepository: UserRepository) : ViewModel(
                 val email = Firebase.auth.currentUser?.email.toString()
                 val response = userRepository.register(name, email, address, phoneNumber)
                 Log.d("Register", response.toString())
-
-                userRepository.saveSession(UserModel(email, name, address, phoneNumber, true))
                 onSuccess() // Notify the success
             } catch (e: HttpException) {
                 _loading.value = false

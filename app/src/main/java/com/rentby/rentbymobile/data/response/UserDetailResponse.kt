@@ -14,5 +14,8 @@ data class UserDetailResponse(
 	val phoneNumber: String? = null,
 
 	@field:SerializedName("email")
-	val email: String? = null
+	val email: String? = null,
+
+	@field:SerializedName("user_id")
+	val userId: String? = null
 )

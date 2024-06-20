@@ -106,7 +106,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.booked -> {
                     auth.currentUser?.let {
-                        Log.d("Fragment", "Clicked")
                         showFragment(bookedFragment)
                     }
                     true

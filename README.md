@@ -24,6 +24,26 @@ The Mobile Development Division consists of:
 - Book and manage rentals
 - View booking details and status
 - Integrated payment system
+<<<<<<< HEAD
+=======
+
+## Screenshots
+
+<p align="center">
+    <img src="screenshoots/splashscreen.jpg" alt="Splash Screen" width="200" />
+    <img src="screenshoots/register.jpg" alt="Register Screen" width="200" />
+    <img src="screenshoots/login.jpg" alt="Login Screen" width="200" />
+    <img src="screenshoots/hiking.jpg" alt="Hiking" width="200" />
+    <img src="screenshoots/cosplay.jpg" alt="Cosplay" width="200" />
+    <img src="screenshoots/detail_product.jpg" alt="Detail Product Sreen" width="200" />
+    <img src="screenshoots/rent_duration.jpg" alt="Calendar" width="200" />
+    <img src="screenshoots/detail_order.jpg" alt="Detail Order Screen" width="200" />
+    <img src="screenshoots/detail_payment.jpg" alt="Detail Payment Screen" width="200" />
+    <img src="screenshoots/detail_booking.jpg" alt="Booking Detail Screen" width="200" />
+    <img src="screenshoots/user_profile.jpg" alt="User Profile Screen" width="200" />
+    <img src="screenshoots/seller_profile.jpg" alt="Seller Profile Screen" width="200" />
+</p>
+>>>>>>> b2c12c99cc641c8ca4a15d88874bf653cf78c5ec
 
 ## Requirements
 

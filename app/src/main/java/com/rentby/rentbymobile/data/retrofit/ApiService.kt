@@ -13,6 +13,7 @@ import com.rentby.rentbymobile.data.response.ProductListResponse
 import com.rentby.rentbymobile.data.response.RegisterResponse
 import com.rentby.rentbymobile.data.response.SellerDetailResponse
 import com.rentby.rentbymobile.data.response.SellerProductResponse
+import com.rentby.rentbymobile.data.response.SuccessResponse
 import com.rentby.rentbymobile.data.response.UserDetailResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -28,6 +29,12 @@ interface ApiService {
     suspend fun register(
         @Body request: RegisterRequest
     ): RegisterResponse
+
+    @Headers("Content-Type: application/json")
+    @POST("update-user")
+    fun updateUser(
+        @Body request: RegisterRequest
+    ): Call<SuccessResponse>
 
     @GET("user/{email}")
     suspend fun getUserDetail(
@@ -79,4 +86,24 @@ interface ApiService {
     fun getUserOrder(
         @Path("user_id") userId: String
     ): Call<List<OrderListResponseItem>>
+
+    @Headers("Content-Type: application/json")
+    @POST("receive-product/{order_id}")
+    fun setOrderReceived(
+        @Path("order_id") orderId: String
+    ): Call<SuccessResponse>
+
+    @Headers("Content-Type: application/json")
+    @POST("completed-order/{order_id}")
+    fun setOrderCompleted(
+        @Path("order_id") orderId: String
+    ): Call<SuccessResponse>
+
+    @Headers("Content-Type: application/json")
+    @POST("cancel-order/{order_id}")
+    fun setOrderCanceled(
+        @Path("order_id") orderId: String
+    ): Call<SuccessResponse>
+
+
 }
