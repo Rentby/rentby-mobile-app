@@ -91,14 +91,12 @@ class OrderDetailActivity : AppCompatActivity() {
         binding.buttonPickedUp.setOnClickListener {
             val orderId = intent.getStringExtra(ORDER_ID) ?: ""
             viewModel.setOrderReceived(orderId)
-            viewModel.getOrderDetail(orderId)
             finish()
         }
 
         binding.buttonCancelOrder.setOnClickListener {
             val orderId = intent.getStringExtra(ORDER_ID) ?: ""
             viewModel.setOrderCanceled(orderId)
-            viewModel.getOrderDetail(orderId)
             finish()
         }
     }

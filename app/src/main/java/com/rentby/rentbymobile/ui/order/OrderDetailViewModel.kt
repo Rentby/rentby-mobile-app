@@ -56,6 +56,7 @@ class OrderDetailViewModel(
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun setOrderReceived(orderId: String) {
         _isLoading.value = true
 
@@ -70,8 +71,11 @@ class OrderDetailViewModel(
                 }
             )
         }
+
+        getOrderDetail(orderId)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun setOrderCanceled(orderId: String) {
         _isLoading.value = true
 
@@ -86,5 +90,7 @@ class OrderDetailViewModel(
                 }
             )
         }
+
+        getOrderDetail(orderId)
     }
 }
