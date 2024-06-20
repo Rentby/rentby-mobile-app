@@ -122,8 +122,6 @@ class OrderActivity : AppCompatActivity() {
         if (productId != null) {
             viewModel.getProduct(productId)
             viewModel.estimateOrder(productId, rentStart, rentEnd)
-        } else {
-            Log.d("OrderActivity", "Product ID is null")
         }
 
         viewModel.product.observe(this) { product ->
@@ -137,8 +135,6 @@ class OrderActivity : AppCompatActivity() {
 
         viewModel.estimateOrderResponse.observe(this){ order ->
             val dateRange = "${dateToDay(order.rentStart)} - ${dateToDay(order.rentEnd)}"
-            Log.d("OrderActivity", "start ${order.rentStart}")
-            Log.d("OrderActivity", "end ${order.rentEnd}")
             val duration = calculateDay(dateToMilliseconds(order.rentStart), dateToMilliseconds(order.rentEnd))
             val orderPrice = "$duration x ${formatInttoMoney(order.rentPrice)}"
 

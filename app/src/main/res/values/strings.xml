@@ -73,4 +73,13 @@
     <string name="searchbar_hint">Cari barang</string>
     <string name="loading_data_error">Oops! Ada masalah saat memuat data\nSilakan coba lagi</string>
     <string name="user_id">03d58a5b\-e5e5\-40d5\-af92\-0c0b25fd8478</string>
+    <string name="waiting_for_payment">Menunggu Pembayaran</string>
+    <string name="order_ready_for_pickup">Barang Siap Diambil</string>
+    <string name="order_is_in_renting_date">Barang dalam Masa Rental</string>
+    <string name="order_needs_to_be_returned">Barang Perlu dikembalikan</string>
+    <string name="order_finished">Pesanan Selesai</string>
+    <string name="order_canceled">Pesanan Dibatalkan</string>
+    <string name="home">Beranda</string>
+    <string name="search">Cari</string>
+    <string name="booked">Pesanan</string>
 </resources>

@@ -63,12 +63,12 @@ class PaymentActivity : AppCompatActivity(), TransactionFinishedCallback {
         if (result.response != null) {
             when (result.status) {
                 TransactionResult.STATUS_SUCCESS -> {
-                    Toast.makeText(this, "Transaction Finished. ID: " + result.response.transactionId, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Transaction Finished", Toast.LENGTH_LONG).show()
                 }
                 TransactionResult.STATUS_PENDING -> {
-                    Toast.makeText(this, "Transaction Pending. ID: " + result.response.transactionId, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Transaction Pending", Toast.LENGTH_LONG).show()
                 }
-                TransactionResult.STATUS_FAILED -> Toast.makeText(this, "Transaction Failed. ID: " + result.response.transactionId.toString() + ". Message: " + result.response.statusMessage, Toast.LENGTH_LONG).show()
+                TransactionResult.STATUS_FAILED -> Toast.makeText(this, "Transaction Failed" + ". Message: " + result.response.statusMessage, Toast.LENGTH_LONG).show()
             }
         } else if (result.isTransactionCanceled) {
             Toast.makeText(this, "Transaction Canceled", Toast.LENGTH_LONG).show()

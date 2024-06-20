@@ -148,32 +148,32 @@ class OrderDetailActivity : AppCompatActivity() {
                 binding.layoutPickUpLocation.visibility = View.GONE
                 binding.layoutReview.visibility = View.GONE
                 binding.buttonCancelOrder.visibility = View.VISIBLE
-                "Waiting for Payment"
+                getString(R.string.waiting_for_payment)
             }
             2 -> {
                 binding.layoutPickUpTime.visibility = View.GONE
                 binding.layoutReturnTime.visibility = View.GONE
                 binding.layoutReview.visibility = View.GONE
                 binding.buttonPayNow.visibility = View.GONE
-                "Order Ready for Pickup"
+                getString(R.string.order_ready_for_pickup)
             }
             3 -> {
                 binding.layoutReturnTime.visibility = View.GONE
                 binding.layoutReview.visibility = View.GONE
                 binding.buttonPayNow.visibility = View.GONE
-                "Order is in Renting Date"
+                getString(R.string.order_is_in_renting_date)
             }
             4 -> {
                 binding.layoutReturnTime.visibility = View.GONE
                 binding.layoutReview.visibility = View.GONE
                 binding.buttonPayNow.visibility = View.GONE
                 binding.cardLateCharge.visibility = View.VISIBLE
-                "Order Needs to be Returned"
+                getString(R.string.order_needs_to_be_returned)
             }
             5 -> {
                 binding.buttonPayNow.visibility = View.GONE
 //                if (order.isRated) binding.layoutReview.visibility = View.GONE
-                "Order Finished"
+                getString(R.string.order_finished)
             }
             6 -> {
                 binding.layoutPaymentMethod.visibility = View.GONE
@@ -182,7 +182,7 @@ class OrderDetailActivity : AppCompatActivity() {
                 binding.layoutPickUpLocation.visibility = View.GONE
                 binding.layoutReview.visibility = View.GONE
                 binding.buttonPayNow.visibility = View.GONE
-                "Order Canceled"
+                getString(R.string.order_canceled)
             }
             else -> "Unknown Status"
         }

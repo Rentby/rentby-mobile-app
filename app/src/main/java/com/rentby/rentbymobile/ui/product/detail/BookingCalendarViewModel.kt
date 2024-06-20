@@ -108,7 +108,6 @@ class BookingCalendarViewModel(
     }
 
     fun makeBooking(context: Context, productId: String) {
-        Log.d("OrderActivity", "Order Button Clicked - Product ID: $productId., Rent Start: ${rentStart.value.toString()}, Rent End: ${rentEnd.value.toString()}")
         if ((product.value?.id ?: "") != "") {
             val intent = Intent(context, OrderActivity::class.java).apply {
                 putExtra(OrderActivity.PRODUCT_ID, productId)

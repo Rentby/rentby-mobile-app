@@ -63,7 +63,6 @@ class OrderViewModel(
         viewModelScope.launch {
             userRepository.getSession().collect { user ->
                 session.value = user
-                Log.d("userrr", user.userId)
             }
         }
     }
@@ -116,11 +115,6 @@ class OrderViewModel(
         })
     }
 
-    fun generateBookingData(productId: String, rentStart: Long, rentEnd: Long) {
-        Log.d("OrderViewModel", "start $rentStart end $rentEnd")
-//        _booking.postValue(bookingRepository.makeBooking(productId, rentStart, rentEnd))
-    }
-
     fun makeOrder(productId: String, rentStart: Long, rentEnd: Long) {
         _isOrderLoading.value = true
         viewModelScope.launch {
@@ -133,7 +127,6 @@ class OrderViewModel(
                     onResult = {
                         if (it != null) {
                             _orderId.value = it.orderId.toString()
-                            Log.d("75755", it.orderId.toString())
                         }
                         _isOrderLoading.value = false
                     },

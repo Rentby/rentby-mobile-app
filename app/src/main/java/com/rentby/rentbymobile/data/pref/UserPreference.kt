@@ -16,8 +16,6 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "se
 class UserPreference private constructor(private val dataStore: DataStore<Preferences>) {
 
     suspend fun saveSession(user: UserModel) {
-        Log.d("tstapiw", user.userId)
-
         dataStore.edit { preferences ->
             preferences[EMAIL_KEY] = user.email
             preferences[NAME_KEY] = user.name
@@ -38,7 +36,6 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
                 preferences[USER_ID_KEY] ?: "",
                 preferences[IS_REGISTERED_KEY] ?: false
             )
-            Log.d("UserPreference", "Retrieved session: $userModel")
             userModel
         }
     }
@@ -59,7 +56,6 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         dataStore.edit { preferences ->
             preferences.clear()
         }
-        Log.d("TestingRegister", "User Pref Cleared")
     }
 
     companion object {
