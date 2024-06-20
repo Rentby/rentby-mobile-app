@@ -32,7 +32,7 @@ data class OrderDetail(
     val isRated: Boolean,
 
     val lateDuration: Int,
-    val lateCharge: Float,
+    val lateCharge: Int,
 
     val imageUrl: String
 ) {
@@ -59,8 +59,8 @@ data class OrderDetail(
                 deposit = response.deposit?.toFloat() ?: 0f,
                 serviceFee = response.serviceFee?.toFloat() ?: 0f,
                 isRated = response.isRated?.toBoolean() ?: false,
-                lateDuration = response.lateDuration?.toIntOrNull() ?: 0,
-                lateCharge = response.lateChange?.toFloatOrNull() ?: 0f,
+                lateDuration = response.lateDuration ?: 0,
+                lateCharge = response.lateCharge ?: 0,
                 imageUrl = response.imageUrl ?: ""
             )
         }
