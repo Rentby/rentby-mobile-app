@@ -231,7 +231,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
-                            android:text="Tanggal Pengambilan"
+                            android:text="Tanggal Pengembalian"
                             android:textColor="@color/text_secondary" />
 
                         <TextView
