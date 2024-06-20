@@ -13,7 +13,7 @@ data class OrderDetailResponse(
 	@field:SerializedName("rent_total")
 	val rentTotal: Int? = null,
 
-	@field:SerializedName("lateDuration")
+	@field:SerializedName("late_duration")
 	val lateDuration: String? = null,
 
 	@field:SerializedName("image_url")
@@ -49,8 +49,8 @@ data class OrderDetailResponse(
 	@field:SerializedName("return_time")
 	val returnTime: String? = null,
 
-	@field:SerializedName("lateChange")
-	val lateChange: String? = null,
+	@field:SerializedName("late_charge")
+	val lateCharge: String? = null,
 
 	@field:SerializedName("deposit")
 	val deposit: Int? = null,

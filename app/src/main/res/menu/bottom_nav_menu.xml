@@ -11,5 +11,5 @@
     <item
         android:id="@+id/booked"
         android:icon="@drawable/ic_booked"
-        @unhas.ac.idandroid:title="@string/booked" />
+        android:title="@string/booked" />
 </menu>
