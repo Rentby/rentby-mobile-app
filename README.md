@@ -1,8 +1,9 @@
 # RentBy
 
-<img src="C:\Users\salsb\Downloads\rentby-mobile-app\dokumentasi\app.png" alt="RentBy App" width="100%" />
+<img src="dokumentasi/app.png" alt="RentBy App" width="100%" />
 
 RentBy is a mobile application designed to facilitate the rental process. Users can browse, book, and manage their rentals seamlessly. This repository contains the source code for the RentBy mobile application built using Android and Kotlin.
+
 The Mobile Development Division consists of:
 1. A208D4KY4149 - Andi Muh. Daffa Yuslim - Universitas Hasanuddin
 2. A200D4KX3583 - Salsabila Rafifah Handifa - Universitas Diponegoro
