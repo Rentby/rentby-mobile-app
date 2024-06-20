@@ -1,6 +1,7 @@
 package com.rentby.rentbymobile.ui.main
 
 import android.os.Parcelable
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -40,6 +41,16 @@ class MainViewModel(
     fun saveRecyclerViewState(parcelable: Parcelable) { state = parcelable }
     fun restoreRecyclerViewState() : Parcelable = state
     fun stateInitialized() : Boolean = ::state.isInitialized
+
+    private val session = MutableLiveData<UserModel>()
+
+    init {
+        viewModelScope.launch {
+            userRepository.getSession().collect { user ->
+                session.value = user
+            }
+        }
+    }
 
     val products: LiveData<PagingData<ProductItem>> = _category.switchMap { category ->
         productRepository.getProductsByCategory(category)
@@ -83,7 +94,15 @@ class MainViewModel(
                     val name = userDetail.name.toString()
                     val address = userDetail.address.toString()
                     val phoneNumber = userDetail.phoneNumber.toString()
-                    userRepository.saveSession(UserModel(email, name, address, phoneNumber))
+                    val userId = userDetail.userId.toString()
+                    userRepository.saveSession(UserModel(email, name, address, phoneNumber, userId))
+
+                    viewModelScope.launch {
+                        userRepository.getSession().collect { user ->
+                            session.value = user
+                        }
+                    }
+
                     onResult(true)
                 } else {
                     _loading.value = false
@@ -96,19 +115,21 @@ class MainViewModel(
         }
     }
 
-    fun getUserOrder(userId: String) {
+    fun getUserOrder() {
         _isLoading.value = true
         viewModelScope.launch {
-            orderRepository.getUserOrder(
-                userId,
-                onResult = {
-                    _orders.postValue(it)
-                    _isLoading.value = false
-                },
-                onError = {
-                    _isLoading.value = false
-                }
-            )
+            session.value?.let {
+                orderRepository.getUserOrder(
+                    it.userId,
+                    onResult = {
+                        _orders.postValue(it)
+                        _isLoading.value = false
+                    },
+                    onError = {
+                        _isLoading.value = false
+                    }
+                )
+            }
         }
     }
 

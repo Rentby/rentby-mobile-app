@@ -16,11 +16,14 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "se
 class UserPreference private constructor(private val dataStore: DataStore<Preferences>) {
 
     suspend fun saveSession(user: UserModel) {
+        Log.d("tstapiw", user.userId)
+
         dataStore.edit { preferences ->
             preferences[EMAIL_KEY] = user.email
             preferences[NAME_KEY] = user.name
             preferences[ADDRESS_KEY] = user.address
             preferences[PHONE_NUMBER_KEY] = user.phoneNumber
+            preferences[USER_ID_KEY] = user.userId
             preferences[IS_REGISTERED_KEY] = true
         }
     }
@@ -32,6 +35,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
                 preferences[NAME_KEY] ?: "",
                 preferences[ADDRESS_KEY] ?: "",
                 preferences[PHONE_NUMBER_KEY] ?: "",
+                preferences[USER_ID_KEY] ?: "",
                 preferences[IS_REGISTERED_KEY] ?: false
             )
             Log.d("UserPreference", "Retrieved session: $userModel")
@@ -45,8 +49,9 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
             val name = preferences[NAME_KEY] ?: ""
             val address = preferences[ADDRESS_KEY] ?: ""
             val phoneNumber = preferences[PHONE_NUMBER_KEY] ?: ""
+            val userId = preferences[USER_ID_KEY] ?: ""
             val isRegistered = preferences[IS_REGISTERED_KEY] ?: false
-            UserModel(email, name, address, phoneNumber, isRegistered)
+            UserModel(email, name, address, phoneNumber, userId, isRegistered)
         }
     }
 
@@ -65,6 +70,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         private val NAME_KEY = stringPreferencesKey("name")
         private val ADDRESS_KEY = stringPreferencesKey("address")
         private val PHONE_NUMBER_KEY = stringPreferencesKey("phoneNumber")
+        private val USER_ID_KEY = stringPreferencesKey("userId")
         private val IS_REGISTERED_KEY = booleanPreferencesKey("isRegistered")
 
         fun getInstance(dataStore: DataStore<Preferences>): UserPreference {

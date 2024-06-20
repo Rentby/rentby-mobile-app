@@ -1,6 +1,7 @@
 package com.rentby.rentbymobile.data.repository
 
 import android.util.Log
+import androidx.lifecycle.asLiveData
 import com.rentby.rentbymobile.data.pref.UserModel
 import com.rentby.rentbymobile.data.pref.UserPreference
 import com.rentby.rentbymobile.data.request.RegisterRequest
@@ -17,10 +18,12 @@ class UserRepository private constructor(
     private val apiService: ApiService
 ) {
     suspend fun saveSession(user: UserModel) {
+        Log.d("tstapi2", user.userId)
         userPreference.saveSession(user)
     }
 
     fun getSession(): Flow<UserModel> {
+
         return userPreference.getSession()
     }
 

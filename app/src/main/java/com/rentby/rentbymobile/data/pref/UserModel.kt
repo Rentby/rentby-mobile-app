@@ -5,5 +5,6 @@ data class UserModel(
     val name: String,
     val address: String,
     val phoneNumber: String,
+    val userId: String,
     val isRegistered: Boolean = false
 )

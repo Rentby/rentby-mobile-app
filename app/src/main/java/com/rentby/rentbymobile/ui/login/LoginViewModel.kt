@@ -22,7 +22,8 @@ class LoginViewModel(private val userRepository: UserRepository) : ViewModel() {
                     val name = userDetail.name.toString()
                     val address = userDetail.address.toString()
                     val phoneNumber = userDetail.phoneNumber.toString()
-                    userRepository.saveSession(UserModel(email, name, address, phoneNumber))
+                    val userId = userDetail.userId.toString()
+                    userRepository.saveSession(UserModel(email, name, address, phoneNumber, userId))
                     onResult(true)
                 } else {
                     _loading.value = false

@@ -1,5 +1,6 @@
 package com.rentby.rentbymobile.ui.profile
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.rentby.rentbymobile.data.pref.UserModel
 import com.rentby.rentbymobile.data.repository.UserRepository
@@ -21,6 +22,7 @@ class ProfileViewModel(private val repository: UserRepository) : ViewModel() {
         viewModelScope.launch {
             repository.getSession().collect { user ->
                 session.value = user
+                Log.d("userrr", user.userId)
             }
         }
     }
@@ -33,7 +35,7 @@ class ProfileViewModel(private val repository: UserRepository) : ViewModel() {
         _isLoading.value = true
         viewModelScope.launch {
             val currentUser = session.value ?: return@launch
-            val updatedUser = UserModel(currentUser.email, name, address, phoneNumber)
+            val updatedUser = UserModel(currentUser.email, name, address, phoneNumber, currentUser.userId)
             repository.saveSession(updatedUser)
             session.value = updatedUser
             _isLoading.value = false

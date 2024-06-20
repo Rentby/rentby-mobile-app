@@ -479,9 +479,9 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="16dp"
                         android:background="@color/gray_100"
-                        app:layout_constraintEnd_toEndOf="@+id/tv_service_fee"
-                        app:layout_constraintStart_toStartOf="@+id/textView16"
-                        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                        app:layout_constraintEnd_toEndOf="@+id/tv_deposit"
+                        app:layout_constraintStart_toStartOf="@+id/textView5"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView5" />
 
                     <Button
                         android:id="@+id/button_pay_now"
@@ -490,6 +490,19 @@
                         android:layout_marginTop="16dp"
                         android:backgroundTint="@color/rentby_primary"
                         android:text="Bayar Sekarang"
+                        android:textColor="@color/rentby_secondary"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_order_total"
+                        app:layout_constraintStart_toStartOf="@+id/textView18"
+                        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+                    <Button
+                        android:id="@+id/button_picked_up"
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="@color/rentby_primary"
+                        android:text="Barang Diterima"
+                        android:visibility="gone"
                         android:textColor="@color/rentby_secondary"
                         app:layout_constraintEnd_toEndOf="@+id/tv_order_total"
                         app:layout_constraintStart_toStartOf="@+id/textView18"
@@ -527,6 +540,32 @@
                         android:text="Rp8.000"
                         app:layout_constraintEnd_toEndOf="@+id/tv_service_fee"
                         app:layout_constraintTop_toBottomOf="@+id/tv_service_fee" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cardView5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/deposit_card"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_deposit"
+                        app:layout_constraintStart_toStartOf="@+id/textView5"
+                        app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="Deposit akan dikembalikan setelah pesanan selesai"
+                            android:textColor="@color/gray_400"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -605,7 +644,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:tint="@color/gray_300"
+        app:tint="@color/gray_300"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar"

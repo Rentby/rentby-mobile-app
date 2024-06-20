@@ -40,12 +40,11 @@ class OrderActivity : AppCompatActivity() {
         }
 
         binding.buttonConfirmOrder.setOnClickListener {
-            val userId = getString(R.string.user_id)
             val productId = intent.getStringExtra(PRODUCT_ID)
             val rentStart = intent.getLongExtra(RENT_START, 0L)
             val rentEnd = intent.getLongExtra(RENT_END, 0L)
             if (productId != null) {
-                viewModel.makeOrder(productId, userId, rentStart, rentEnd)
+                viewModel.makeOrder(productId, rentStart, rentEnd)
             }
         }
 
