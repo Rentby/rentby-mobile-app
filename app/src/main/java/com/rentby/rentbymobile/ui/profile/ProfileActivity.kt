@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
@@ -74,23 +75,35 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        profileViewModel.message.observe(this, Observer { message ->
-            if (message.isNotBlank()) {
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-                profileViewModel.clearMessage()
+        profileViewModel.message.observe(this) { message ->
+            message?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
 
-                if (message == "Logged out successfully") {
-                    navigateToLogin()
+                if (it != "") {
+                    profileViewModel.clearMessage()
                 }
             }
-        })
+        }
 
-        profileViewModel.getSession().observe(this, Observer { user ->
+        profileViewModel.getSession().observe(this) { user ->
             user?.let {
                 originalUser = it
                 updateUI(it)
             } ?: navigateToLogin()
-        })
+        }
+
+        profileViewModel.isLoading.observe(this) {
+            if (it) {
+                binding.progressBar2.isVisible = true
+            } else {
+                binding.progressBar2.isVisible = false
+            }
+        }
+    }
+
+    private fun isValidIndonesianPhoneNumber(phoneNumber: String): Boolean {
+        val regex = Regex("^08[0-9]{8,10}\$")
+        return phoneNumber.matches(regex)
     }
 
     private fun updateUI(user: UserModel) {
@@ -148,8 +161,16 @@ class ProfileActivity : AppCompatActivity() {
         val name = binding.username.text.toString()
         val address = binding.address.text.toString()
         val phoneNumber = binding.phoneNumber.text.toString()
+        if (name.isNotEmpty() && address.isNotEmpty() && phoneNumber.isNotEmpty()) {
+            if (isValidIndonesianPhoneNumber(phoneNumber)) {
+                profileViewModel.updateProfile(name, address, phoneNumber)
+            } else {
+                Toast.makeText(this, "Nomor telepon tidak valid!", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(this, "Harap Lengkapi Informasi Anda!", Toast.LENGTH_SHORT).show()
+        }
 
-        profileViewModel.updateProfile(name, address, phoneNumber)
     }
 
     private fun loadUserProfilePhoto() {

@@ -22,7 +22,6 @@ class ProfileViewModel(private val repository: UserRepository) : ViewModel() {
         viewModelScope.launch {
             repository.getSession().collect { user ->
                 session.value = user
-                Log.d("userrr", user.userId)
             }
         }
     }
@@ -33,13 +32,61 @@ class ProfileViewModel(private val repository: UserRepository) : ViewModel() {
 
     fun updateProfile(name: String, address: String, phoneNumber: String) {
         _isLoading.value = true
+
         viewModelScope.launch {
-            val currentUser = session.value ?: return@launch
-            val updatedUser = UserModel(currentUser.email, name, address, phoneNumber, currentUser.userId)
-            repository.saveSession(updatedUser)
-            session.value = updatedUser
-            _isLoading.value = false
-            _message.value = "Profile updated successfully"
+            session.value?.let { user ->
+                repository.updateUser(
+                    user.email,
+                    name,
+                    phoneNumber,
+                    address,
+                    onResult = {
+                        _message.value = "Profile updated successfully"
+
+                        updateSession(user.email) { success ->
+                            if (!success) {
+                                _message.value = "Failed to update session"
+                            }
+                        }
+                        _isLoading.value = false
+
+                    },
+                    onError = {
+                        _isLoading.value = false
+                        _message.value = "Failed to update profile"
+                    }
+                )
+            }
+        }
+    }
+
+    fun updateSession(email: String, onResult: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            try {
+                _isLoading.value = true
+                val userDetail = repository.getUserDetail(email)
+                if (userDetail != null) {
+                    val name = userDetail.name.toString()
+                    val address = userDetail.address.toString()
+                    val phoneNumber = userDetail.phoneNumber.toString()
+                    val userId = userDetail.userId.toString()
+                    repository.saveSession(UserModel(email, name, address, phoneNumber, userId))
+
+                    viewModelScope.launch {
+                        repository.getSession().collect { user ->
+                            session.value = user
+                        }
+                    }
+
+                    onResult(true)
+                } else {
+                    _isLoading.value = false
+                    onResult(false)
+                }
+            } catch (e: Exception) {
+                _isLoading.value = false
+                onResult(false)
+            }
         }
     }
 

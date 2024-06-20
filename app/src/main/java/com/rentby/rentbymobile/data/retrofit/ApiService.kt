@@ -30,6 +30,12 @@ interface ApiService {
         @Body request: RegisterRequest
     ): RegisterResponse
 
+    @Headers("Content-Type: application/json")
+    @POST("update-user")
+    fun updateUser(
+        @Body request: RegisterRequest
+    ): Call<SuccessResponse>
+
     @GET("user/{email}")
     suspend fun getUserDetail(
         @Path("email") email: String
